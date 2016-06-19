@@ -257,11 +257,15 @@ h2 {
   border-color: #59abe3;
 }
 
-#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"] {
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"], 
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit #loginBtn /*Alan 0619*/ {
   background-color: #59abe3;
   border: 2px solid #59abe3;
 }
-#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"]:hover {
+
+
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"]:hover, 
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit #loginBtn:hover /*Alan 0619*/ {
   color: #59abe3;
   border-color: #59abe3;
 }

@@ -2581,7 +2581,9 @@ img {
   text-align: center;
   width: 100%;
 }
-#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"] {
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"],
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit #loginBtn /* Alan 0618 */
+{
   color: #fff;
   font-size: 16px;
   font-weight: bold;
@@ -2596,9 +2598,13 @@ img {
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
-#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"]:hover {
+
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit input[type="submit"]:hover,
+#aa-signin .aa-signin-area .aa-signin-form .aa-single-submit #loginBtn:hover /* Alan 0618 */
+{
   background-color: #FFF;
 }
+
 #aa-signin .aa-signin-area .aa-signin-form .aa-single-submit p {
   color: #000;
 }
