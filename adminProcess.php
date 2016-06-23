@@ -1,10 +1,9 @@
 <?php
 	session_start();
 
-
-if(isset($_GET['email'])){
+if(isset($_POST['email'])){
 	process_login();
-}else if(isset($_GET['logout'])){
+}else if(isset($_POST['logout'])){
 	session_destroy();
 	echo "LogOut";
 //	header("Location: index.html");	
@@ -16,15 +15,19 @@ if(isset($_GET['email'])){
 #
 ###########################################################################*/
 function process_login(){
-	$id = $_GET['email'];
-	$password = $_GET['password'];	
-/*	$id = $_POST['email'];
-	$password = $_POST['password'];	*/
+    $servername = "ec2-52-201-212-193.compute-1.amazonaws.com";    
+    $username = "s2016a_user14";
+    $password = "s2016a_user14";
+    $dbname = "s2016a_user14";   
+
+	$id = $_POST['email'];
+	$pswd = $_POST['password'];
 	
-	$link = mysqli_connect('localhost','root','','jproject');
-	if($link){	
-//		echo $id, $password;	
-		$query = "select department from user where email = '$id' and pswd = '$password'";
+    $link = mysqli_connect($servername, $username, $password, $dbname);
+
+	if($link){
+
+		$query = "select department from Users where email = '$id' and pswd = '$pswd'";
 			$result = mysqli_query($link,$query);
 			if ($result && mysqli_num_rows($result) > 0){
 				$out = mysqli_fetch_row($result);
@@ -34,11 +37,11 @@ function process_login(){
 				echo $out[0];				//return department				
 			}else{
 				mysqli_close($link);
-				echo "<h2 align='center'>Log In Failed <a href='index.html'> [GOTO Login]</a></h2>";				
+				echo "loginFail";				
 		}	
 			
 	}else{
-		echo "DBMS connection failed<br/>";
+		echo "connectFail";
 	}	
 }
 
