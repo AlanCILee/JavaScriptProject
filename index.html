@@ -37,7 +37,55 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(e) {
+       		 $.post("adminProcess.php",
+                    {                        
+                        User: "null"                 
+                    }
+                    , function display(dataFromtheServer) {
+			 			if(dataFromtheServer != "null"){
+    						$("#loginText").html(dataFromtheServer);
+						}	
+         			}		 
+                );        
+             $.post("adminProcess.php",
+                    {                        
+                        Depart: "null"                 
+                    }
+                    , function display(dataFromtheServer) {
+                    			
+			 			if(dataFromtheServer == "IT"){
+							$("#propertiesDropdown").css("display","inline");
+							$("#propertiesSingle").css("display","none");
+							$("#realtorsDropdown").css("display","inline");
+							$("#realtorsSingle").css("display","none");
+							$("#newsDropdown").css("display","inline");
+							$("#newsSingle").css("display","none");
+						}else if(dataFromtheServer == "Sales"){
+							$("#propertiesDropdown").css("display","inline");
+							$("#propertiesSingle").css("display","none");							
+						}else if(dataFromtheServer == "HR"){	
+							$("#realtorsDropdown").css("display","inline");
+							$("#realtorsSingle").css("display","none");
+						}else if(dataFromtheServer == "News"){	
+							$("#newsDropdown").css("display","inline");
+							$("#newsSingle").css("display","none");
+						}	
 
+         			}		 
+                );                    	
+        });		        
+            
+         	
+            
+    </script>
+<style>
+	#propertiesDropdown, #realtorsDropdown, #newsDropdown {
+		display : none;
+	}	
+</style>
   </head>
   <body class="aa-price-range">  
   <!-- Pre Loader -->
@@ -68,8 +116,8 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
+                  <!--<a href="register.html" class="aa-register">Register</a> -->
+                  <a href="signin.html" class="aa-login" id="loginText">Login</a>
                 </div>
               </div>
             </div>
@@ -101,23 +149,36 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
             <li class="active"><a href="index.html">HOME</a></li>
-             <li class="dropdown">
+            
+            <li id="propertiesDropdown" class="propertiesHidden dropdown" >
               <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
+              <ul class="dropdown-menu" role="menu">               
                 <li><a href="properties.html">PROPERTIES</a></li>
-                <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
-              </ul>
-            </li>
-            <li><a href="gallery.html">GALLERY</a></li>                                         
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
+                <li><a href="properties-edit.html">PROPERTIES EDIT</a></li>                                            
+              </ul> 
+            </li>		
+            <li id="propertiesSingle" class="propertiesHidden"><a href="properties.html">PROPERTIES</a></li>
+                  
+<!--            <li><a href="gallery.html">GALLERY</a></li>-->                                         
+            <li id="realtorsDropdown" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">REALTORS <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
-                <li><a href="blog-archive.html">BLOG</a></li>
-                <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
+                <li><a href="realtors.html">REALTORS</a></li>
+                <li><a href="realtors-edit.html">REALTORS EDIT</a></li>                                            
               </ul>
             </li>
-            <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="404.html">404 PAGE</a></li>
+            <li id="realtorsSingle"><a href="blog-archive.html">REALTORS</a></li>
+            
+              <li id="newsDropdown" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">NEWS <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">                
+                <li><a href="news.html">NEWS</a></li>
+                <li><a href="news-edit.html">NEWS EDIT</a></li>                                            
+              </ul>
+            </li>
+            <li id="newsSingle"><a href="blog-archive.html">NEWS</a></li>
+         <!--   <li><a href="contact.html">CONTACT</a></li>
+           <li><a href="404.html">404 PAGE</a></li>-->
           </ul>                            
         </div><!--/.nav-collapse -->       
       </div>          

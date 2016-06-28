@@ -6,7 +6,10 @@ if(isset($_POST['email'])){
 }else if(isset($_POST['logout'])){
 	session_destroy();
 	echo "LogOut";
-//	header("Location: index.html");	
+}else if(isset($_POST['User'])){
+	getUser();
+}else if(isset($_POST['Depart'])){
+	getDepartment();	
 }
 
 /*###########################################################################
@@ -32,9 +35,9 @@ function process_login(){
 			if ($result && mysqli_num_rows($result) > 0){
 				$out = mysqli_fetch_row($result);
 				$_SESSION['User']=$id;
+				$_SESSION['Depart']=$out[0];
 				mysqli_close($link);				
-//				header("Location: adminControl.php");
-				echo $out[0];				//return department				
+				echo "Welcome ".$id." from ".$out[0]." Department";				//return department				
 			}else{
 				mysqli_close($link);
 				echo "loginFail";				
@@ -45,4 +48,29 @@ function process_login(){
 	}	
 }
 
+/*###########################################################################
+#
+#	Return current log in user's Id
+#
+###########################################################################*/
+function getUser(){
+	if(!isset($_SESSION['User'])){
+		echo "null";
+	}else{
+		echo $_SESSION['User'];
+	}
+}
+
+/*###########################################################################
+#
+#	Return current log in user's Department
+#
+###########################################################################*/
+function getDepartment(){
+	if(!isset($_SESSION['Depart'])){
+		echo "null";
+	}else{
+		echo $_SESSION['Depart'];
+	}
+}
 ?>

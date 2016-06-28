@@ -49,13 +49,14 @@
                         email: $("#email").val(),
                         password: $("#password").val()
                     }
-                    , display 
-                );             
+                    ,   function process(dataFromtheServer) {
+    			  			alert(dataFromtheServer);	
+				  			location.href='index.html';
+            			}
+		            );             
             }             
             
-            function display(dataFromtheServer) {
-    			  alert("Division :"+dataFromtheServer);	
-            }			
+		
             
     </script>
   
