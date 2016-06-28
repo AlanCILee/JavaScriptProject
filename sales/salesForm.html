@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title></title>
+<style>
+            table, tr, td, th, div { border: 1px dashed saddlebrown; }
+            textarea , div { width: 300px ; height: 200px; }
+</style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+function ajaxWay() {
+        $.post("salesForm.php",
+                    {
+                        
+                        add: $("#address").val(),
+                        cty: $("#city").val(),
+                        pos: $("#postal").val(),
+                       // image: $("#postal").val(), replace this code for file upload.
+                        rm: $("#rooms").val(),
+                        bth: $("#baths").val(),
+                        descp: $("#description").val(),
+                        sqft: $("#squareF").val(),
+                        price: $("#Price").val(),
+                        //query: "Select * from formTest"     it's already assigned on the php'
+                    }
+                    , display
+                );
+             
+            }
+            
+            function display(dataFromtheServer) {
+                $("#result tbody > tr").remove();
+                $("#result tbody").append(dataFromtheServer);
+            }
+	
+</script>
+
+<!--<?php
+// define variables and set to empty values
+$name = $email = $gender = $comment = $website = "" ;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $name = test_input($_POST["name"]);
+  $email = test_input($_POST["email"]);
+  $website = test_input($_POST["website"]);
+  $comment = test_input($_POST["comment"]);
+  $gender = test_input($_POST["gender"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>-->
+
+</head>
+<body>
+<h2>New Sales Post Example</h2>
+<!--<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  -->
+
+<label>Address: <input id="address" type="text" /></label><br><br>
+<label>City: <input id="city" type="text" /></label><br><br>
+<label>Postal Code: <input id="postal" type="text" /></label><br><br>
+<!--<label>Image: <input id="image" type="file" /></label><br><br>-->
+<label>Number of Rooms: <input id="rooms" type="number" /></label><br><br> 
+<label>Number of Baths: <input id="baths" type="number" /></label><br><br>
+<label>Description: <input id="description" type="text" /></label><br><br>
+<label>SQ FT: <input id="squareF" type="int" /></label><br><br>
+<label>Price: <input id="Price" type="number" /></label><br><br>
+
+ <button onclick="ajaxWay()">Submit</button>
+ <!--</form>-->
+  <p></p>
+ <div id="result"></div>
+
+
+
+</body>
+</html>
