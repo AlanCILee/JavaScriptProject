@@ -1242,7 +1242,7 @@ img {
 .aa-blog-single {
   background-color: #f8f8f8;
   display: inline;
-  float: left;
+  float: none;
   width: 100%;
 }
 .aa-blog-single .aa-blog-img {

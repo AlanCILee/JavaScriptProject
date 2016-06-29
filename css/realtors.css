@@ -1,0 +1,52 @@
+/* CSS file for the Realtor page */
+
+.realtorinfocontainer 
+{
+	width: 100%;
+	display: block;
+}
+
+.location
+{
+	width: 10%;
+	float: left;
+	display: inline-block;
+}
+
+.phone
+{
+	width: 10%;
+	float: left;
+	display: inline-block;
+}
+
+.email
+{
+	width: 80%;
+	float: left;
+	display: inline-block;
+}
+
+.realtormaincontainer
+{
+	width: 100%;
+	display: block;
+}
+
+.leftside
+{
+	float: left;
+	display: inline;
+	width: 35%;
+}
+
+.rightside
+{
+	float: left;
+	display: inline;
+	width: 65%;
+}
+
+
+
+
