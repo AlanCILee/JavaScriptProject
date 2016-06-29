@@ -3,34 +3,39 @@
 <head>
 <title></title>
 <style>
-            table, tr, td, th, div { border: 1px dashed saddlebrown; }
-            textarea , div { width: 300px ; height: 200px; }
+        /*    table, tr, td, th, div { border: 1px dashed saddlebrown; }
+            textarea , div { width: 300px ; height: 200px; }*/
 </style>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
 function ajaxWay() {
+	   
         $.post("salesForm.php",
                     {
                         
                         add: $("#address").val(),
-                        cty: $("#city").val(),
-                        pos: $("#postal").val(),
-                       // image: $("#postal").val(), replace this code for file upload.
+                        city: $("#city").val(),
+                        pos: $("#postal").val(),                      
                         rm: $("#rooms").val(),
                         bth: $("#baths").val(),
                         descp: $("#description").val(),
                         sqft: $("#squareF").val(),
-                        price: $("#Price").val(),
+                        price: $("#Price").val()
                         //query: "Select * from formTest"     it's already assigned on the php'
                     }
                     , display
                 );
              
+             //image: $("#image").val(), //replace this code for file upload.   http://www.w3schools.com/php/php_file_upload.asp
+             var x = document.getElementById("image").value;
+    document.getElementById("result").innerHTML = x;
+            
+            
+            
             }
             
             function display(dataFromtheServer) {
-                $("#result tbody > tr").remove();
-                $("#result tbody").append(dataFromtheServer);
+                $("#imgTest").append(dataFromtheServer);
             }
 	
 </script>
@@ -63,18 +68,18 @@ function test_input($data) {
 <label>Address: <input id="address" type="text" /></label><br><br>
 <label>City: <input id="city" type="text" /></label><br><br>
 <label>Postal Code: <input id="postal" type="text" /></label><br><br>
-<!--<label>Image: <input id="image" type="file" /></label><br><br>-->
+<label>Image: <input id="image" type="file" accept="image/*" value="C:\Users\300234869\Downloads\ImageSelection\ImageSelection"/></label><br><br><!--accepts all images format image/*    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_fileupload_value   http://www.html5rocks.com/en/tutorials/file/dndfiles/      -->
 <label>Number of Rooms: <input id="rooms" type="number" /></label><br><br> 
 <label>Number of Baths: <input id="baths" type="number" /></label><br><br>
 <label>Description: <input id="description" type="text" /></label><br><br>
-<label>SQ FT: <input id="squareF" type="int" /></label><br><br>
+<label>SQ FT: <input id="squareF" type="number" /></label><br><br>
 <label>Price: <input id="Price" type="number" /></label><br><br>
 
  <button onclick="ajaxWay()">Submit</button>
  <!--</form>-->
   <p></p>
  <div id="result"></div>
-
+ <div id="imgTest"></div>
 
 
 </body>

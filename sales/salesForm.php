@@ -16,35 +16,46 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     // Check connection
+  
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
-    }
-    
-    $sql = "INSERT INTO formTest (address, city, postalCode, roomCnt, bathCnt, description, sqFt,price) " ;
+    }  
+
+ $sql = "INSERT INTO formTest (address, city, postalCode, roomCnt, bathCnt, description, sqFt,price) " ;
     $sql .="VALUES (?, ?, ?, ?, ?, ?, ?, ? ) " ;
     
     
-    if($statement = $conn->prepare($sql)){
+    if($statement = $conn->prepare($sql))
+    	{
         //$statement->bind_param("ss", $_POST["add"], $_POST["city"], .......); 
         //OR
+       
         $statement->bind_param("sssiisii", $address, $city, $postal, $room, $bath, $descp, $sqft, $price);
         $statement->execute();
 
- 
-  $sql = "SELECT * From formTest order by id asc" ;
-        $result = $conn->query($sql) or die("Query: ($sql) [problem]");
+    
+        
+        $sql = "SELECT * From formTest order by propertyid desc" ;
+        
+       $result = $conn->query($sql) or die("Query: ($sql) [problem]");
  
         if ($result->num_rows > 0) {
             // output data of each row
             $fields = mysqli_num_fields($result);
 
-            while($row = $result->fetch_row()) {
-                display("<tr>","\n");
-                for ($i=0; $i < $fields; $i++) {
-                    display("<td>", $row[$i] . "</td>");
-                }
-                display("</tr>","\n");
-            }
+            $row = $result->fetch_row();
+               
+            display(
+               	"Address: " . $row[1]. "<br/>". 
+      			"City: " . $row[2]. "<br/>".
+      			"Postal Code: " . $row[3]. "<br/>".
+      			"Number of Rooms: " . $row[4]. "<br/>".
+      			"Number of Baths: " . $row[5]. "<br/>".
+      			"Description: " . $row[6]. "<br/>".
+      			"Square FT: " . $row[7]. "<br/>".
+      			"Price: $" . $row[8]. "<br/>" 
+                    );
+           
 
         } else {
             echo "0 results";
@@ -53,12 +64,17 @@
        $statement->close();
     } else 
         echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-
+    
+ 
+   
    $conn->close();
     
     // ==========================================
-function display($tag , $value) {
-        echo $tag . $value ;
+    function display($value) {
+        echo $value ;
     }
-
+    
+    
+		   
+    
 ?>
