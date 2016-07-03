@@ -33,6 +33,9 @@ function checkDepartment(){
                 Depart: "null"                 
             }
             , function display(dataFromtheServer) {
+            		var path = $(location).attr('pathname');  	   				
+    				var page = path.substring(path.lastIndexOf('/') + 1);	// read current file
+            	
             		$("#propertiesDropdown").css("display","none");		//Default All Signle Menu
 					$("#propertiesSingle").css("display","inline");
 					$("#realtorsDropdown").css("display","none");
@@ -55,8 +58,9 @@ function checkDepartment(){
 				}else if(dataFromtheServer == "News"){	
 					$("#newsDropdown").css("display","inline");
 					$("#newsSingle").css("display","none");
-				}
-				
+				}else if(page == "news-edit.html" || page=="properties-edit.html" || page =="realtors-edit.html"){
+					location.href='signin.html';		//Not login user access editing page case
+				}				
  			}		 
         );           	
 }
