@@ -5,7 +5,7 @@ if(isset($_POST['email'])){
 	process_login();
 }else if(isset($_POST['logout'])){
 	session_destroy();
-	echo "LogOut";
+	echo "You logged out seccessfully";
 }else if(isset($_POST['User'])){
 	getUser();
 }else if(isset($_POST['Depart'])){

@@ -39,17 +39,36 @@
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script>
-		$(document).ready(function(e) {
+		$(document).ready(function() {
        		 $.post("adminProcess.php",
                     {                        
                         User: "null"                 
                     }
                     , function display(dataFromtheServer) {
 			 			if(dataFromtheServer != "null"){
-    						$("#loginText").html(dataFromtheServer);
+    						$("#loginText").html(dataFromtheServer + "<button id='logoutBtn' > [LOGOUT]</button>");
+    						
+							$("#logoutBtn").click(function(){
+								$.post("adminProcess.php",
+				                {                        
+				                	logout: "null"                 
+				                }
+				                 , function display(dataFromtheServer) {
+							 			if(dataFromtheServer != "null"){
+				    						$("#loginText").html("<a href='signin.html' class='aa-login'>Login</a>"); 
+				    						checkDepartment();
+										}	
+         							}		 
+                				);        
+	        	 			});   
 						}	
          			}		 
-                );        
+             );        
+              
+             checkDepartment();                	
+        });		        
+            
+       	function checkDepartment(){     
              $.post("adminProcess.php",
                     {                        
                         Depart: "null"                 
@@ -72,19 +91,26 @@
 						}else if(dataFromtheServer == "News"){	
 							$("#newsDropdown").css("display","inline");
 							$("#newsSingle").css("display","none");
+						}else{
+							$("#propertiesDropdown").css("display","none");
+							$("#propertiesSingle").css("display","inline");
+							$("#realtorsDropdown").css("display","none");
+							$("#realtorsSingle").css("display","inline");
+							$("#newsDropdown").css("display","none");
+							$("#newsSingle").css("display","inline");	
 						}	
-
          			}		 
-                );                    	
-        });		        
-            
-         	
-            
+                );           	
+        }
     </script>
 <style>
 	#propertiesDropdown, #realtorsDropdown, #newsDropdown {
 		display : none;
 	}	
+	
+	#loginText {
+		color : white;
+	}
 </style>
   </head>
   <body class="aa-price-range">  
@@ -115,9 +141,9 @@
                 </div>              
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="aa-header-right">
+                <div class="aa-header-right" id="loginText">
                   <!--<a href="register.html" class="aa-register">Register</a> -->
-                  <a href="signin.html" class="aa-login" id="loginText">Login</a>
+                  <a href="signin.html" class="aa-login">Login</a>
                 </div>
               </div>
             </div>
