@@ -39,6 +39,14 @@
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script>
+	$(document).ready(function(){
+		$.getScript("js/navigation.js");		
+	});
+
+
+	</script>	
+	<!--
+	<script>
 		$(document).ready(function() {
        		 $.post("adminProcess.php",
                     {                        
@@ -102,16 +110,8 @@
          			}		 
                 );           	
         }
-    </script>
-<style>
-	#propertiesDropdown, #realtorsDropdown, #newsDropdown {
-		display : none;
-	}	
-	
-	#loginText {
-		color : white;
-	}
-</style>
+    </script>-->
+
   </head>
   <body class="aa-price-range">  
   <!-- Pre Loader -->
@@ -156,7 +156,7 @@
 
   <!-- Start menu section -->
   <section id="aa-menu-area">
-    <nav class="navbar navbar-default main-navbar" role="navigation">  
+    <nav class="navbar navbar-default main-navbar" role="navigation" id="topNavigation">  
       <div class="container">
         <div class="navbar-header">
           <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
@@ -183,28 +183,24 @@
                 <li><a href="properties-edit.html">PROPERTIES EDIT</a></li>                                            
               </ul> 
             </li>		
-            <li id="propertiesSingle" class="propertiesHidden"><a href="properties.html">PROPERTIES</a></li>
-                  
-<!--            <li><a href="gallery.html">GALLERY</a></li>-->                                         
+            <li id="propertiesSingle" class="propertiesHidden"><a href="properties.html">PROPERTIES</a></li>                                        
             <li id="realtorsDropdown" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">REALTORS <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="realtors.html">REALTORS <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="realtors.html">REALTORS</a></li>
                 <li><a href="realtors-edit.html">REALTORS EDIT</a></li>                                            
               </ul>
             </li>
-            <li id="realtorsSingle"><a href="blog-archive.html">REALTORS</a></li>
+            <li id="realtorsSingle"><a href="realtors.html">REALTORS</a></li>
             
               <li id="newsDropdown" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">NEWS <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="news.html">NEWS <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">                
                 <li><a href="news.html">NEWS</a></li>
                 <li><a href="news-edit.html">NEWS EDIT</a></li>                                            
               </ul>
             </li>
-            <li id="newsSingle"><a href="blog-archive.html">NEWS</a></li>
-         <!--   <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="404.html">404 PAGE</a></li>-->
+            <li id="newsSingle"><a href="news.html">NEWS</a></li>
           </ul>                            
         </div><!--/.nav-collapse -->       
       </div>          
