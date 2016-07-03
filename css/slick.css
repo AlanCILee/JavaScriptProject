@@ -325,3 +325,8 @@
 #loginText {
 	color : white;
 }
+
+#logoutBtn {
+	background-color: transparent;
+	border-color: transparent;
+}
