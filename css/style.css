@@ -904,7 +904,7 @@ img {
 ====================*/
 
 #aa-promo-banner {
-  background-image: url("../img/promo-banner.jpg");
+  background-image: url("../img/promo-banner1.jpg");
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
@@ -2474,7 +2474,7 @@ img {
 ====================*/
 
 #aa-signin {
-  background-image: url("../img/signin-bg.jpg");
+  background-image: url("../img/signin-bg1.jpg");
   background-position: center center;
   background-size: cover;
   bottom: 0;
@@ -2487,7 +2487,7 @@ img {
   width: 100%;
 }
 #aa-signin:before {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   content: '';
   position: fixed;
   left: 0;
