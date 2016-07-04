@@ -13,6 +13,10 @@
     $sqft = $_POST["sqft"];
     $price = $_POST["price"];
 
+// img input ============================================================================
+
+// sql value inputs ==========================================================================
+
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     // Check connection
@@ -71,6 +75,9 @@
     
     // ==========================================
     function display($value) {
+        echo $value ;
+    }
+    function dispImg($value) {
         echo $value ;
     }
     

@@ -6,10 +6,32 @@
         /*    table, tr, td, th, div { border: 1px dashed saddlebrown; }
             textarea , div { width: 300px ; height: 200px; }*/
 </style>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
+
+//allow the user to view image before upload =====================================================================
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+document.getElementById("myimg").innerHTML = "<img id=image src=# alt=your image />";
+                reader.onload = function (e) {
+                    $('#image')
+                        .attr('src', e.target.result)
+                        .width(370)
+                        .height(220);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+// submit inputs =========================================================================================================
 function ajaxWay() {
 	   
+       
+       
         $.post("salesForm.php",
                     {
                         
@@ -25,18 +47,71 @@ function ajaxWay() {
                     }
                     , display
                 );
-             
-             //image: $("#image").val(), //replace this code for file upload.   http://www.w3schools.com/php/php_file_upload.asp
-             var x = document.getElementById("image").value;
-    document.getElementById("result").innerHTML = x;
+// for img http://codepen.io/SpencerCooley/pen/JtiFL       https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser=======================================================================================================================
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+	
+   
+//watch for change on the 
+	$( "#the-photo-file-field" ).change(function() {
+		console.log("photo file has been chosen")
+		//grab the first image in the fileList
+		//in this example we are only loading one file.
+		console.log(this.files[0].size)
+		renderImage(this.files[0])
+
+	});
+  }else {
+
+  alert('The File APIs are not fully supported in this browser.');
+
+}
+
+  //this function is called when the input loads an image
+	function renderImage(file){
+			var reader = new FileReader();
+			reader.onload = function(event){
+				the_url = event.target.result
+ //of course using a template library like handlebars.js is a better solution than just inserting a string
+				$('#img').html("<img src='"+the_url+"' />")
+				$('#name').html(file.name)
+				$('#size').html(humanFileSize(file.size, "MB"))
+				$('#type').html(file.type)
+			}
+	    
+	    //when the file is read it triggers the onload event above.
+			reader.readAsDataURL(file);
+		}
+		
+		//this is not completely neccesary, just a nice function I found to make the file size format friendlier
+	//http://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable
+	
+	function humanFileSize(bytes, si) {
+	    var thresh = si ? 1000 : 1024;
+	    if(bytes < thresh) return bytes + ' B';
+	    var units = si ? ['kB','MB','GB','TB','PB','EB','ZB','YB'] : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+	    var u = -1;
+	    do {
+	        bytes /= thresh;
+	        ++u;
+	    } while(bytes >= thresh);
+	    return bytes.toFixed(1)+' '+units[u];
+	}	
+
+		
+
+//============================================================================
+                
             
-            
-            
-            }
+ // testing -- display user input variables ===========================           
             
             function display(dataFromtheServer) {
-                $("#imgTest").append(dataFromtheServer);
+                $("#result").append(dataFromtheServer);
             }
+            
+           /* function dispImg(dataFromtheServer) {
+                $("#img").append(dataFromtheServer);
+            }*/
+    }
 	
 </script>
 
@@ -68,7 +143,9 @@ function test_input($data) {
 <label>Address: <input id="address" type="text" /></label><br><br>
 <label>City: <input id="city" type="text" /></label><br><br>
 <label>Postal Code: <input id="postal" type="text" /></label><br><br>
-<label>Image: <input id="image" type="file" accept="image/*" value="C:\Users\300234869\Downloads\ImageSelection\ImageSelection"/></label><br><br><!--accepts all images format image/*    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_fileupload_value   http://www.html5rocks.com/en/tutorials/file/dndfiles/      -->
+<label>Image: <input type="file" id="the-photo-file-field" onchange="readURL(this);"/></label><br><br><!--accepts all images format image/*    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_fileupload_value   http://www.html5rocks.com/en/tutorials/file/dndfiles/ 
+http://www.w3schools.com/php/php_file_upload.asp
+https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser     -->
 <label>Number of Rooms: <input id="rooms" type="number" /></label><br><br> 
 <label>Number of Baths: <input id="baths" type="number" /></label><br><br>
 <label>Description: <input id="description" type="text" /></label><br><br>
@@ -79,7 +156,7 @@ function test_input($data) {
  <!--</form>-->
   <p></p>
  <div id="result"></div>
- <div id="imgTest"></div>
+ <div id="myimg"></div>
 
 
 </body>
