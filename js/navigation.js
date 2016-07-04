@@ -27,7 +27,7 @@ $(document).ready(function() {
      );        	        
 });
     
-function checkDepartment(){	    
+function checkDepartment(){	   
      $.post("adminProcess.php",
             {                        
                 Depart: "null"                 
@@ -35,6 +35,30 @@ function checkDepartment(){
             , function display(dataFromtheServer) {
             		var path = $(location).attr('pathname');  	   				
     				var page = path.substring(path.lastIndexOf('/') + 1);	// read current file
+
+            		switch (page){
+            			case "index.html" :
+            				$("#menuHome").addClass("active");
+            				break;
+            				
+            			case "properties.html" :
+            			case "properties-edit.html"	:
+             				$("#propertiesDropdown").addClass("active");
+             				$("#propertiesSingle").addClass("active");
+            				break;           			
+  
+              			case "realtors.html" :
+            			case "realtors-edit.html" :
+            			    $("#realtorsDropdown").addClass("active");
+             				$("#realtorsSingle").addClass("active");
+            				break;  
+
+              			case "news.html" :
+            			case "news-edit.html" :
+            			    $("#newsDropdown").addClass("active");
+             				$("#newsSingle").addClass("active");
+            				break;            			            				        			
+            		}
             	
             		$("#propertiesDropdown").css("display","none");		//Default All Signle Menu
 					$("#propertiesSingle").css("display","inline");
@@ -59,7 +83,7 @@ function checkDepartment(){
 					$("#newsDropdown").css("display","inline");
 					$("#newsSingle").css("display","none");
 				}else if(page == "news-edit.html" || page=="properties-edit.html" || page =="realtors-edit.html"){
-					location.href='signin.html';		//Not login user access editing page case
+					location.href='index.html';		//Not login user access editing page case
 				}				
  			}		 
         );           	
