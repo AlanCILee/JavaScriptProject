@@ -2,16 +2,48 @@
 <html>
 <head>
 <title></title>
+
 <style>
-        /*    table, tr, td, th, div { border: 1px dashed saddlebrown; }
-            textarea , div { width: 300px ; height: 200px; }*/
+form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
+#progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+#bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+#percent { position:absolute; display:inline-block; top:3px; left:48%; }
 </style>
+
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> <!--form plugin-->
+
+<!-- <?php
+// define variables and set to empty values
+$name = $email = $gender = $comment = $website = "" ;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $address = test_input($_POST["address"]);
+  $city = test_input($_POST["city"]);
+  $postal = test_input($_POST["postal"]);
+  $rooms = test_input($_POST["rooms"]);
+  $baths = test_input($_POST["baths"]);
+  $description = test_input($_POST["description"]);
+  $squareF = test_input($_POST["squareF"]);
+  $Price = test_input($_POST["Price"]);
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  return $data;
+}
+?>-->
 <script>
 
+// validate form before sending to server ======================================================================
+
+
 //allow the user to view image before upload =====================================================================
+
 function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -26,13 +58,62 @@ document.getElementById("myimg").innerHTML = "<img id=image src=# alt=your image
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        
+// display upload progress, provide options to ajaxForm to get callbacks like success,error, uploadProgress and beforeSend
+//http://malsup.com/jquery/form/  ===============================================================================================================
+/*beforeSend : this function called before form submission
+uploadProgress : this function called when the upload is in progress
+success : this function is called when the form upload is successful.
+complete: this function is called when the form upload is completed.*/
+
+$(document).ready(function()
+{
+ 
+    var options = { 
+    beforeSend: function() 
+    {
+        $("#progress").show();
+        //clear everything
+        $("#bar").width('0%');
+        $("#message").html("");
+        $("#percent").html("0%");
+    },
+    uploadProgress: function(event, position, total, percentComplete) 
+    {
+        $("#bar").width(percentComplete+'%');
+        $("#percent").html(percentComplete+'%');
+ 
+    },
+    success: function() 
+    {
+        $("#bar").width('100%');
+        $("#percent").html('100%');
+ 
+    },
+    complete: function(response) 
+    {
+        $("#message").html("<font color='green'>"+response.responseText+"</font>");
+    },
+    error: function()
+    {
+        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+ 
+    }
+ 
+}; 
+ 
+     $("#myForm").ajaxForm(options);
+ 
+});
+
 
 // submit inputs =========================================================================================================
-function ajaxWay() {
-	   
-       
-       
-        $.post("salesForm.php",
+
+function upload() {
+
+//the $.post is only use if the <input are String and Integer, not for FILE. Otherwise use Formtags
+//below uses ID tags. Form uses NAME tags
+      /*  $.post("salesForm.php",
                     {
                         
                         add: $("#address").val(),
@@ -43,66 +124,25 @@ function ajaxWay() {
                         descp: $("#description").val(),
                         sqft: $("#squareF").val(),
                         price: $("#Price").val()
+                      
                         //query: "Select * from formTest"     it's already assigned on the php'
                     }
                     , display
-                );
-// for img http://codepen.io/SpencerCooley/pen/JtiFL       https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser=======================================================================================================================
-if (window.File && window.FileReader && window.FileList && window.Blob) {
-	
-   
-//watch for change on the 
-	$( "#the-photo-file-field" ).change(function() {
-		console.log("photo file has been chosen")
-		//grab the first image in the fileList
-		//in this example we are only loading one file.
-		console.log(this.files[0].size)
-		renderImage(this.files[0])
-
-	});
-  }else {
-
-  alert('The File APIs are not fully supported in this browser.');
-
-}
-
-  //this function is called when the input loads an image
-	function renderImage(file){
-			var reader = new FileReader();
-			reader.onload = function(event){
-				the_url = event.target.result
- //of course using a template library like handlebars.js is a better solution than just inserting a string
-				$('#img').html("<img src='"+the_url+"' />")
-				$('#name').html(file.name)
-				$('#size').html(humanFileSize(file.size, "MB"))
-				$('#type').html(file.type)
-			}
-	    
-	    //when the file is read it triggers the onload event above.
-			reader.readAsDataURL(file);
-		}
+                );*/
+// clear inputs and preview image once upload button is clicked==================================================================================
 		
-		//this is not completely neccesary, just a nice function I found to make the file size format friendlier
-	//http://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable
-	
-	function humanFileSize(bytes, si) {
-	    var thresh = si ? 1000 : 1024;
-	    if(bytes < thresh) return bytes + ' B';
-	    var units = si ? ['kB','MB','GB','TB','PB','EB','ZB','YB'] : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
-	    var u = -1;
-	    do {
-	        bytes /= thresh;
-	        ++u;
-	    } while(bytes >= thresh);
-	    return bytes.toFixed(1)+' '+units[u];
-	}	
-
-		
-
-//============================================================================
-                
-            
- // testing -- display user input variables ===========================           
+document.getElementById("myForm").getElementsByTagName("address").value ="";
+document.getElementById("myForm").getElementsByTagName("city").value ="";
+document.getElementById("myForm").getElementsByTagName("postal").value ="";
+document.getElementById("myForm").getElementsByTagName("rooms").value ="";
+document.getElementById("myForm").getElementsByTagName("baths").value ="";
+document.getElementById("myForm").getElementsByTagName("description").value ="";
+document.getElementById("myForm").getElementsByTagName("squareF").value ="";
+document.getElementById("myForm").getElementsByTagName("Price").value ="";
+document.getElementById("myForm").getElementsByTagName("myfile").value = "";
+document.getElementById("myimg").innerHTML = "";
+                            
+ // testing -- display user input variables ==========================================================================           
             
             function display(dataFromtheServer) {
                 $("#result").append(dataFromtheServer);
@@ -131,6 +171,10 @@ function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
+  
+  $data = null file.....
+  
+  
   return $data;
 }
 ?>-->
@@ -139,24 +183,35 @@ function test_input($data) {
 <body>
 <h2>New Sales Post Example</h2>
 <!--<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  -->
+<form id="myForm" action="salesForm.php" method="post" enctype="multipart/form-data">
+<label>Address: <input name="address" type="text" required /></label><br><br>
+<label>City: <input name="city" type="text" required/></label><br><br>
+<label>Postal Code: <input name="postal" type="text" required/></label><br><br>
+<label>Number of Rooms: <input name="rooms" type="number" required/></label><br><br> 
+<label>Number of Baths: <input name="baths" type="number" required/></label><br><br>
+<label>Description: <input name="description" type="text" required/></label><br><br>
+<label>SQ FT: <input name="squareF" type="number" required/></label><br><br>
+<label>Price: <input name="Price" type="number" required/></label><br><br>
+<label>Image: <input type="file" name="myfile" onchange="readURL(this);" required/></label><br><br>
+     
+<!--<label>Image: <input type="file" name="image" onchange="readURL(this);"/></label><br><br>--><!--accepts all images format image/*    
+http://www.html5rocks.com/en/tutorials/file/dndfiles/ 
+https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser    
+http://hayageek.com/ajax-file-upload-jquery/ -->
 
-<label>Address: <input id="address" type="text" /></label><br><br>
-<label>City: <input id="city" type="text" /></label><br><br>
-<label>Postal Code: <input id="postal" type="text" /></label><br><br>
-<label>Image: <input type="file" id="the-photo-file-field" onchange="readURL(this);"/></label><br><br><!--accepts all images format image/*    http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_fileupload_value   http://www.html5rocks.com/en/tutorials/file/dndfiles/ 
-http://www.w3schools.com/php/php_file_upload.asp
-https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser     -->
-<label>Number of Rooms: <input id="rooms" type="number" /></label><br><br> 
-<label>Number of Baths: <input id="baths" type="number" /></label><br><br>
-<label>Description: <input id="description" type="text" /></label><br><br>
-<label>SQ FT: <input id="squareF" type="number" /></label><br><br>
-<label>Price: <input id="Price" type="number" /></label><br><br>
-
- <button onclick="ajaxWay()">Submit</button>
+<input type="submit" onclick="upload()" value="Submit">
+<!--<button onclick="upload()" >up</button-->
+ </form>
  <!--</form>-->
   <p></p>
- <div id="result"></div>
- <div id="myimg"></div>
+ <div id="progress">
+        <div id="bar"></div>
+        <div id="percent">0%</div >
+ </div>
+ <br/>
+ <div id="message"></div><br>
+  <div id="result"></div>
+  <div id="myimg"></div>
 
 
 </body>

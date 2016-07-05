@@ -1,21 +1,94 @@
 <?php
+    /*http://ec2-52-201-212-193.compute-1.amazonaws.com/phpmyadmin/*/
     $servername = "ec2-52-201-212-193.compute-1.amazonaws.com";
     $username = "s2016a_user18";
     $password = "s2016a_user18";
     $dbname = "s2016a_user18";
     
-    $address = $_POST["add"];
+    $address = $_POST["address"];
     $city = $_POST["city"];
-    $postal = $_POST["pos"];
-    $room = $_POST["rm"];
-    $bath = $_POST["bth"];
-    $descp = $_POST["descp"];
-    $sqft = $_POST["sqft"];
-    $price = $_POST["price"];
+    $postal = $_POST["postal"];
+    $room = $_POST["rooms"];
+    $bath = $_POST["baths"];
+    $descp = $_POST["description"];
+    $sqft = $_POST["squareF"];
+    $price = $_POST["Price"];
+  
 
 // img input ============================================================================
-
-// sql value inputs ==========================================================================
+		
+//echo "<script language='javascript'>alert('thanks!');</script>"; 
+	/*if(isset($_FILES['myfile'])){
+      $errors= array();
+      $file_name = $_FILES['myfile']['name'];
+      $file_size =$_FILES['immyfileage']['size'];
+      $file_tmp =$_FILES['myfile']['tmp_name'];
+      $file_type=$_FILES['myfile']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['myfile']['name'])));
+      
+      $expensions= array("jpeg","jpg","png");
+      
+      if(in_array($file_ext,$expensions)=== false){
+         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+      
+      if($file_size > 2097152){
+         $errors[]='File size must be excately 2 MB';
+      }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($_FILES["myfile"]["tmp_name"],
+                                "../www/" . $_FILES["myfile"]["name"]);
+         echo "Success";
+      }else{
+         print_r($errors);
+      }
+   }
+*/
+if(isset($_FILES['myfile'])){
+      $errors= array();
+      $file_name = $_FILES['myfile']['name'];
+      $file_size =$_FILES['myfile']['size'];
+      $file_tmp =$_FILES['myfile']['tmp_name'];
+      $file_type=$_FILES['myfile']['type'];
+     
+      
+      if($file_size > 2097152){
+         $errors[]='File size must not exceed 2 MB';
+      }
+      
+      if(empty($errors)==true){
+         move_uploaded_file($_FILES["myfile"]["tmp_name"],
+                                "../www/" . $_FILES["myfile"]["name"]);
+                                
+          echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
+          
+      }else{
+         print_r($errors);
+      }
+   }
+/*
+   $output_dir = "../www/";
+ 
+if(isset($_FILES["myfile"]))
+{
+    //Filter the file types , if you want.
+    if ($_FILES["myfile"]["error"] > 0)
+    {
+      echo "Error: " . $_FILES["file"]["error"] . "<br>";
+    }
+    else
+    {
+        //move the uploaded file to uploads folder;
+        move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir. $_FILES["myfile"]["name"]);
+ 
+     echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
+    }
+ 
+}
+   */
+   
+//upload inputs into sql  ==========================================================================
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -37,9 +110,9 @@
         $statement->bind_param("sssiisii", $address, $city, $postal, $room, $bath, $descp, $sqft, $price);
         $statement->execute();
 
-    
+ // display inputs for testing/ but can be use for displaying propert info. ============================================================================   
         
-        $sql = "SELECT * From formTest order by propertyid desc" ;
+        $sql = "SELECT * From formTest order by propertyid desc limit 1" ;
         
        $result = $conn->query($sql) or die("Query: ($sql) [problem]");
  
@@ -77,9 +150,7 @@
     function display($value) {
         echo $value ;
     }
-    function dispImg($value) {
-        echo $value ;
-    }
+    
     
     
 		   
