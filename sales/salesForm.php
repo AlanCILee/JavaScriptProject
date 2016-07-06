@@ -15,7 +15,7 @@
     $price = $_POST["Price"];
   
 
-// img input ============================================================================
+// ===========================================       img input        ===========================================
 		
 //echo "<script language='javascript'>alert('thanks!');</script>"; 
 	/*if(isset($_FILES['myfile'])){
@@ -88,7 +88,7 @@ if(isset($_FILES["myfile"]))
 }
    */
    
-//upload inputs into sql  ==========================================================================
+//===================================      upload inputs into sql      ================================================================
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -110,7 +110,7 @@ if(isset($_FILES["myfile"]))
         $statement->bind_param("sssiisii", $address, $city, $postal, $room, $bath, $descp, $sqft, $price);
         $statement->execute();
 
- // display inputs for testing/ but can be use for displaying propert info. ============================================================================   
+ // display inputs for testing/ but can be use for displaying propert info. =========================================
         
         $sql = "SELECT * From formTest order by propertyid desc limit 1" ;
         
@@ -132,9 +132,23 @@ if(isset($_FILES["myfile"]))
       			"Square FT: " . $row[7]. "<br/>".
       			"Price: $" . $row[8]. "<br/>" 
                     );
-           
-
-        } else {
+  /* ===========================   to clear form   ==============================   */
+      echo "<script> 
+	document.getElementById('ad').value ='';  
+	document.getElementById('city').value ='';
+	document.getElementById('pos').value ='';
+	document.getElementById('rm').value ='';
+	document.getElementById('bh').value ='';
+	document.getElementById('descp').value ='';
+	document.getElementById('sf').value ='';
+	document.getElementById('price').value ='';
+	document.getElementById('file').value = '';
+	</script>";
+ /*=======================================================================================*/
+        } 
+        
+        else 
+        {
             echo "0 results";
         }
 
@@ -145,7 +159,21 @@ if(isset($_FILES["myfile"]))
  
    
    $conn->close();
+// clear form inputs ===========================================================
     
+/*echo "<script> 
+	form.getElementsByName("address").value ="";  
+	form.getElementsByName("city").value ="";
+	form.getElementsByName("postal").value ="";
+	form.getElementsByName("rooms").value ="";
+	form.getElementsByName("baths").value ="";
+	form.getElementsByName("description").value ="";
+	form.getElementsByName("squareF").value ="";
+	form.getElementsByName("Price").value ="";
+	document.getElementById("file").value = "";
+	</script>";*/
+	
+	
     // ==========================================
     function display($value) {
         echo $value ;
