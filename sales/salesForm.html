@@ -130,18 +130,8 @@ function upload() {
                     , display
                 );*/
 // clear inputs and preview image once upload button is clicked==================================================================================
-/*
-	document.getElementById("ad").value ="";  
-	document.getElementById("city").value ="";
-	document.getElementById("pos").value ="";
-	document.getElementById("rm").value ="";
-	document.getElementById("bh").value ="";
-	document.getElementById("descp").value ="";
-	document.getElementById("sf").value ="";
-	document.getElementById("price").value ="";
-	document.getElementById("file").value = "";
-		*/
-/*document.getElementById("myForm").getElementsByTagName("address").value ="";
+		
+document.getElementById("myForm").getElementsByTagName("address").value ="";
 document.getElementById("myForm").getElementsByTagName("city").value ="";
 document.getElementById("myForm").getElementsByTagName("postal").value ="";
 document.getElementById("myForm").getElementsByTagName("rooms").value ="";
@@ -149,7 +139,7 @@ document.getElementById("myForm").getElementsByTagName("baths").value ="";
 document.getElementById("myForm").getElementsByTagName("description").value ="";
 document.getElementById("myForm").getElementsByTagName("squareF").value ="";
 document.getElementById("myForm").getElementsByTagName("Price").value ="";
-document.getElementById("file").value = "";*/
+document.getElementById("myForm").getElementsByTagName("myfile").value = "";
 document.getElementById("myimg").innerHTML = "";
                             
  // testing -- display user input variables ==========================================================================           
@@ -194,15 +184,15 @@ function test_input($data) {
 <h2>New Sales Post Example</h2>
 <!--<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  -->
 <form id="myForm" action="salesForm.php" method="post" enctype="multipart/form-data">
-<label>Address: <input name="address" id="ad" type="text" required /></label><br><br>
-<label>City: <input name="city" id="city" type="text"  required/></label><br><br>
-<label>Postal Code: <input name="postal" id="pos" type="text" required/></label><br><br>
-<label>Number of Rooms: <input name="rooms" id="rm" type="number" required/></label><br><br> 
-<label>Number of Baths: <input name="baths" id="bh" type="number" required/></label><br><br>
-<label>Description: <input name="description" id="descp" type="text" required/></label><br><br>
-<label>SQ FT: <input name="squareF" id="sf" type="number" required/></label><br><br>
-<label>Price: <input name="Price" id="price" type="number" required/></label><br><br>
-<label>Image: <input type="file" id="file" name="myfile" onchange="readURL(this);" required/></label><br><br>
+<label>Address: <input name="address" type="text" required /></label><br><br>
+<label>City: <input name="city" type="text" required/></label><br><br>
+<label>Postal Code: <input name="postal" type="text" required/></label><br><br>
+<label>Number of Rooms: <input name="rooms" type="number" required/></label><br><br> 
+<label>Number of Baths: <input name="baths" type="number" required/></label><br><br>
+<label>Description: <input name="description" type="text" required/></label><br><br>
+<label>SQ FT: <input name="squareF" type="number" required/></label><br><br>
+<label>Price: <input name="Price" type="number" required/></label><br><br>
+<label>Image: <input type="file" name="myfile" onchange="readURL(this);" required/></label><br><br>
      
 <!--<label>Image: <input type="file" name="image" onchange="readURL(this);"/></label><br><br>--><!--accepts all images format image/*    
 http://www.html5rocks.com/en/tutorials/file/dndfiles/ 
