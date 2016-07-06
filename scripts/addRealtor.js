@@ -1,3 +1,4 @@
+
 function addRealtor(rName, rLocation, rPhone, rEmail, rBio, rImg)
 {
 	//This function adds the HTML elements that display a realtor's information.
@@ -21,7 +22,7 @@ function addRealtor(rName, rLocation, rPhone, rEmail, rBio, rImg)
 		//Left-side Agent portrait
 		realtorElement += "<div class=\"leftside\">
 		                    	<figure class=\"aa-blog-img\">
-		                          	<img class=\"agentImg\" alt=\"img\" src=" + rImg +">
+		                          	<img class=\"agentImg\" alt=\"img\" src=\"" + rImg +"\">
 		                        </figure>
 		                   </div>";
 		//Right-side Agent bio

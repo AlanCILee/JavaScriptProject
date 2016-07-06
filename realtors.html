@@ -42,13 +42,29 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="scripts/addRealtor.js"></script>
 	<script>
-	$(document).ready(function(){
-		$("#aa-menu-area").load("index.html #topNavigation");
-		$.getScript("js/navigation.js");		
-	});
-
-
+		$(document).ready(function()
+		{
+			$("#aa-menu-area").load("index.html #topNavigation");
+			$.getScript("js/navigation.js");
+			
+			ajaxWay();
+		});
+		
+		function ajaxWay() 
+		{
+			alert("DEBUG MESSAGE - HTML");
+			$.post("retrieveRealtors.php", {filler: "NULL"}, recieve);
+		}
+		
+		function recieve(msg)
+		{
+			var data = JSON.parse(msg);
+			var dArray = data.split(":");
+			alert("DEBUG MESSAGE - SCRIPT");
+			addRealtor(dArray[0], dArray[1], dArray[2], dArray[3], dArray[4], dArray[5]);
+		}
 	</script>	
 
 
@@ -185,7 +201,7 @@
 		                      	<div class="realtormaincontainer">
 		                      		<div class="leftside">
 		                      			<figure class="aa-blog-img">
-		                          			<img class="agentImg" alt="img" src="img/blog-img-1.jpg">
+		                          			<img class="agentImg" alt="img" src="img/agents/agent-1.png">
 		                        		</figure>
 		                      		</div>
 		                      		<div class="rightside">
