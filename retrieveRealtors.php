@@ -1,11 +1,10 @@
 <?php
-	echo "DEBUG MESSAGE PHP A";
+	//echo "DEBUG MESSAGE PHP A";
 	
 	$servername = "ec2-52-201-212-193.compute-1.amazonaws.com";
 	$username = "s2016a_user14";
     $password = "s2016a_user14";
     $dbname = "s2016a_user14";
-    $filler = $_POST["filler"];
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -19,7 +18,7 @@
     
     if (mysqli_num_rows($result) > 0) 
     {
-        echo "DEBUG MESSAGE PHP";
+        //echo "DEBUG MESSAGE PHP";
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) 
         {
@@ -32,7 +31,7 @@
             $isrc = $row["imgsource"];
 			
 			$data = $name . ":" . $location . ":" . $phone . ":" . $mail . ":" . $bio . ":" . $isrc;
-			echo $name;
+			//echo $name;
 			echo json_encode($data);
         }
     } 

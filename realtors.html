@@ -28,7 +28,6 @@
 
    	<!-- Realtor page-specific style sheet -->
     <link href="css/realtors.css" rel="stylesheet" type="text/css"> 
-    <script type="text/javascript" src="scripts/addRealtor.js"></script>
    
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
@@ -42,29 +41,31 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="scripts/addRealtor.js"></script>
 	<script>
 		$(document).ready(function()
 		{
+			ajaxWay();
 			$("#aa-menu-area").load("index.html #topNavigation");
 			$.getScript("js/navigation.js");
-			
-			ajaxWay();
 		});
 		
 		function ajaxWay() 
 		{
 			alert("DEBUG MESSAGE - HTML");
-			$.post("retrieveRealtors.php", {filler: "NULL"}, recieve);
+			$.post("retrieveRealtors.php", function recieve(msg) {
+					var data = JSON.parse(msg);
+					var dArray = data.split(":");
+					alert(dArray[0]);
+					addRealtorElement(dArray[0], dArray[1], dArray[2], dArray[3], dArray[4], dArray[5]);
+				}
+			 );
 		}
-		
-		function recieve(msg)
-		{
-			var data = JSON.parse(msg);
-			var dArray = data.split(":");
-			alert("DEBUG MESSAGE - SCRIPT");
-			addRealtor(dArray[0], dArray[1], dArray[2], dArray[3], dArray[4], dArray[5]);
-		}
+			
 	</script>	
 
 
