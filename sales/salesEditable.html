@@ -1,13 +1,71 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+http://tympanus.net/Development/SelectInspiration/index.html
+
+-->
+
 <html>
 <head>
 <title></title>
 
 <style>
-form { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
-#progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
-#bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
-#percent { position:absolute; display:inline-block; top:3px; left:48%; }
+h1{
+	font-size: 30px;
+/*	margin: 8px;*/
+}
+input, textarea {
+    width: 100%;
+    padding: 8px 4px;
+    margin: 2px 0; /*the gap between the top*/
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px; /*making the border curve*/
+    box-sizing: border-box;
+    
+}
+
+input[type=text]:focus,[type=number]:focus {
+    background-color: lightblue;
+}
+
+
+input[type=submit] {
+    width: 100.5%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px; /*14 is the depth 20 is the width of the button*/
+    margin: 2px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+#myimg  {
+    border-radius: 10px;
+    text-align: center;
+    display: block;
+    margin: 8px;
+    width: 100%;
+    padding: 0px;
+}
+
+/*body {
+    background-color: cyan;
+}*/
+
+
+
+
+
+
+form { display: block; margin: 0 500px; background: #3CBC8D; border-radius: 10px; padding: 20px }
+#progress { position:relative; width:100%; border: 1px solid #ddd; padding: 1px; border-radius: 10px; }
+#bar { background-color: #B4F5B4; width:0%; height:30px; border-radius: 10px; }
+#percent { position:absolute; display:inline-block; top:6px; left:48%; }
 </style>
 
 <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -39,7 +97,10 @@ function test_input($data) {
 ?>-->
 <script>
 
-//================================      allow the user to view image before upload       ===================================================
+// validate form before sending to server ======================================================================
+
+
+//allow the user to view image before upload =====================================================================
 
 function readURL(input) {
             if (input.files && input.files[0]) {
@@ -51,13 +112,13 @@ document.getElementById("myimg").innerHTML = "<img id=image src=# alt=your image
                         .width(370)
                         .height(220);
                 };
-
+ 	/*$.post("salesForm.php",{filePath: $("#file").val()}); //post file path to php*/
                 reader.readAsDataURL(input.files[0]);
             }
         }
         
 // display upload progress, provide options to ajaxForm to get callbacks like success,error, uploadProgress and beforeSend
-//http://malsup.com/jquery/form/ ============================================================
+//http://malsup.com/jquery/form/  ===============================================================================================================
 /*beforeSend : this function called before form submission
 uploadProgress : this function called when the upload is in progress
 success : this function is called when the form upload is successful.
@@ -104,7 +165,8 @@ $(document).ready(function()
 });
 
 
-//===================================       submit inputs to php       ======================================================
+
+// submit inputs =========================================================================================================
 
 function upload() {
 
@@ -126,7 +188,30 @@ function upload() {
                     }
                     , display
                 );*/
-// clear preview image once upload button is clicked==================================================================================
+                
+// ====================================     post img path to php    =============================
+/*                
+             $.post("salesForm.php",
+                    {
+                        
+                        add: $("#address").val(),
+                        city: $("#city").val(),
+                        pos: $("#postal").val(),                      
+                        rm: $("#rooms").val(),
+                        bth: $("#baths").val(),
+                        descp: $("#description").val(),
+                        sqft: $("#squareF").val(),
+                        price: $("#Price").val()
+                      
+                        //query: "Select * from formTest"     it's already assigned on the php'
+                    }
+                    , display
+                );   
+                
+                */
+                
+                
+// clear inputs and preview image once upload button is clicked==================================================================================
 /*
 	document.getElementById("ad").value ="";  
 	document.getElementById("city").value ="";
@@ -147,14 +232,13 @@ document.getElementById("myForm").getElementsByTagName("description").value ="";
 document.getElementById("myForm").getElementsByTagName("squareF").value ="";
 document.getElementById("myForm").getElementsByTagName("Price").value ="";
 document.getElementById("file").value = "";*/
-
 document.getElementById("myimg").innerHTML = "";
                             
  // testing -- display user input variables ==========================================================================           
-            
+     /*       
             function display(dataFromtheServer) {
                 $("#result").append(dataFromtheServer);
-            }
+            }*/
             
            /* function dispImg(dataFromtheServer) {
                 $("#img").append(dataFromtheServer);
@@ -189,38 +273,42 @@ function test_input($data) {
 
 </head>
 <body>
-<h2>New Sales Post Example</h2>
+<form id="myForm" action="salesEditable.php" method="post" enctype="multipart/form-data">
+<h1>New Sales Post</h1>
 <!--<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  -->
-<form id="myForm" action="salesForm.php" method="post" enctype="multipart/form-data">
-<label>Address: <input name="address" id="ad" type="text" required /></label><br><br>
-<label>City: <input name="city" id="city" type="text"  required/></label><br><br>
-<label>Postal Code: <input name="postal" id="pos" type="text" required/></label><br><br>
-<label>Number of Rooms: <input name="rooms" id="rm" type="number" required/></label><br><br> 
-<label>Number of Baths: <input name="baths" id="bh" type="number" required/></label><br><br>
-<label>Description: <input name="description" id="descp" type="text" required/></label><br><br>
-<label>SQ FT: <input name="squareF" id="sf" type="number" required/></label><br><br>
-<label>Price: <input name="Price" id="price" type="number" required/></label><br><br>
-<label>Image: <input type="file" id="file" name="myfile" onchange="readURL(this);" required/></label><br><br>
-     
+
+<label>Address:<br> <input name="address" id="ad" type="text" placeholder="Street address" required /></label><br><br>
+<label>City:<br> <input name="city" id="city" type="text" placeholder="City" required/></label><br><br>
+<label>Postal Code:<br> <input name="postal" id="pos" type="text" placeholder="Postal code" required/></label><br><br>
+<label>Number of Rooms:<br> <input name="rooms" id="rm" type="number" placeholder="Number of rooms" required/></label><br><br> 
+<label>Number of Baths:<br> <input name="baths" id="bh" type="number" placeholder="Number of baths" required/></label><br><br>
+<label>SQ FT:<br> <input name="squareF" id="sf" type="number" placeholder="Square feet" required/></label><br><br>
+<label>Price:<br> <input name="Price" id="price" type="number" placeholder="Price" required/></label><br><br>
+<label>Description:<br></label><textarea name="description" id="descp" form="myForm" rows="5" cols="50" name="comment" placeholder="Enter description of property here..." form="usrform"></textarea><p></p>
+<label>Image:<br> <input type="file" id="file" name="myfile" placeholder="Select image" onchange="readURL(this);" required/></label><p></p>
+<div id="progress">
+        <div id="bar"></div>
+        <div id="percent">0%</div >
+ </div>
+<!--<label>Description:<br> <input name="description" id="descp" type="" placeholder="Description of property" required/></label><br><br>
+--> 
 <!--<label>Image: <input type="file" name="image" onchange="readURL(this);"/></label><br><br>--><!--accepts all images format image/*    
 http://www.html5rocks.com/en/tutorials/file/dndfiles/ 
 https://scotch.io/tutorials/use-the-html5-file-api-to-work-with-files-locally-in-the-browser    
 http://hayageek.com/ajax-file-upload-jquery/ -->
-
+<div id="myimg"></div>
 <input type="submit" onclick="upload()" value="Submit">
+ 
 <!--<button onclick="upload()" >up</button-->
- </form>
- <!--</form>-->
-  <p></p>
- <div id="progress">
-        <div id="bar"></div>
-        <div id="percent">0%</div >
- </div>
+ 
  <br/>
- <div id="message"></div><br>
-  <div id="result"></div>
-  <div id="myimg"></div>
+ 
+ </form>
 
+ <!--</form>-->
+<span id="message"></span><br>
+  
+  <div id="result"></div>
 
 </body>
 </html>

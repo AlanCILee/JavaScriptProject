@@ -13,9 +13,24 @@
     $descp = $_POST["description"];
     $sqft = $_POST["squareF"];
     $price = $_POST["Price"];
+    
+    
+/* ===========================   to clear form   ==============================   */
+      echo "<script> 
+	document.getElementById('ad').value ='';  
+	document.getElementById('city').value ='';
+	document.getElementById('pos').value ='';
+	document.getElementById('rm').value ='';
+	document.getElementById('bh').value ='';
+	document.getElementById('descp').value ='';
+	document.getElementById('sf').value ='';
+	document.getElementById('price').value ='';
+	document.getElementById('file').value = '';
+	</script>";
+    
   
 
-// img input ============================================================================
+// ===========================================       img input        ===========================================
 		
 //echo "<script language='javascript'>alert('thanks!');</script>"; 
 	/*if(isset($_FILES['myfile'])){
@@ -61,7 +76,9 @@ if(isset($_FILES['myfile'])){
          move_uploaded_file($_FILES["myfile"]["tmp_name"],
                                 "../www/" . $_FILES["myfile"]["name"]);
                                 
-          echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
+         // echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
+         echo "Input successful!<br>";
+          $img = $_FILES['myfile']['name']; //store image path for sql upload
           
       }else{
          print_r($errors);
@@ -88,7 +105,7 @@ if(isset($_FILES["myfile"]))
 }
    */
    
-//upload inputs into sql  ==========================================================================
+//===================================      upload inputs into sql      ================================================================
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -98,8 +115,8 @@ if(isset($_FILES["myfile"]))
         die("Connection failed: " . mysqli_connect_error());
     }  
 
- $sql = "INSERT INTO formTest (address, city, postalCode, roomCnt, bathCnt, description, sqFt,price) " ;
-    $sql .="VALUES (?, ?, ?, ?, ?, ?, ?, ? ) " ;
+ $sql = "INSERT INTO formTest (address, city, postalCode, roomCnt, bathCnt, description, sqFt,price, imgPath) " ;
+    $sql .="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? ) " ;
     
     
     if($statement = $conn->prepare($sql))
@@ -107,10 +124,10 @@ if(isset($_FILES["myfile"]))
         //$statement->bind_param("ss", $_POST["add"], $_POST["city"], .......); 
         //OR
        
-        $statement->bind_param("sssiisii", $address, $city, $postal, $room, $bath, $descp, $sqft, $price);
+        $statement->bind_param("sssiisiis", $address, $city, $postal, $room, $bath, $descp, $sqft, $price, $img);
         $statement->execute();
 
- // display inputs for testing/ but can be use for displaying propert info. ============================================================================   
+ // display inputs for testing/ but can be use for displaying propert info. =========================================
         
         $sql = "SELECT * From formTest order by propertyid desc limit 1" ;
         
@@ -130,11 +147,15 @@ if(isset($_FILES["myfile"]))
       			"Number of Baths: " . $row[5]. "<br/>".
       			"Description: " . $row[6]. "<br/>".
       			"Square FT: " . $row[7]. "<br/>".
-      			"Price: $" . $row[8]. "<br/>" 
+      			"Price: $" . $row[8]. "<br/>".
+      			"Image path: " . $row[9]. "<br/>" 
                     );
-           
-
-        } else {
+  
+ /*=======================================================================================*/
+        } 
+        
+        else 
+        {
             echo "0 results";
         }
 
@@ -145,7 +166,21 @@ if(isset($_FILES["myfile"]))
  
    
    $conn->close();
+// clear form inputs ===========================================================
     
+/*echo "<script> 
+	form.getElementsByName("address").value ="";  
+	form.getElementsByName("city").value ="";
+	form.getElementsByName("postal").value ="";
+	form.getElementsByName("rooms").value ="";
+	form.getElementsByName("baths").value ="";
+	form.getElementsByName("description").value ="";
+	form.getElementsByName("squareF").value ="";
+	form.getElementsByName("Price").value ="";
+	document.getElementById("file").value = "";
+	</script>";*/
+	
+	
     // ==========================================
     function display($value) {
         echo $value ;
