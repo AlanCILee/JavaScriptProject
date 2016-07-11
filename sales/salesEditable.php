@@ -77,7 +77,9 @@ if(isset($_FILES['myfile'])){
                                 "../www/" . $_FILES["myfile"]["name"]);
                                 
          // echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
-         echo "Input successful!<br>";
+/*================      clear inputs and preview image once upload button is clicked      ==================================================================================*/
+      echo "<script>document.getElementById('myimg').innerHTML = 'Upload successful!'</script>";
+      
           $img = $_FILES['myfile']['name']; //store image path for sql upload
           
       }else{
@@ -159,7 +161,8 @@ if(isset($_FILES["myfile"]))
             echo "0 results";
         }
 
-       $statement->close();
+       $statement->close();       
+       
     } else 
         echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
     
