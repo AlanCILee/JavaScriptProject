@@ -1,11 +1,11 @@
-
-function addRealtorElement(rName, rLocation, rPhone, rEmail, rBio, rImg)
+function addRealtorElement()
 {
 	//This function adds the HTML elements that display a realtor's information.
 	//
 	//It will be called by the PHP that retrieves each realtor's information, then fills the element with the info,
 	//which the function receives as paramenters. 
 	alert("DEBUG: EXTERNAL JS");
+	/*
 	var realtorElement = "<div class=\"realtor\">";
 	
 	realtorElement += "<h3 class=\"realtorname\>" + rName + "</h3>";
@@ -30,5 +30,5 @@ function addRealtorElement(rName, rLocation, rPhone, rEmail, rBio, rImg)
 	realtorElement += "</div>"; //closing tag for "realtormaincontainer" div
 	
 	realtorElement += "</div>"; //closing tag for "realtor" div
-	document.getElementById("realtorArea") += realtorElement;
+	document.getElementById("realtorArea") += realtorElement;*/
 }

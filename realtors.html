@@ -45,7 +45,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="scripts/addRealtor.js"></script>
+	<script type="text/javascript" src="scripts/addRealtor.js" charset="utf-8"></script>
 	<script>
 		$(document).ready(function()
 		{
@@ -61,10 +61,21 @@
 					var data = JSON.parse(msg);
 					var dArray = data.split(":");
 					alert(dArray[0]);
-					addRealtorElement(dArray[0], dArray[1], dArray[2], dArray[3], dArray[4], dArray[5]);
+					
 				}
 			 );
+			 
+			 test();
+			 
 		}
+		
+		function test()
+		{
+			alert("TEST");
+			addRealtorElement();
+		}
+		
+		
 			
 	</script>	
 
