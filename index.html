@@ -54,6 +54,18 @@
 		    } 	    
 		});
 		
+		$.ajax({
+		    url:"getDBInfo.php",
+		    data : {
+    			query : "SELECT * From AGENT order by agent_ID desc limit 1", 
+  			},
+		    type:"POST",
+		    dataType:"json",
+		    success:function(msg){			         	
+				generateAgents(msg, 1, "#agent");
+		    } 	    
+		});
+		
 		function generateSales(pInfo, propertyCnt, startID){
 			for (var i=0;i<propertyCnt;i++){
 				$(startID+i+" .roomCnt").html(pInfo[i]['roomCnt']+" Rooms");
@@ -64,7 +76,15 @@
 				$(startID+i+" .description").html(pInfo[i]['description']+"SQ FT");
 				$(startID+i+" .title").html(pInfo[i]['address']+", "+pInfo[i]['city']);			
 			}			
-		}			
+		}	
+		
+		function generateAgents(pInfo, agentCnt, startID){
+			for (var i=0;i<agentCnt;i++){
+				$(startID+i+" .agentEmail").html(pInfo[i]['email']);
+				$(startID+i+" .agentName").html(pInfo[i]['agent_name']);
+				$(startID+i+" .agentImg").attr("src",pInfo[i]['imgsource']);			
+			}			
+		}		
 	});
 
 
@@ -677,14 +697,32 @@
             <!-- agents content -->
             <div class="aa-agents-content">
               <ul class="aa-agents-slider">
-                <li>
-                  <div class="aa-single-agents">
+                <li>                
+                  <div id="agent0" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-1.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
+                      <div class="aa-agent-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                
+                <li>
+                   <div id="agent1" class="aa-single-agents">
+                    <div class="aa-agents-img">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
+                    </div>
+                    <div class="aa-agetns-info">
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -695,13 +733,13 @@
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
+                  <div id="agent2" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-5.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -712,30 +750,13 @@
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
+                  <div id="agent3" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-3.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="img/agents/agent-4.png" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -746,13 +767,13 @@
                   </div>
                 </li>
                  <li>
-                  <div class="aa-single-agents">
+                    <div id="agent4" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-1.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Philip Smith</a></h4>
-                      <span>Top Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -763,13 +784,13 @@
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
+                    <div id="agent5" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-5.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Adam Barney</a></h4>
-                      <span>Expert Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -780,13 +801,13 @@
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
+                  <div id="agent6" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-3.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">Paul Walker</a></h4>
-                      <span>Director</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -797,13 +818,13 @@
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
+                  <div id="agent7" class="aa-single-agents">
                     <div class="aa-agents-img">
-                      <img src="img/agents/agent-4.png" alt="agent member image">
+                      <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
-                      <h4><a href="#">John Smith</a></h4>
-                      <span>Jr. Agent</span>
+                      <h4><a href="#" class="agentName">Philip Smith</a></h4>
+                      <span class="agentEmail">Top Agent</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
