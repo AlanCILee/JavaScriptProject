@@ -43,10 +43,45 @@
 	$(document).ready(function(){
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$("#aa-header").load("index.html #headerContainer");
-		$.getScript("js/navigation.js");		
+		$.getScript("js/navigation.js");
+		
+		var pageBlock = 0;		//1st block : 1~5, 2nd block : 6~10, 3rd block : 11~15 
+		var activePage = 1;		//relative position of active page
+		pageControl();
+		
+		
+			
+		function pageControl(){
+			$("#p1 a").html(pageBlock*5+1);
+			$("#p2 a").html(pageBlock*5+2);
+			$("#p3 a").html(pageBlock*5+3);
+			$("#p4 a").html(pageBlock*5+4);
+			$("#p5 a").html(pageBlock*5+5);
+			$("#p1").removeClass("active");
+			$("#p2").removeClass("active");
+			$("#p3").removeClass("active");
+			$("#p4").removeClass("active");
+			$("#p5").removeClass("active");
+			$("#p"+activePage).addClass("active");
+		}
+		
+		$("#prevClick").click(function(){
+			if(pageBlock >0){
+				pageBlock--;	
+				activePage = 5;
+				pageControl();	
+			}	
+		});	
+		
+		$("#nextClick").click(function(){
+			pageBlock++;	
+			activePage = 1;	
+			pageControl();	
+		});				
 	});
 
 
+	
 	</script>	
 
 
@@ -368,18 +403,18 @@
             <div class="aa-properties-content-bottom">
               <nav>
                 <ul class="pagination">
-                  <li>
-                    <a href="#" aria-label="Previous">
+                  <li id="prevClick">
+                    <a aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li class="active"><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
+                  <li id="p1"><a href="#">1</a></li>
+                  <li id="p2"><a href="#">2</a></li>
+                  <li id="p3"><a href="#">3</a></li>
+                  <li id="p4"><a href="#">4</a></li>
+                  <li id="p5"><a href="#">5</a></li>
                   <li>
-                    <a href="#" aria-label="Next">
+                    <a id="nextClick" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
