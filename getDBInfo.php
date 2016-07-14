@@ -14,8 +14,11 @@
             
     $result = $conn->query($sql) or die("Query: ($sql) [problem]");
  	$resultArr = array();  
+	$resultNum = mysqli_num_rows($result);
 
-    if (mysqli_num_rows($result) > 0) {
+
+    if ($resultNum > 0) {
+    	$resultArr['elementCount'] = $resultNum; 	
         while($row = mysqli_fetch_assoc($result)) {
         	$resultArr[] = $row;
         }		        

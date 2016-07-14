@@ -47,10 +47,54 @@
 		
 		var pageBlock = 0;		//1st block : 1~5, 2nd block : 6~10, 3rd block : 11~15 
 		var activePage = 1;		//relative position of active page
-		pageControl();
+		var propertiesArr;
 		
-		
+		pageControl();		
+		loadProperties();
 			
+		function loadProperties(){
+			var startProperty = pageBlock * 30;
+			
+			$.ajax({
+			    url:"getDBInfo.php",
+			    data : {
+	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,30", 
+	  			},
+			    type:"POST",
+			    dataType:"json",
+			    success:function(msg){	
+			    	propertiesArr = msg;		         	
+					generateSales(msg);
+				}		     	    
+			});	
+			
+		}	
+		
+		function generateSales(msg){
+			var elementCount = msg['elementCount'];
+			
+			for (var i=0;i<elementCount;i++){
+				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
+				+ msg[i]['imgPath'] 
+				+ '"></a><div class="aa-tag sold-out">Sold Out</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
+				+ msg[i]['roomCnt']
+				+' Rooms</span><span>'
+				+ msg[i]['bathCnt']
+				+' Baths</span><span>'
+				+ msg[i]['sqFt'] 
+				+ ' SQ FT</span></div><div class="aa-properties-about"><h3><a href="#">'
+				+msg[i]['address']+", "+msg[i]['city']
+				+'</a></h3><p>'
+				+ msg[i]['description']
+				+ '</p></div><div class="aa-properties-detial"><span class="aa-price">'
+				+ msg[i]['price']
+				+ '</span><a class="aa-secondary-btn" href="#">View Details</a></div></div></article></li>';
+				
+				$("#propertyList").append(pStr);
+			}			
+		}
+		
+		
 		function pageControl(){
 			$("#p1 a").html(pageBlock*5+1);
 			$("#p2 a").html(pageBlock*5+2);
@@ -77,7 +121,29 @@
 			pageBlock++;	
 			activePage = 1;	
 			pageControl();	
-		});				
+		});
+		
+		$("#p1").click(function(){
+			movePage(1);
+		});	
+		$("#p2").click(function(){
+			movePage(2);
+		});
+		$("#p3").click(function(){
+			movePage(3);
+		});
+		$("#p4").click(function(){
+			movePage(4);
+		});
+		$("#p5").click(function(){
+			movePage(5);
+		});
+		
+		function movePage(index){
+			if(index != activePage){
+				
+			}
+		}														
 	});
 
 
@@ -228,8 +294,8 @@
             </div>
             <!-- Start properties content body -->
             <div class="aa-properties-content-body">
-              <ul class="aa-properties-nav">
-                <li>
+              <ul id="propertyList" class="aa-properties-nav">
+     <!--           <li>
                   <article class="aa-properties-item">
                     <a class="aa-properties-item-img" href="#">
                       <img alt="img" src="img/item/6.jpg">
@@ -396,7 +462,7 @@
                       </div>
                     </div>
                   </article>
-                </li>
+                </li>-->
               </ul>
             </div>
             <!-- Start properties content bottom -->

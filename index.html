@@ -67,13 +67,14 @@
 		});
 		
 		function generateSales(pInfo, propertyCnt, startID){
+//			alert(pInfo['elementCount']);	
 			for (var i=0;i<propertyCnt;i++){
 				$(startID+i+" .roomCnt").html(pInfo[i]['roomCnt']+" Rooms");
 				$(startID+i+" .bathCnt").html(pInfo[i]['bathCnt']+" Bath");
 				$(startID+i+" .price").html("$"+pInfo[i]['price']);
 				$(startID+i+" .sqFt").html(pInfo[i]['sqFt']+"SQ FT");
 				$(startID+i+" .imgPath").attr("src",pInfo[i]['imgPath']);
-				$(startID+i+" .description").html(pInfo[i]['description']+"SQ FT");
+				$(startID+i+" .description").html(pInfo[i]['description']);
 				$(startID+i+" .title").html(pInfo[i]['address']+", "+pInfo[i]['city']);			
 			}			
 		}	
