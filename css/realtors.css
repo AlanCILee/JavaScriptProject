@@ -1,51 +1,43 @@
 /* CSS file for the Realtor page */
 
-.realtorinfocontainer 
+
+td.realtorInfo
 {
-	width: 100%;
-	display: block;
+	vertical-align: top;
+	padding: 5px;
 }
 
-.location
+td.portraitBox
 {
-	width: 10%;
-	float: left;
-	display: inline-block;
+	padding: 5px;
 }
 
-.phone
+h3.realtorName
 {
-	width: 10%;
-	float: left;
-	display: inline-block;
+	font-weight: bold;
+	color:#0e9fcf;
 }
 
-.email
+p.realtorLocation
 {
-	width: 80%;
-	float: left;
-	display: inline-block;
+	font-weight: bold;
 }
 
-.realtormaincontainer
+p.realtorPhone
 {
-	width: 100%;
-	display: block;
+	font-weight: bold;
 }
 
-.leftside
+p.realtorEmail
 {
-	float: left;
-	display: inline;
-	width: 25%;
+	font-weight: bold;
 }
 
-.rightside
+p.realtorBio
 {
-	float: left;
-	display: inline;
-	width: 70%;
+	word-wrap: break-all;
 }
+
 
 
 

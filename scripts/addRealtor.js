@@ -4,31 +4,22 @@ function addRealtorElement()
 	//
 	//It will be called by the PHP that retrieves each realtor's information, then fills the element with the info,
 	//which the function receives as paramenters. 
-	alert("DEBUG: EXTERNAL JS");
-	/*
-	var realtorElement = "<div class=\"realtor\">";
+	//alert("DEBUG: EXTERNAL JS");
 	
-	realtorElement += "<h3 class=\"realtorname\>" + rName + "</h3>";
-	realtorElement += "<div class=\"realtorinfocontainer\">";
-		//Realtor Location
-		realtorElement += "<div class=\"location\"><p class=\"pLocation\">" + rLocation +"</p></div>";
-		//Realtor Phone
-		realtorElement += "<div class=\"phone\"><p class=\"pPhone\">" + rPhone + "</p></div>";
-		//Realtor Email
-		realtorElement += "<div class=\"email\"><p class=\"pEmail\">" + rEmail + "</p></div>";
-	realtorElement += "</div>"; //closing tag for "realtorinfocontainer" div
+	//alert(arguments[0]);
 	
-	realtorElement += "<div class=\"realtormaincontainer\">";
-		//Left-side Agent portrait
-		realtorElement += "<div class=\"leftside\">
-		                    	<figure class=\"aa-blog-img\">
-		                          	<img class=\"agentImg\" alt=\"img\" src=\"" + rImg +"\">
-		                        </figure>
-		                   </div>";
-		//Right-side Agent bio
-		realtorElement += "<div class=\"rightside\"><p class=\"realtorbio\">" + rBio + "</p></div>";
-	realtorElement += "</div>"; //closing tag for "realtormaincontainer" div
+	var row = "<tr class=\"realtorRow\" >";
 	
-	realtorElement += "</div>"; //closing tag for "realtor" div
-	document.getElementById("realtorArea") += realtorElement;*/
+	row += "<td class=\"portraitBox\"><image class=\"portrait\" src=\"" + arguments[5] + "\"></td>";  //portrait
+	
+	row += "<td class=\"realtorInfo\">";
+	row += "<h3 class=\"realtorName\">" + arguments[0] + "</h3>"; //NAME
+	row += "<p class=\"realtorLocation\">" + arguments[1] + "</p>"; //LOCATION
+	row += "<p class=\"realtorPhone\">" + arguments[2] + "</p>"; //PHONE
+	row += "<p class=\"realtorEmail\">" + arguments[3] + "</p>"; //EMAIL
+	row += "<p class=\"realtorBio\">" + arguments[4] + "</p>"; //BIO
+	row += "</td>";
+	
+	row += "</tr>";
+	document.getElementById("realtorTable").innerHTML += row;
 }

@@ -49,7 +49,9 @@
 	<script>
 		$(document).ready(function()
 		{
+			//alert("debug1A");
 			ajaxWay();
+			//alert("debug1B");
 			$("#aa-menu-area").load("index.html #topNavigation");
 			$("#aa-header").load("index.html #headerContainer");
 			$.getScript("js/navigation.js");
@@ -57,27 +59,24 @@
 		
 		function ajaxWay() 
 		{
-			alert("DEBUG MESSAGE - HTML");
+			//alert("debug1");
 			$.post("retrieveRealtors.php", function recieve(msg) {
-					var data = JSON.parse(msg);
-					var dArray = data.split(":");
-					alert(dArray[0]);
+					var dataArray; 
+					dataArray = JSON.parse(msg);
 					
+					for (var i = 0; i < dataArray.length; i++)
+					{
+						//alert("debug2");
+						var dataString = dataArray[i];
+						dataString = dataString.split(":");
+						addRealtorElement(dataString[0], dataString[1], dataString[2], dataString[3], dataString[4], dataString[5]);
+					}
 				}
 			 );
 			 
-			 test();
 			 
 		}
-		
-		function test()
-		{
-			alert("TEST");
-			addRealtorElement();
-		}
-		
-		
-			
+	
 	</script>	
 
 
@@ -198,31 +197,10 @@
                     <div class="col-md-12 col-sm-12">
                       <article class="aa-blog-single">
                       	<div class="aa-blog-single-content" id="realtorArea">
-	                      	<div class="realtor">
-	                      		<h3 class="realtorname">Robert "Rob" Robertson</h3>
-			                    <div class="realtorinfocontainer">
-			                      	<div class="location">
-			                      		<p class="pLocation">Vancouver, BC</p>
-			                      	</div>
-			                      	<div class="phone">
-			                      		<p class="pPhone">604-310-1010</p>
-			                      	</div>
-			                      	<div class="email">
-			                      		<p class="pEmail">sendmespam@internet.net</p>
-			                      	</div>
-			                    </div>
-		                      	<div class="realtormaincontainer">
-		                      		<div class="leftside">
-		                      			<figure class="aa-blog-img">
-		                          			<img class="agentImg" alt="img" src="img/agents/agent-1.png">
-		                        		</figure>
-		                      		</div>
-		                      		<div class="rightside">
-		                      			<p class="realtorbio">
-		                      				Rob is a reator who has been with the company for 5 years now. He works hard to make us a lot of money. WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS WORDS
-		                      			</p>
-		                      		</div>
-		                      	</div>
+	                      	<div class="realtorarea">
+	                      		<table id="realtorTable">
+	                      			
+	                      		</table>
 	                        </div>
                     	</div>                
                       </article>

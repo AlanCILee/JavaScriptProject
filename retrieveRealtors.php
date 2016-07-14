@@ -16,9 +16,12 @@
     $sql = "SELECT agent_name, location, phone, email, bio, imgsource FROM AGENT";
     $result = mysqli_query($conn, $sql);
     
+    //echo "<script type='text/javascript'>alert('debug');</script>";
     if (mysqli_num_rows($result) > 0) 
     {
-        //echo "DEBUG MESSAGE PHP";
+        $dataArray = array();
+        
+        
         // output data of each row
         while($row = mysqli_fetch_assoc($result)) 
         {
@@ -30,10 +33,13 @@
             $bio = $row["bio"];
             $isrc = $row["imgsource"];
 			
-			$data = $name . ":" . $location . ":" . $phone . ":" . $mail . ":" . $bio . ":" . $isrc;
+			$data = $name . ":" . $location . ":" . $phone . ":" . $mail . ":" . $bio . ":" . $isrc; //string
+			array_push($dataArray, $data);
 			//echo $name;
-			echo json_encode($data);
+			
         }
+        
+        echo json_encode($dataArray);
     } 
     else 
     {
