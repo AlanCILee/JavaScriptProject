@@ -48,8 +48,9 @@
 		var pageBlock = 0;		//1st block : 1~5, 2nd block : 6~10, 3rd block : 11~15 
 		var activePage = 1;		//relative position of active page
 		var propertiesArr;
+		var elementCount; 
+		var availPage;
 		
-		pageControl();		
 		loadProperties();
 			
 		function loadProperties(){
@@ -58,25 +59,28 @@
 			$.ajax({
 			    url:"getDBInfo.php",
 			    data : {
-	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,30", 
+	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31", 
 	  			},
 			    type:"POST",
 			    dataType:"json",
 			    success:function(msg){	
-			    	propertiesArr = msg;		         	
+			    	propertiesArr = msg;
+			    	elementCount = msg['elementCount'];		         	
 					generateSales(msg);
+					pageControl();
 				}		     	    
 			});	
 			
 		}	
 		
 		function generateSales(msg){
-			var elementCount = msg['elementCount'];
-			
-			for (var i=0;i<elementCount;i++){
+			var startElement = (activePage-1) * 6;
+			$("#propertyList").html("");
+				
+			for (var i=startElement;i<startElement+6;i++){
 				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
 				+ 'sales/' + msg[i]['imgPath'] 
-				+ '"></a><div class="aa-tag sold-out">Sold Out</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
+				+ '"></a><div class="aa-tag for-sale">For Sale</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
 				+ msg[i]['roomCnt']
 				+' Rooms</span><span>'
 				+ msg[i]['bathCnt']
@@ -101,12 +105,17 @@
 			$("#p3 a").html(pageBlock*5+3);
 			$("#p4 a").html(pageBlock*5+4);
 			$("#p5 a").html(pageBlock*5+5);
-			$("#p1").removeClass("active");
-			$("#p2").removeClass("active");
-			$("#p3").removeClass("active");
-			$("#p4").removeClass("active");
-			$("#p5").removeClass("active");
+			$("#p1").removeClass("active disablePage");
+			$("#p2").removeClass("active disablePage");
+			$("#p3").removeClass("active disablePage");
+			$("#p4").removeClass("active disablePage");
+			$("#p5").removeClass("active disablePage");
 			$("#p"+activePage).addClass("active");
+			
+			var availPage = Math.ceil(elementCount/6) ;
+			for (var i=availPage+1;i<6;i++){
+				$("#p"+i).addClass("disablePage");			
+			}
 		}
 		
 		$("#prevClick").click(function(){
@@ -118,9 +127,11 @@
 		});	
 		
 		$("#nextClick").click(function(){
-			pageBlock++;	
-			activePage = 1;	
-			pageControl();	
+			if(availPage>5){				
+				pageBlock++;	
+				activePage = 1;	
+				pageControl();			
+			}
 		});
 		
 		$("#p1").click(function(){
@@ -141,17 +152,16 @@
 		
 		function movePage(index){
 			if(index != activePage){
-				
+				activePage = index;
+				pageControl();
+				generateSales(propertiesArr);
 			}
 		}														
 	});
 
 
 	
-	</script>	
-
-
-  
+	</script>	  
 
   </head>
   <body class="aa-price-range">   
@@ -479,8 +489,8 @@
                   <li id="p3"><a href="#">3</a></li>
                   <li id="p4"><a href="#">4</a></li>
                   <li id="p5"><a href="#">5</a></li>
-                  <li>
-                    <a id="nextClick" aria-label="Next">
+                  <li id="nextClick">
+                    <a aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>

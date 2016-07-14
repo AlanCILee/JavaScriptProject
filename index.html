@@ -45,12 +45,12 @@
 		$.ajax({
 		    url:"getDBInfo.php",
 		    data : {
-    			query : "SELECT * From Sales order by propertyID desc limit 2", 
+    			query : "SELECT * From Sales order by propertyID desc limit 3", 
   			},
 		    type:"POST",
 		    dataType:"json",
 		    success:function(msg){			         	
-				generateSales(msg, 2, "#sales");
+				generateSales(msg, 3, "#sales");
 		    } 	    
 		});
 		
@@ -73,9 +73,9 @@
 				$(startID+i+" .bathCnt").html(pInfo[i]['bathCnt']+" Bath");
 				$(startID+i+" .price").html("$"+pInfo[i]['price']);
 				$(startID+i+" .sqFt").html(pInfo[i]['sqFt']+"SQ FT");
-				$(startID+i+" .imgPath").attr("src",pInfo[i]['imgPath']);
-				$(startID+i+" .description").html(pInfo[i]['description']);
-				$(startID+i+" .title").html(pInfo[i]['address']+", "+pInfo[i]['city']);			
+				$(startID+i+" .imgPath").attr("src","sales/"+pInfo[i]['imgPath']);
+				$(startID+i+" .description").html(pInfo[i]['description'].substring(0,80));
+				$(startID+i+" .title").html(pInfo[i]['address']);			
 			}			
 		}	
 		

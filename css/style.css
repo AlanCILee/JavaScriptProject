@@ -1477,6 +1477,9 @@ img {
 #aa-properties .aa-properties-content .aa-properties-content-bottom .pagination li a {
   border: 1px solid transparent;
 }
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination li.disablePage {
+  display:none;
+}
 #aa-properties .aa-properties-content .aa-properties-content-bottom .pagination li a:hover, #aa-properties .aa-properties-content .aa-properties-content-bottom .pagination li a:focus {
   color: #fff;
 }
