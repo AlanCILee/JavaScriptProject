@@ -75,7 +75,7 @@
 			
 			for (var i=0;i<elementCount;i++){
 				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
-				+ msg[i]['imgPath'] 
+				+ 'sales/' + msg[i]['imgPath'] 
 				+ '"></a><div class="aa-tag sold-out">Sold Out</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
 				+ msg[i]['roomCnt']
 				+' Rooms</span><span>'
@@ -83,11 +83,11 @@
 				+' Baths</span><span>'
 				+ msg[i]['sqFt'] 
 				+ ' SQ FT</span></div><div class="aa-properties-about"><h3><a href="#">'
-				+msg[i]['address']+", "+msg[i]['city']
+				+ msg[i]['address']
 				+'</a></h3><p>'
-				+ msg[i]['description']
+				+ msg[i]['description'].substring(0,80)
 				+ '</p></div><div class="aa-properties-detial"><span class="aa-price">'
-				+ msg[i]['price']
+				+ "$"+msg[i]['price']
 				+ '</span><a class="aa-secondary-btn" href="#">View Details</a></div></div></article></li>';
 				
 				$("#propertyList").append(pStr);
