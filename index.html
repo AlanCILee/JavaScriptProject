@@ -66,8 +66,7 @@
 		    } 	    
 		});
 		
-		function generateSales(pInfo, propertyCnt, startID){
-//			alert(pInfo['elementCount']);	
+		function generateSales(pInfo, propertyCnt, startID){	
 			for (var i=0;i<propertyCnt;i++){
 				$(startID+i+" .roomCnt").html(pInfo[i]['roomCnt']+" Rooms");
 				$(startID+i+" .bathCnt").html(pInfo[i]['bathCnt']+" Bath");
@@ -75,7 +74,9 @@
 				$(startID+i+" .sqFt").html(pInfo[i]['sqFt']+"SQ FT");
 				$(startID+i+" .imgPath").attr("src","sales/"+pInfo[i]['imgPath']);
 				$(startID+i+" .description").html(pInfo[i]['description'].substring(0,80));
-				$(startID+i+" .title").html(pInfo[i]['address']);			
+				$(startID+i+" .title").html(pInfo[i]['address']);	
+				$(startID+i+" .city").html(pInfo[i]['city']);		
+				$(startID+i+" .category").html(pInfo[i]['category']);		
 			}			
 		}	
 		
@@ -501,24 +502,24 @@ Having been successfully established in the industry since 1990, Home Property h
 			    <div class="aa-properties-item-content">
 			      <div class="aa-properties-info">
 			      
-			        <span class="roomCnt">5 Rooms</span>
-			        <span class="bathCnt">3 Baths</span>
-			        <span class="sqFt">1100 SQ FT</span>
+			        <span class="roomCnt"></span>
+			        <span class="bathCnt"></span>
+			        <span class="sqFt"></span>
+			        <span class="city"></span>
 			        
 			      </div>
 			      <div class="aa-properties-about">
 			      
-			        <h3><a href="properties.html" class="title">Appartment Title</a></h3>
+			        <h3><a href="properties.html" class="title"></a></h3>
 			      
-			        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+			        <p class="description"></p>                      
 			      </div>
 			      <div class="aa-properties-detial">
 			      
 			        <span class="aa-price price">
-			          $35000
 			        </span>
 			        
-			        <a href="properties.html" class="aa-secondary-btn">View Details</a>
+			        <a href="properties.html" class="aa-secondary-btn category"></a>
 			      </div>
 			    </div>
 			  </article>
@@ -537,16 +538,17 @@ Having been successfully established in the industry since 1990, Home Property h
 			    <div class="aa-properties-item-content">
 			      <div class="aa-properties-info">
 			      
-			        <span class="roomCnt">5 Rooms</span>
-			        <span class="bathCnt">3 Baths</span>
-			        <span class="sqFt">1100 SQ FT</span>
+			        <span class="roomCnt"></span>
+			        <span class="bathCnt"></span>
+			        <span class="sqFt"></span>
+			        <span class="city"></span>
 			        
 			      </div>
 			      <div class="aa-properties-about">
 			      
-			        <h3><a href="properties.html" class="title">Appartment Title</a></h3>
+			        <h3><a href="properties.html" class="title"></a></h3>
 			      
-			        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+			        <p class="description"></p>                      
 			      </div>
 			      <div class="aa-properties-detial">
 			      
@@ -554,7 +556,7 @@ Having been successfully established in the industry since 1990, Home Property h
 			          $35000
 			        </span>
 			        
-			        <a href="properties.html" class="aa-secondary-btn">View Details</a>
+			        <a href="properties.html" class="aa-secondary-btn category">View Details</a>
 			      </div>
 			    </div>
 			  </article>
@@ -573,16 +575,17 @@ Having been successfully established in the industry since 1990, Home Property h
 			    <div class="aa-properties-item-content">
 			      <div class="aa-properties-info">
 			      
-			        <span class="roomCnt">5 Rooms</span>
-			        <span class="bathCnt">3 Baths</span>
-			        <span class="sqFt">1100 SQ FT</span>
+			        <span class="roomCnt"></span>
+			        <span class="bathCnt"></span>
+			        <span class="sqFt"></span>
+			        <span class="city"></span>
 			        
 			      </div>
 			      <div class="aa-properties-about">
 			      
-			        <h3><a href="properties.html" class="title">Appartment Title</a></h3>
+			        <h3><a href="properties.html" class="title"></a></h3>
 			      
-			        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>                      
+			        <p class="description"></p>                      
 			      </div>
 			      <div class="aa-properties-detial">
 			      
@@ -590,7 +593,7 @@ Having been successfully established in the industry since 1990, Home Property h
 			          $35000
 			        </span>
 			        
-			        <a href="properties.html" class="aa-secondary-btn">View Details</a>
+			        <a href="properties.html" class="aa-secondary-btn category" ></a>
 			      </div>
 			    </div>
 			  </article>

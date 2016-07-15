@@ -110,7 +110,8 @@
 				+ msg[i]['description'].substring(0,80)
 				+ '</p></div><div class="aa-properties-detial"><span class="aa-price">'
 				+ "$"+ msg[i]['price']
-				+ '</span><a class="aa-secondary-btn" href="#">View Details</a></div></div></article></li>';
+				+ '</span><a class="aa-secondary-btn" href="#">'
+				+ msg[i]['category'] + '</a></div></div></article></li>';
 				
 				$("#propertyList").append(pStr);
 			}			
