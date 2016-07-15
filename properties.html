@@ -50,16 +50,32 @@
 		var propertiesArr;
 		var elementCount; 
 		var availPage;
+		var sortOption = 1; //1: Latest, 2:Price High, 3:Price Low
 		
 		loadProperties();
 			
+		$("#sortOption").change(function(){
+			sortOption = $("#sortOption").val();
+        	
+        	var pageBlock = 0;		 
+			var activePage = 1;		
+			loadProperties();
+    	});
+			
 		function loadProperties(){
 			var startProperty = pageBlock * 30;
+			var queryStr = "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31";
+			
+			if(sortOption == 2){
+				queryStr = "SELECT * From Sales order by price desc limit "+startProperty+" ,31";
+			}else {
+				queryStr = "SELECT * From Sales order by price asc limit "+startProperty+" ,31";
+			}
 			
 			$.ajax({
 			    url:"getDBInfo.php",
 			    data : {
-	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31"
+	    			query : queryStr
 	  			},
 			    type:"POST",
 			    dataType:"json",
@@ -76,7 +92,7 @@
 		function generateSales(msg){
 			var startElement = (activePage-1) * 6;
 			$("#propertyList").html("");
-	
+
 			for (var i=startElement;i<startElement+6;i++){
 				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
 				+ 'sales/' + msg[i]['imgPath'] 
@@ -91,7 +107,7 @@
 				+ '</a></h3><p>'
 				+ msg[i]['description'].substring(0,80)
 				+ '</p></div><div class="aa-properties-detial"><span class="aa-price">'
-				+ "$"+msg[i]['price']
+				+ "$"+ msg[i]['price']
 				+ '</span><a class="aa-secondary-btn" href="#">View Details</a></div></div></article></li>';
 				
 				$("#propertyList").append(pStr);
@@ -283,21 +299,20 @@
               <div class="aa-properties-content-head-left">
                 <form action="" class="aa-sort-form">
                   <label for="">Sort by</label>
-                  <select name="">
-                    <option value="1" selected="Default">Default</option>
-                    <option value="2">Name</option>
-                    <option value="3">Price</option>
-                    <option value="4">Date</option>
+                  <select id="sortOption" name="">
+                    <option value="1" selected="Default">Latest</option>
+                    <option value="2">Price High to Low</option>
+                    <option value="3">Price Low to High</option>
                   </select>
                 </form>
-                <form action="" class="aa-show-form">
+<!--                <form action="" class="aa-show-form">
                   <label for="">Show</label>
                   <select name="">
                     <option value="1" selected="12">6</option>
                     <option value="2">12</option>
                     <option value="3">24</option>
                   </select>
-                </form>
+                </form>-->
               </div>
               <div class="aa-properties-content-head-right">
                 <a id="aa-grid-properties" href="#"><span class="fa fa-th"></span></a>
