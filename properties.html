@@ -57,8 +57,8 @@
 		$("#sortOption").change(function(){
 			sortOption = $("#sortOption").val();
         	
-        	var pageBlock = 0;		 
-			var activePage = 1;		
+        	pageBlock = 0;		 
+			activePage = 1;		
 			loadProperties();
     	});
 			
@@ -68,7 +68,7 @@
 			
 			if(sortOption == 2){
 				queryStr = "SELECT * From Sales order by price desc limit "+startProperty+" ,31";
-			}else {
+			}else if (sortOption == 3){
 				queryStr = "SELECT * From Sales order by price asc limit "+startProperty+" ,31";
 			}
 			
