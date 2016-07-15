@@ -59,36 +59,36 @@
 			$.ajax({
 			    url:"getDBInfo.php",
 			    data : {
-	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31", 
+	    			query : "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31"
 	  			},
 			    type:"POST",
 			    dataType:"json",
-			    success:function(msg){	
+			    success:function(msg){					
 			    	propertiesArr = msg;
 			    	elementCount = msg['elementCount'];		         	
 					generateSales(msg);
 					pageControl();
 				}		     	    
-			});	
-			
+			});
+
 		}	
 		
 		function generateSales(msg){
 			var startElement = (activePage-1) * 6;
 			$("#propertyList").html("");
-				
+	
 			for (var i=startElement;i<startElement+6;i++){
 				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
 				+ 'sales/' + msg[i]['imgPath'] 
 				+ '"></a><div class="aa-tag for-sale">For Sale</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
 				+ msg[i]['roomCnt']
-				+' Rooms</span><span>'
+				+ ' Rooms</span><span>'
 				+ msg[i]['bathCnt']
-				+' Baths</span><span>'
+				+ ' Baths</span><span>'
 				+ msg[i]['sqFt'] 
 				+ ' SQ FT</span></div><div class="aa-properties-about"><h3><a href="#">'
 				+ msg[i]['address']
-				+'</a></h3><p>'
+				+ '</a></h3><p>'
 				+ msg[i]['description'].substring(0,80)
 				+ '</p></div><div class="aa-properties-detial"><span class="aa-price">'
 				+ "$"+msg[i]['price']
@@ -112,19 +112,18 @@
 			$("#p5").removeClass("active disablePage");
 			$("#p"+activePage).addClass("active");
 			
-			var availPage = Math.ceil(elementCount/6) ;
+			availPage = Math.ceil(elementCount/6);
 			for (var i=availPage+1;i<6;i++){
 				$("#p"+i).addClass("disablePage");			
-			}
-			
-			
+			}			
 		}
 		
 		$("#prevClick").click(function(){
 			if(pageBlock >0){
 				pageBlock--;	
 				activePage = 5;
-				pageControl();	
+				pageControl();
+				loadProperties();	
 			}	
 		});	
 		
@@ -132,7 +131,8 @@
 			if(availPage>5){				
 				pageBlock++;	
 				activePage = 1;	
-				pageControl();			
+				pageControl();
+				loadProperties();			
 			}
 		});
 		
