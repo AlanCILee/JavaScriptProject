@@ -51,6 +51,7 @@
 		var elementCount; 
 		var availPage;
 		var sortOption = 1; //1: Latest, 2:Price High, 3:Price Low
+		var where ="";
 		
 		loadProperties();
 			
@@ -64,13 +65,15 @@
 			
 		function loadProperties(){
 			var startProperty = pageBlock * 30;
-			var queryStr = "SELECT * From Sales order by propertyID desc limit "+startProperty+" ,31";
+			var queryStr = "SELECT * From Sales "+where+" order by propertyID desc limit "+startProperty+" ,31";
 			
 			if(sortOption == 2){
-				queryStr = "SELECT * From Sales order by price desc limit "+startProperty+" ,31";
+				queryStr = "SELECT * From Sales "+where+" order by price desc limit "+startProperty+" ,31";
 			}else if (sortOption == 3){
-				queryStr = "SELECT * From Sales order by price asc limit "+startProperty+" ,31";
+				queryStr = "SELECT * From Sales "+where+" order by price asc limit "+startProperty+" ,31";
 			}
+			
+			where ="";
 			
 			$.ajax({
 			    url:"getDBInfo.php",
@@ -79,11 +82,18 @@
 	  			},
 			    type:"POST",
 			    dataType:"json",
-			    success:function(msg){					
+			    success:function(msg){	
+			    					
 			    	propertiesArr = msg;
-			    	elementCount = msg['elementCount'];		         	
-					generateSales(msg);
-					pageControl();
+			    	elementCount = msg['elementCount'];	
+         			
+         			if(elementCount != 0){
+         				generateSales(msg);
+						pageControl();				
+         			}else{
+         				alert ("Sorry, There is no property");
+         			}
+
 				}		     	    
 			});
 
@@ -91,9 +101,10 @@
 		
 		function generateSales(msg){
 			var startElement = (activePage-1) * 6;
+			
 			$("#propertyList").html("");
-
-			for (var i=startElement;i<startElement+6;i++){
+			
+			for (var i=startElement; i<(startElement+6) && i<elementCount ;i++){
 				var pStr = '<li><article class="aa-properties-item"><a class="aa-properties-item-img" href="#"><img alt="img" src="' 
 				+ 'sales/' + msg[i]['imgPath'] 
 				+ '"></a><div class="aa-tag for-sale">For Sale</div><div class="aa-properties-item-content"><div class="aa-properties-info"><span>'
@@ -114,34 +125,30 @@
 				+ msg[i]['category'] + '</a></div></div></article></li>';
 				
 				$("#propertyList").append(pStr);
+
 			}			
 		}
 		
 		
-		function pageControl(){
-			$("#p1 a").html(pageBlock*5+1);
-			$("#p2 a").html(pageBlock*5+2);
-			$("#p3 a").html(pageBlock*5+3);
-			$("#p4 a").html(pageBlock*5+4);
-			$("#p5 a").html(pageBlock*5+5);
-			$("#p1").removeClass("active disablePage");
-			$("#p2").removeClass("active disablePage");
-			$("#p3").removeClass("active disablePage");
-			$("#p4").removeClass("active disablePage");
-			$("#p5").removeClass("active disablePage");
-			$("#p"+activePage).addClass("active");
-			
+		function pageControl(){			
 			availPage = Math.ceil(elementCount/6);
-			for (var i=availPage+1;i<6;i++){
-				$("#p"+i).addClass("disablePage");			
-			}			
+	
+			for (var i=1;i<6;i++){							
+				if (i>availPage){
+					$("#p"+i).addClass("disablePage");
+				}	
+				else{
+					$("#p"+i+" a").html(pageBlock*5+i);	
+					$("#p"+i).removeClass("active disablePage");			
+				}			
+			}				
+			$("#p"+activePage).addClass("active");		
 		}
 		
 		$("#prevClick").click(function(){
 			if(pageBlock >0){
 				pageBlock--;	
 				activePage = 5;
-				pageControl();
 				loadProperties();	
 			}	
 		});	
@@ -150,7 +157,6 @@
 			if(availPage>5){				
 				pageBlock++;	
 				activePage = 1;	
-				pageControl();
 				loadProperties();			
 			}
 		});
@@ -177,13 +183,66 @@
 				pageControl();
 				generateSales(propertiesArr);
 			}
-		}														
+		}
+		
+		$("#searchBtn").click(function(){
+			var city = $("#searchCity").val();
+			var type;
+
+			switch($("#searchType").val()){
+				case '1':
+					type = "House";				
+					break;
+
+				case '2':
+					type = "Condo";				
+					break;
+			
+				case '3':
+					type = "Townhouse";				
+					break;
+										
+				case '4':
+					type = "Duplex";				
+					break;	
+					
+				case '5':
+					type = "Apartment";				
+					break;
+					
+				default:
+					type = "House";				
+					break;														
+			}
+
+			var SpaceLow = $("#skip-value-lower").text();	
+			var SpaceHigh = $("#skip-value-upper").text();		
+			var priceLow = $("#skip-value-lower2").text();	
+			var priceHigh = $("#skip-value-upper2").text();				
+			
+			where = "WHERE (city LIKE '%"+ city + "%') && (category ='" + type + "') && (sqFt BETWEEN "
+			             + SpaceLow + " AND " + SpaceHigh + ") && (price BETWEEN " + priceLow + " AND " + priceHigh + ")";	
+
+        	pageBlock = 0;		 
+			activePage = 1;	
+			loadProperties();             		
+		});														
 	});
 
 
 	
 	</script>	  
+<style>
+#searchBtn{
+	text-align: center;
+}	
 
+#searchBtn:hover{
+	cursor: pointer;
+	cursor: hand;
+}
+	
+</style>
   </head>
   <body class="aa-price-range">   
   <!-- Pre Loader -->
@@ -461,20 +520,21 @@
             <!-- Start Single properties sidebar -->
             <div class="aa-properties-single-sidebar">
               <h3>Properties Search</h3>
-              <form action="">
+              <form>
                 <div class="aa-single-advance-search">
-                  <input type="text" placeholder="Type Your Location">
+                  <input id="searchCity" type="text" placeholder="Type Your City">
                 </div>
                 <div class="aa-single-advance-search">
-                  <select id="" name="">
+                  <select id="searchType" name="">
                    <option selected="" value="0">Category</option>
-                    <option value="1">Flat</option>
-                    <option value="2">Land</option>
-                    <option value="3">Plot</option>
-                    <option value="4">Commercial</option>
+                    <option value="1">House</option>
+                    <option value="2">Condo</option>
+                    <option value="3">Townhouse</option>
+                    <option value="4">Duplex</option>
+                    <option value="5">Apartment</option>
                   </select>
                 </div>
-                <div class="aa-single-advance-search">
+<!--                <div class="aa-single-advance-search">
                   <select id="" name="">
                     <option selected="" value="0">Type</option>
                     <option value="1">Flat</option>
@@ -491,9 +551,9 @@
                     <option value="3">Plot</option>
                     <option value="4">Commercial</option>
                   </select>
-                </div>
+                </div>-->
                 <div class="aa-single-filter-search">
-                  <span>AREA (SQ)</span>
+                  <span>AREA (SQ)</span><br/>
                   <span>FROM</span>
                   <span id="skip-value-lower" class="example-val">30.00</span>
                   <span>TO</span>
@@ -502,7 +562,7 @@
                   </div>                  
                 </div>
                 <div class="aa-single-filter-search">
-                  <span>PRICE ($)</span>
+                  <span>PRICE ($)</span><br/>
                   <span>FROM</span>
                   <span id="skip-value-lower2" class="example-val">30.00</span>
                   <span>TO</span>
@@ -511,7 +571,8 @@
                   </div>      
                 </div>
                 <div class="aa-single-advance-search">
-                  <input type="submit" value="Search" class="aa-search-btn">
+              <!--  <input id="searchBtn" type="submit" value="Search" class="aa-search-btn">-->
+                <input id="searchBtn" value="Search" class="aa-search-btn">
                 </div>
               </form>
             </div> 

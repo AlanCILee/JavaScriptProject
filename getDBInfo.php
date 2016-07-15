@@ -6,7 +6,6 @@
     $password = "s2016a_user14";
     $dbname = "s2016a_user14";
    	$sql = $_POST['query'];
-//    $sql = "SELECT imgPath,roomCnt,bathCnt,sqFt,address,description,price From Sales order by propertyID desc limit 28";
     $conn = mysqli_connect($servername, $username, $password, $dbname);
    
     if (!$conn) {
@@ -16,23 +15,16 @@
     $result = $conn->query($sql) or die("Query: ($sql) [problem]");
  	$resultArr = array();  
 	$resultNum = mysqli_num_rows($result);
+	$resultArr['elementCount'] = $resultNum;
 
-
-    if ($resultNum > 0) {
-    	
-    	$resultArr['elementCount'] = $resultNum; 	
+    if ($resultNum > 0) {    	
+    	 	
         while($row = mysqli_fetch_assoc($result)) {
         	$resultArr[] = $row;
         }	
-	        
-        echo json_encode($resultArr);		        
-		        
-/*		json_encode($resultArr);		        
-		echo json_last_error_msg();*/
-    } else {
-        echo "0 results";
-    }  
-
+    } 
+    
+	echo json_encode($resultArr);
    	$conn->close();    
 		    
 ?>
