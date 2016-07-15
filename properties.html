@@ -187,7 +187,7 @@
 		
 		$("#searchBtn").click(function(){
 			var city = $("#searchCity").val();
-			var type;
+			var type ="";
 
 			switch($("#searchType").val()){
 				case '1':
@@ -208,10 +208,6 @@
 					
 				case '5':
 					type = "Apartment";				
-					break;
-					
-				default:
-					type = "House";				
 					break;														
 			}
 
@@ -220,7 +216,7 @@
 			var priceLow = $("#skip-value-lower2").text();	
 			var priceHigh = $("#skip-value-upper2").text();				
 			
-			where = "WHERE (city LIKE '%"+ city + "%') && (category ='" + type + "') && (sqFt BETWEEN "
+			where = "WHERE (city LIKE '%"+ city + "%') && (category LIKE '%" + type + "%') && (sqFt BETWEEN "
 			             + SpaceLow + " AND " + SpaceHigh + ") && (price BETWEEN " + priceLow + " AND " + priceHigh + ")";	
 
         	pageBlock = 0;		 
