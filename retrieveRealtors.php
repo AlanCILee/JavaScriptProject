@@ -5,6 +5,8 @@
 	$username = "s2016a_user14";
     $password = "s2016a_user14";
     $dbname = "s2016a_user14";
+    
+    
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -13,7 +15,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     
-    $sql = "SELECT agent_name, location, phone, email, bio, imgsource FROM AGENT";
+    $sql = "SELECT agent_name, location, phone, email, bio, imgsource, agent_ID FROM AGENT";
     $result = mysqli_query($conn, $sql);
     
     //echo "<script type='text/javascript'>alert('debug');</script>";
@@ -32,8 +34,9 @@
             $mail = $row["email"];
             $bio = $row["bio"];
             $isrc = $row["imgsource"];
+            $aID = $row["agent_ID"];
 			
-			$data = $name . ":" . $location . ":" . $phone . ":" . $mail . ":" . $bio . ":" . $isrc; //string
+			$data = $name . ":" . $location . ":" . $phone . ":" . $mail . ":" . $bio . ":" . $isrc . ":" . $aID; //string
 			array_push($dataArray, $data);
 			//echo $name;
 			

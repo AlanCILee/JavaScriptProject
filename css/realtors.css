@@ -38,7 +38,14 @@ p.realtorBio
 	word-wrap: break-all;
 }
 
+#editbtn
+{
+	display: inline;
+}
 
-
-
-
+#rID
+{
+	display: inline;
+	float: left;
+	background-color: #b6b6b6;
+}
