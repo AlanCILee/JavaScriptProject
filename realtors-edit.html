@@ -41,16 +41,33 @@
 	<script>
 	$(document).ready(function()
 	{
+		getID();
+		
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$("#aa-header").load("index.html #headerContainer");		
 		$.getScript("js/navigation.js");
+		
+		ajaxWay();
 	});
-
+	
+	function ajaxWay() 
+	{
+		alert("AJAXWAY DEBUG");
+		$.post("retrieveRealtorSingle.php", {id: $("#IDholder").val()}, function recieve(msg) {
+			var data //this is a string
+			data = JSON.parse(msg); 
+			var dataString = data.split(":"); //this is an array
+			alert(dataString[0])
+			}
+		);		 
+	}
+	
 	function getID()
 	{
 		var result = location.search.substr(1).split("=");
 		
-		return result[1];
+		document.getElementById("IDholder").value = result[1];
+		alert(result[1]);
 	}
 	
 	</script>	
@@ -175,6 +192,7 @@
                         <div class="aa-blog-single-content">
                         	<! -- HERE -- >
                         	<div id="display"></div>
+                        	<input type="text" id="IDholder" value="" >
                         </div>                   
                     </div>  
                   </div>                                   
