@@ -49,3 +49,20 @@ p.realtorBio
 	float: left;
 	background-color: #b6b6b6;
 }
+
+#IDholder
+{
+	background-color: #9a9a9a;
+}
+
+.uRow
+{
+	padding: 20px;
+}
+
+.leftLbl
+{
+	vertical-align: top;
+	font-weight: bold;
+	padding-right: 5px;
+}

@@ -24,7 +24,9 @@
 
     <!-- Main style sheet -->
     <link href="css/style.css" rel="stylesheet">    
-
+	
+	<!-- Realtor page-specific style sheet -->
+    <link href="css/realtors.css" rel="stylesheet" type="text/css"> 
    
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
@@ -52,22 +54,49 @@
 	
 	function ajaxWay() 
 	{
-		alert("AJAXWAY DEBUG");
+		//alert("AJAXWAY DEBUG");
 		$.post("retrieveRealtorSingle.php", {id: $("#IDholder").val()}, function recieve(msg) {
 			var data //this is a string
 			data = JSON.parse(msg); 
 			var dataString = data.split(":"); //this is an array
-			alert(dataString[0])
+			//alert(dataString[0])
+			
+			document.getElementById("uName").value = dataString[0];
+			document.getElementById("uLoc").value = dataString[1];
+			document.getElementById("uPhone").value = dataString[2];
+			document.getElementById("uMail").value = dataString[3];
+			document.getElementById("uBio").value = dataString[4];
+			//document.getElementById("nImg").innerHTML = "<img src=\"" + dataString[5] + "\">";
 			}
 		);		 
 	}
+	
+	function dothething() 
+	{
+       
+    	// syntax: $.post(URL,data,callback);
+    	$.post("updateRealtor.php",
+    		{
+    			id: $("#IDholder").val(),
+    			name: $("#uName").val(),
+    			loc: $("#uLoc").val(),
+    			phone: $("#uPhone").val(),
+    			mail: $("#uMail").val(),
+    			bio: $("#uBio").val(),
+   			}
+    		, function recieve(msg) 
+    			{ 
+    				alert(msg);
+    			}
+    	);        
+    }
 	
 	function getID()
 	{
 		var result = location.search.substr(1).split("=");
 		
 		document.getElementById("IDholder").value = result[1];
-		alert(result[1]);
+		//alert(result[1]);
 	}
 	
 	</script>	
@@ -170,7 +199,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>Edit Team Page</h2>
+            <h2>UPDATE REALTOR INFO</h2>
           </div>
         </div>
       </div>
@@ -191,8 +220,32 @@
                     <div class="col-md-12">
                         <div class="aa-blog-single-content">
                         	<! -- HERE -- >
-                        	<div id="display"></div>
-                        	<input type="text" id="IDholder" value="" >
+                        	<div id="display">
+                        		<p>CURRENTLY EDITING REALTOR ID: <input type="text" id="IDholder" value="" size="3" readonly="true"></p>
+	                        	<table>
+	                        		<tr class="uRow">
+	                        			<td class="leftLbl"><p>Name:</p></td>
+	                        			<td><input type="text" id="uName" value="" size="30"></td>
+	                        		</tr>
+	                        		<tr class="uRow">
+	                        			<td class="leftLbl"><p>Location:</p></td>
+	                        			<td><input type="text" id="uLoc" value="" size="30"></td>
+	                       			</tr>
+	                       			<tr class="uRow">
+	                       				<td class="leftLbl"><p>Phone:</p></td>
+	                       				<td><input type="text" id="uPhone" value="" size="30"></td>
+	                       			</tr>
+	                       			<tr class="uRow">
+	                       				<td class="leftLbl"><p>Email:</p></td>
+	                       				<td><input type="text" id="uMail" value="" size="30"></td>
+	                       			</tr>
+	                       			<tr class="uRow">
+	                       				<td class="leftLbl"><p>About:</p></td>
+	                       				<td><textarea id="uBio" value="" rows="8" cols="100"></textarea></td>
+	                       			</tr>
+	                       		</table>
+	                       		<br><button onclick="dothething()">UPDATE</button>
+                        	</div>
                         </div>                   
                     </div>  
                   </div>                                   

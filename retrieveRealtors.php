@@ -15,7 +15,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     
-    $sql = "SELECT agent_name, location, phone, email, bio, imgsource, agent_ID FROM AGENT";
+    $sql = "SELECT agent_name, location, phone, email, bio, imgsource, agent_ID FROM AGENT ORDER BY agent_name ASC";
     $result = mysqli_query($conn, $sql);
     
     //echo "<script type='text/javascript'>alert('debug');</script>";
