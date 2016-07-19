@@ -41,7 +41,7 @@
 	<script>
 	$(document).ready(function(){
 		$.getScript("js/navigation.js");
-	 			
+	 	
 		$.ajax({
 		    url:"getDBInfo.php",
 		    data : {
@@ -57,15 +57,15 @@
 		$.ajax({
 		    url:"getDBInfo.php",
 		    data : {
-    			query : "SELECT * From AGENT order by agent_ID desc limit 1", 
+    			query : "SELECT * From AGENT order by agent_ID desc limit 8", 
   			},
 		    type:"POST",
 		    dataType:"json",
 		    success:function(msg){			         	
-				generateAgents(msg, 1, "#agent");
+				generateAgents(msg, 7, "#agent");
 		    } 	    
 		});
-		
+			 	
 		function generateSales(pInfo, propertyCnt, startID){	
 			for (var i=0;i<propertyCnt;i++){
 				$(startID+i+" .roomCnt").html(pInfo[i]['roomCnt']+" Rooms");
@@ -82,11 +82,60 @@
 		
 		function generateAgents(pInfo, agentCnt, startID){
 			for (var i=0;i<agentCnt;i++){
-				$(startID+i+" .agentEmail").html(pInfo[i]['email']);
-				$(startID+i+" .agentName").html(pInfo[i]['agent_name']);
-				$(startID+i+" .agentImg").attr("src",pInfo[i]['imgsource']);			
-			}			
-		}		
+/*				$(startID+i+" .agentEmail").text(pInfo[i]['email']);
+				$(startID+i+" .agentName").text(pInfo[i]['agent_name']);
+				$(startID+i+" .agentImg").attr("src",pInfo[i]['imgsource']);*/				
+				
+				var htmlStr = '<li><div id="agent" class="aa-single-agents"><div class="aa-agents-img"><img class="agentImg" src="'
+					+ pInfo[i]['imgsource'] + '" alt="agent member image"></div><div class="aa-agetns-info"><h4><a href="realtors.html" class="agentName">'
+					+ pInfo[i]['agent_name'] + '</a></h4><span class="agentEmail">'
+					+ pInfo[i]['email'] +'</span><div class="aa-agent-social"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-google-plus"></i></a></div></div></div></li>';
+				
+				$(".aa-agents-slider").append(htmlStr);							
+			}	
+			
+			// Slider start after putting data. It came from custom.js 
+			jQuery('.aa-agents-slider').slick({
+			      dots: false,
+			      arrows: false,
+			      infinite: true,
+			      speed: 300,
+			      slidesToShow: 4,
+			      slidesToScroll: 1,
+			      autoplay: true,
+			      autoplaySpeed: 2500,
+			      responsive: [
+			        {
+			          breakpoint: 1024,
+			          settings: {
+			            slidesToShow: 3,
+			            slidesToScroll: 3,
+			            infinite: true,
+			            dots: true
+			          }
+			        },
+			        {
+			          breakpoint: 600,
+			          settings: {
+			            slidesToShow: 2,
+			            slidesToScroll: 2
+			          }
+			        },
+			        {
+			          breakpoint: 480,
+			          settings: {
+			            slidesToShow: 1,
+			            slidesToScroll: 1
+			          }
+			        }
+			        // You can unslick at a given breakpoint now by adding:
+			        // settings: "unslick"
+			        // instead of a settings object
+			      ]
+			});		
+		} //End of generateAgents
+		
+				
 	});
 
 
@@ -703,14 +752,14 @@ Having been successfully established in the industry since 1990, Home Property h
             <!-- agents content -->
             <div class="aa-agents-content">
               <ul class="aa-agents-slider">
-                <li>                
+<!--                <li>                
                   <div id="agent0" class="aa-single-agents">
                     <div class="aa-agents-img">
                       <img class="agentImg" src="img/agents/agent-1.png" alt="agent member image">
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent0</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -728,7 +777,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent1</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -745,7 +794,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent2</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -762,7 +811,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent3</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -779,7 +828,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent4</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -796,7 +845,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent5</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -813,7 +862,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent6</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -830,7 +879,7 @@ Having been successfully established in the industry since 1990, Home Property h
                     </div>
                     <div class="aa-agetns-info">
                       <h4><a href="realtors.html" class="agentName">Philip Smith</a></h4>
-                      <span class="agentEmail">Top Agent</span>
+                      <span class="agentEmail">Top Agent7</span>
                       <div class="aa-agent-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -839,7 +888,7 @@ Having been successfully established in the industry since 1990, Home Property h
                       </div>
                     </div>
                   </div>
-                </li>
+                </li>-->
               </ul>
             </div>
           </div>

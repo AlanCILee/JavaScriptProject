@@ -46,7 +46,7 @@ jQuery(function($){
   /* ----------------------------------------------------------- */
   /*  2. AGENTS SLIDER
   /* ----------------------------------------------------------- */    
-
+/*
     jQuery('.aa-agents-slider').slick({
       dots: false,
       arrows: false,
@@ -84,7 +84,7 @@ jQuery(function($){
         // settings: "unslick"
         // instead of a settings object
       ]
-    });
+    });*/
 
   /* ----------------------------------------------------------- */
   /*  3. TESTIMONIAL SLIDER 
