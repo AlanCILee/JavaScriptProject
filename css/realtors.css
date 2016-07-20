@@ -66,3 +66,31 @@ p.realtorBio
 	font-weight: bold;
 	padding-right: 5px;
 }
+
+#file
+{
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+}
+
+#upImage
+{
+	display: inline;
+	float: left;
+	margin: 5px;
+}
+
+.feedback
+{
+	display: inline;
+	float: inherit;
+	color: #01dc22;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.locked
+{
+	background-color: #b3b3b3;
+}

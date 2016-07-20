@@ -23,7 +23,7 @@ function addRealtorElement()
 	if (test != null)
 	{
 		row += "<form action=\"realtors-edit.html\" method=\"GET\"><input id=\"rID\" name=\"realtorID\" type=\"hidden\" value=\"" + arguments[6] + "\"><input type=\"submit\" value=\"EDIT\" class=\"editbtn\"></form>";
-		document.getElementById("addNew").innerHTML = "<form action=\"realtors-edit.html\"><input type=\"submit\" value=\"Add New Realtor\"></form>";
+		document.getElementById("addNew").innerHTML = "<form action=\"realtors-add.html\" ><input type=\"submit\" value=\"Add New Realtor\"></form>";
 	}
 	
 	row += "</td>";

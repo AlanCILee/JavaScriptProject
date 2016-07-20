@@ -43,94 +43,40 @@
 	<script>
 	$(document).ready(function()
 	{
-		getID();
-		
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$("#aa-header").load("index.html #headerContainer");		
 		$.getScript("js/navigation.js");
-		
-		ajaxWay();
 	});
 	
-	function ajaxWay() 
-	{
-		//alert("AJAXWAY DEBUG");
-		$.post("retrieveRealtorSingle.php", {id: $("#IDholder").val()}, function recieve(msg) {
-			var data //this is a string
-			data = JSON.parse(msg); 
-			var dataString = data.split(":"); //this is an array
-			//alert(dataString[0])
-			
-			document.getElementById("uName").value = dataString[0];
-			document.getElementById("uLoc").value = dataString[1];
-			document.getElementById("uPhone").value = dataString[2];
-			document.getElementById("uMail").value = dataString[3];
-			document.getElementById("uBio").value = dataString[4];
-			document.getElementById("cImg").innerHTML = "<img src=\"" + dataString[5] + "\">";
-			}
-		);		 
-	}
-	
-	function dothething() 
+	function addthedude() 
 	{
        
     	// syntax: $.post(URL,data,callback);
-    	$.post("updateRealtor.php",
+    	$.post("addNewRealtor.php",
     		{
-    			id: $("#IDholder").val(),
-    			name: $("#uName").val(),
-    			loc: $("#uLoc").val(),
-    			phone: $("#uPhone").val(),
-    			mail: $("#uMail").val(),
-    			bio: $("#uBio").val(),
+    			name: $("#nName").val(),
+    			loc: $("#nLoc").val(),
+    			phone: $("#nPhone").val(),
+    			mail: $("#nMail").val(),
+    			bio: $("#nBio").val(),
    			}
     		, function recieve(msg) 
     			{ 
-    				alert(msg);
-    			}
-    	);        
-    }
-    
-    function removethedude() 
-	{
-       
-    	// syntax: $.post(URL,data,callback);
-    	$.post("removeRealtor.php",
-    		{
-    			id: $("#IDholder").val(),
-   			}
-    		, function recieve(msg) 
-    			{ 
-    				document.getElementById("fbDel").innerHTML = msg + "<br>";
+    				document.getElementById("fbAdd").innerHTML = msg;
     			}
     	);
     	
-    	//lock fields after deletetion    
-    	document.getElementById("uName").setAttribute("readonly", "true");
-    	document.getElementById("uName").setAttribute("class", "locked");
-    	
-    	document.getElementById("uLoc").setAttribute("readonly", "true");
-    	document.getElementById("uLoc").setAttribute("class", "locked");
-    	
-    	document.getElementById("uPhone").setAttribute("readonly", "true");
-    	document.getElementById("uPhone").setAttribute("class", "locked");
-    	
-    	document.getElementById("uMail").setAttribute("readonly", "true");
-    	document.getElementById("uMail").setAttribute("class", "locked");
-    	
-    	document.getElementById("uBio").setAttribute("readonly", "true");
-    	document.getElementById("uBio").setAttribute("class", "locked");
-    	
-    	document.getElementById("btnUpdate").setAttribute("disabled", "true");
+    	clearFields();      
     }
-	
-	function getID()
-	{
-		var result = location.search.substr(1).split("=");
-		
-		document.getElementById("IDholder").value = result[1];
-		//alert(result[1]);
-	}
+    
+    function clearFields()
+    {
+    	document.getElementById("nName").value = "";
+    	document.getElementById("nLoc").value = "";  
+    	document.getElementById("nPhone").value = "";  
+    	document.getElementById("nMail").value = "";  
+    	document.getElementById("nBio").value = "";
+    }
 	
 	</script>	
 
@@ -254,37 +200,34 @@
                         <div class="aa-blog-single-content">
                         	<! -- HERE -- >
                         	<div id="display">
-                        		<p>CURRENTLY EDITING REALTOR ID: <input type="text" id="IDholder" value="" size="3" readonly="true"><button onclick="removethedude()">DELETE</button></p><div id="fbDel" class="feedback"></div>
 	                        	<table>
 	                        		<tr class="uRow">
 	                        			<td class="leftLbl"><p>Name:</p></td>
-	                        			<td><input type="text" id="uName" value="" size="30"></td>
+	                        			<td><input type="text" id="nName" value="" size="30"></td>
 	                        		</tr>
 	                        		<tr class="uRow">
 	                        			<td class="leftLbl"><p>Location:</p></td>
-	                        			<td><input type="text" id="uLoc" value="" size="30"></td>
+	                        			<td><input type="text" id="nLoc" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
 	                       				<td class="leftLbl"><p>Phone:</p></td>
-	                       				<td><input type="text" id="uPhone" value="" size="30"></td>
+	                       				<td><input type="text" id="nPhone" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
 	                       				<td class="leftLbl"><p>Email:</p></td>
-	                       				<td><input type="text" id="uMail" value="" size="30"></td>
+	                       				<td><input type="text" id="nMail" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
 	                       				<td class="leftLbl"><p>About:</p></td>
-	                       				<td><textarea id="uBio" value="" rows="8" cols="100"></textarea></td>
+	                       				<td><textarea id="nBio" value="" rows="8" cols="100"></textarea></td>
 	                       			</tr>
 	                       		</table>
-	                       		<br><button id="btnUpdate" onclick="dothething()">UPDATE INFORMATION</button>
+	                       		<br><button onclick="addthedude()">ADD REALTOR</button><div id="fbAdd" class="feedback"></div>
                         	</div>
                         	<br>
                         	<div id="formHolder">
                         		<form id="imgUp" method="POST">
-                        			<p>Portrait</p>
-                        			<p id="cImg"></p>
-                        			<p>Upload New Portrait:</p>
+                        			<p>Upload Portrait:</p>
                         			<input type="file" id="file" name="myfile" placeholder="Select image" onchange="readURL(this);"/>
                         			<input id="upImage" type="submit" value="UPLOAD"/>
                         		</form>
