@@ -46,7 +46,12 @@
 		getID();
 		
 		$("#aa-menu-area").load("index.html #topNavigation");
-		$("#aa-header").load("index.html #headerContainer");		
+		$("#aa-header").load("index.html #headerContainer");
+		$("#aa-footer").load("index.html #footerContents");		
+		var $div = $('<div>');
+		$div.load('index.html #myModal', function(){
+			$(this).appendTo("footer");
+		});		
 		$.getScript("js/navigation.js");
 		
 		ajaxWay();

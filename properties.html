@@ -43,6 +43,13 @@
 	$(document).ready(function(){
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$("#aa-header").load("index.html #headerContainer");
+		$("#aa-footer").load("index.html #footerContents");		
+		var $div = $('<div>');
+		$div.load('index.html #myModal', function(){
+			$(this).appendTo("footer");
+		});
+		
+		
 		$.getScript("js/navigation.js");
 		
 		var pageBlock = 0;		//1st block : 1~5, 2nd block : 6~10, 3rd block : 11~15 
