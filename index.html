@@ -57,7 +57,7 @@
 		$.ajax({
 		    url:"getDBInfo.php",
 		    data : {
-    			query : "SELECT * From AGENT order by agent_ID desc limit 8", 
+    			query : "SELECT * From AGENT order by agent_ID desc limit 7", 
   			},
 		    type:"POST",
 		    dataType:"json",
@@ -65,6 +65,27 @@
 				generateAgents(msg, 7, "#agent");
 		    } 	    
 		});
+			 	
+		$.ajax({
+		    url:"getDBInfo.php",
+		    data : {
+    			query : "SELECT * From NEWS order by newsID desc limit 3", 
+  			},
+		    type:"POST",
+		    dataType:"json",
+		    success:function(msg){			         	
+				generateNews(msg, 3, "#news");
+		    } 	    
+		});
+
+		function generateNews(pInfo, newsCnt, startID){	
+			for (var i=0;i<newsCnt;i++){
+				$(startID+i+" .date").html(pInfo[i]['Date']);
+				$(startID+i+" .image").attr("src",pInfo[i]['Image']);
+				$(startID+i+" .description").html(pInfo[i]['Description'].substring(0,80));
+				$(startID+i+" .title").html(pInfo[i]['Title']);	
+			}			
+		}				 	
 			 	
 		function generateSales(pInfo, propertyCnt, startID){	
 			for (var i=0;i<propertyCnt;i++){
@@ -140,72 +161,12 @@
 
 
 	</script>	
-	<!--
-	<script>
-		$(document).ready(function() {
-       		 $.post("adminProcess.php",
-                    {                        
-                        User: "null"                 
-                    }
-                    , function display(dataFromtheServer) {
-			 			if(dataFromtheServer != "null"){
-    						$("#loginText").html(dataFromtheServer + "<button id='logoutBtn' > [LOGOUT]</button>");
-    						
-							$("#logoutBtn").click(function(){
-								$.post("adminProcess.php",
-				                {                        
-				                	logout: "null"                 
-				                }
-				                 , function display(dataFromtheServer) {
-							 			if(dataFromtheServer != "null"){
-				    						$("#loginText").html("<a href='signin.html' class='aa-login'>Login</a>"); 
-				    						checkDepartment();
-										}	
-         							}		 
-                				);        
-	        	 			});   
-						}	
-         			}		 
-             );        
-              
-             checkDepartment();                	
-        });		        
-            
-       	function checkDepartment(){     
-             $.post("adminProcess.php",
-                    {                        
-                        Depart: "null"                 
-                    }
-                    , function display(dataFromtheServer) {
-                    			
-			 			if(dataFromtheServer == "IT"){
-							$("#propertiesDropdown").css("display","inline");
-							$("#propertiesSingle").css("display","none");
-							$("#realtorsDropdown").css("display","inline");
-							$("#realtorsSingle").css("display","none");
-							$("#newsDropdown").css("display","inline");
-							$("#newsSingle").css("display","none");
-						}else if(dataFromtheServer == "Sales"){
-							$("#propertiesDropdown").css("display","inline");
-							$("#propertiesSingle").css("display","none");							
-						}else if(dataFromtheServer == "HR"){	
-							$("#realtorsDropdown").css("display","inline");
-							$("#realtorsSingle").css("display","none");
-						}else if(dataFromtheServer == "News"){	
-							$("#newsDropdown").css("display","inline");
-							$("#newsSingle").css("display","none");
-						}else{
-							$("#propertiesDropdown").css("display","none");
-							$("#propertiesSingle").css("display","inline");
-							$("#realtorsDropdown").css("display","none");
-							$("#realtorsSingle").css("display","inline");
-							$("#newsDropdown").css("display","none");
-							$("#newsSingle").css("display","inline");	
-						}	
-         			}		 
-                );           	
-        }
-    </script>-->
+<style>
+	#aa-advance-search{
+		display: none;
+	}
+</style>
+
 
   </head>
   <body class="aa-price-range">  
@@ -313,12 +274,12 @@
           <img src="img/slider/i3.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
+            <span class="aa-top-slider-catg">Mansion</span>
+            <h2 class="aa-top-slider-title">2560 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>West Vancouver</p>
             <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <p class="aa-top-slider-price">$2,460,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -328,12 +289,12 @@
           <img src="img/slider/i2.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <span class="aa-top-slider-catg">House</span>
+            <h2 class="aa-top-slider-title">3120 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>North Vancouver</p>
+            <span class="aa-top-slider-off">15% OFF</span>
+            <p class="aa-top-slider-price">$1,990,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -343,12 +304,12 @@
           <img src="img/slider/i1.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <span class="aa-top-slider-catg">House</span>
+            <h2 class="aa-top-slider-title">4200 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>Burnaby</p>
+            <span class="aa-top-slider-off">20% OFF</span>
+            <p class="aa-top-slider-price">$2,560,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -358,12 +319,12 @@
           <img src="img/slider/i5.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <span class="aa-top-slider-catg">Mansion</span>
+            <h2 class="aa-top-slider-title">2900 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>Richmond</p>
+            <span class="aa-top-slider-off">15% OFF</span>
+            <p class="aa-top-slider-price">$2,800,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -373,12 +334,12 @@
           <img src="img/slider/i4.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
-            <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <span class="aa-top-slider-catg">Townhouse</span>
+            <h2 class="aa-top-slider-title">1860 Square Feet</h2>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>New Westminster</p>
+            <span class="aa-top-slider-off">5% OFF</span>
+            <p class="aa-top-slider-price">$990,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -388,12 +349,12 @@
           <img src="img/slider/i6.jpg" alt="img">
           <!-- Top slider content -->
           <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">Duplex</span>
+            <span class="aa-top-slider-catg">Condo</span>
             <h2 class="aa-top-slider-title">1560 Square Feet</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>South Beach, Miami (USA)</p>
-            <span class="aa-top-slider-off">30% OFF</span>
-            <p class="aa-top-slider-price">$460,000</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>Surrey</p>
+            <span class="aa-top-slider-off">10% OFF</span>
+            <p class="aa-top-slider-price">$880,000</p>
+            <a href="properties.html" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
           </div>
           <!-- / Top slider content -->
         </div>
@@ -407,7 +368,7 @@
   <section id="aa-advance-search">
     <div class="container">
       <div class="aa-advance-search-area">
-        <div class="form">
+        <div class="form"><
          <div class="aa-advance-search-top">
             <div class="row">
               <div class="col-md-4">
@@ -1040,19 +1001,19 @@ Having been successfully established in the industry since 1990, Home Property h
               <h2>Latest News</h2>
               <span></span>
               <p>From real estate pricing trends to innovative ways to market your property, we deliver timely news and valuable information to help you make smart real estate decisions.</p>
-            </div>
+            </div>        
             <div class="aa-latest-blog-content">
               <div class="row">
                 <!-- start single blog -->
                 <div class="col-md-4">
-                  <article class="aa-blog-single">
+                  <article id="news0" class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="img/blog-img-1.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="news.html"><img class="image" src="img/blog-img-1.jpg" alt="img"></a>
+                      <span class="aa-date-tag date">15 April, 16</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <h3><a href="news.html" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
                       <div class="aa-blog-single-bottom">
 <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
                         <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
@@ -1063,14 +1024,14 @@ Having been successfully established in the industry since 1990, Home Property h
                 </div>
                 <!-- start single blog -->
                 <div class="col-md-4">
-                  <article class="aa-blog-single">
+                  <article id="news1" class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="img/blog-img-2.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="news.html"><img class="image" src="img/blog-img-2.jpg" alt="img"></a>
+                      <span class="aa-date-tag date">15 April, 16</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <h3><a href="news.html" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
                       <div class="aa-blog-single-bottom">
 <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
                         <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
@@ -1080,14 +1041,14 @@ Having been successfully established in the industry since 1990, Home Property h
                 </div>
                 <!-- start single blog -->
                 <div class="col-md-4">
-                  <article class="aa-blog-single">
+                  <article id="news2" class="aa-blog-single">
                     <figure class="aa-blog-img">
-                      <a href="#"><img src="img/blog-img-3.jpg" alt="img"></a>
-                      <span class="aa-date-tag">15 April, 16</span>
+                      <a href="news.html"><img class="image" src="img/blog-img-3.jpg" alt="img"></a>
+                      <span class="aa-date-tag  date">15 April, 16</span>
                     </figure>
                     <div class="aa-blog-single-content">
-                      <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <h3><a href="news.html" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                      <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
                       <div class="aa-blog-single-bottom">
 <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
                         <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
@@ -1106,33 +1067,17 @@ Having been successfully established in the industry since 1990, Home Property h
 
   <!-- Footer -->
   <footer id="aa-footer">
-    <div class="container">
+    <div class="container" id="footerContents">
       <div class="row">
         <div class="col-md-12">
         <div class="aa-footer-area">
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="aa-footer-left">
-               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+              <p>Designed by <a href="#" id="trigger" data-toggle="modal" data-target="#myModal">Alan, Kevin, Matt, Shaun </a>(Alphabetic Order)</p>
               </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="aa-footer-right">
-                <a href="#">Home</a>
-                <a href="#">Support</a>
-                <a href="#">License</a>
-                <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a>
-              </div>
-            </div>            
+          </div>            
           </div>
         </div>
       </div>
@@ -1141,6 +1086,29 @@ Having been successfully established in the industry since 1990, Home Property h
   </footer>
   <!-- / Footer -->
 
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Our Project and Members (Alphabetic Order)</h4>
+      </div>
+      <div class="modal-body">
+        <p>Working Repository : https://github.com/AlanCILee/JavaScriptProject.git </p>
+        <p class="text-center">Alan Changil Lee (300247998)</p>
+        <p class="text-center">Kevin Doan (300237827)</p>
+        <p class="text-center">Matt Lai (300228124)</p>
+        <p class="text-center">Shaun Lu (300234869)</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
  
   
   <!-- jQuery library -->
