@@ -4,7 +4,7 @@
     $password = "s2016a_user14";
     $dbname = "s2016a_user14";
 
-	$returnMsg = "UPDATE FAILED";
+	$returnMsg = "Update Failed!";
 	
 	// Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -60,7 +60,7 @@
 	
 	if (mysqli_query($conn, $sql))
 	{
-		$returnMsg = "UPDATE SUCCESSFUL";
+		$returnMsg = "Information Updated!";
 	}
 	
 	echo $returnMsg;

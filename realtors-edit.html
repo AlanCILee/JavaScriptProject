@@ -91,7 +91,7 @@
    			}
     		, function recieve(msg) 
     			{ 
-    				alert(msg);
+    				document.getElementById("fbUpdate").innerHTML = msg;
     			}
     	);        
     }
@@ -282,7 +282,7 @@
 	                       				<td><textarea id="uBio" value="" rows="8" cols="100"></textarea></td>
 	                       			</tr>
 	                       		</table>
-	                       		<br><button id="btnUpdate" onclick="dothething()">UPDATE INFORMATION</button>
+	                       		<br><button id="btnUpdate" onclick="dothething()">UPDATE INFORMATION</button><div id="fbUpdate" class="feedback"></div>
                         	</div>
                         	<br>
                         	<div id="formHolder">
