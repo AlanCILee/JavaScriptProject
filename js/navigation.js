@@ -15,19 +15,20 @@ $(document).ready(function() {
 		                }
 		                 , function display(dataFromtheServer) {
 					 			if(dataFromtheServer != "null"){
+					 				alert(dataFromtheServer);
 		    						$("#loginText").html("<a href='signin.html' class='aa-login'>Login</a>"); 	
 								}	
-								checkDepartment();
+								checkDepartment(false);		//logoff event case
 						}		 
 	    				);        
 	 				});   
 				}
-				checkDepartment();	
+				checkDepartment(true);		//login status case
  			}		 
      );        	        
 });
     
-function checkDepartment(){	   
+function checkDepartment(login){	   
      $.post("adminProcess.php",
             {                        
                 Depart: "null"                 
@@ -69,21 +70,23 @@ function checkDepartment(){
 	 			if(dataFromtheServer == "IT"){
 					$("#propertiesDropdown").css("display","inline");
 					$("#propertiesSingle").css("display","none");
-					$("#realtorsDropdown").css("display","inline");
-					$("#realtorsSingle").css("display","none");
+					$("#realtorsDropdown").css("display","none");
+					$("#realtorsSingle").css("display","inline");
 					$("#newsDropdown").css("display","inline");
 					$("#newsSingle").css("display","none");
 				}else if(dataFromtheServer == "Sales"){
 					$("#propertiesDropdown").css("display","inline");
 					$("#propertiesSingle").css("display","none");								
 				}else if(dataFromtheServer == "HR"){	
-					$("#realtorsDropdown").css("display","inline");
-					$("#realtorsSingle").css("display","none");	
+					$("#realtorsDropdown").css("display","none");
+					$("#realtorsSingle").css("display","inline");	
 				}else if(dataFromtheServer == "News"){	
 					$("#newsDropdown").css("display","inline");
 					$("#newsSingle").css("display","none");
 				}else if(page == "news-edit.html" || page=="properties-edit.html" || page =="realtors-edit.html"){
 					location.href='index.html';		//Not login user access editing page case
+				}else if(page =="realtors.html" && !login){
+					location.href='realtors.html';	//Not login user access editing page case					
 				}				
  			}		 
         );           	
