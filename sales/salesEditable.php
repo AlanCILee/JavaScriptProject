@@ -74,7 +74,7 @@ if(isset($_FILES['myfile'])){
       
       if(empty($errors)==true){
          move_uploaded_file($_FILES["myfile"]["tmp_name"],
-                                "../www/" . $_FILES["myfile"]["name"]);
+                                "img/agents/" . $_FILES["myfile"]["name"]);
                                 
          // echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
 /*================      clear inputs and preview image once upload button is clicked      ==================================================================================*/

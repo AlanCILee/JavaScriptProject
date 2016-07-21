@@ -40,6 +40,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/readURL.js" charset="utf-8"></script>
 	<script>
 	$(document).ready(function()
 	{
@@ -71,7 +72,7 @@
 			document.getElementById("uPhone").value = dataString[2];
 			document.getElementById("uMail").value = dataString[3];
 			document.getElementById("uBio").value = dataString[4];
-			document.getElementById("cImg").innerHTML = "<img src=\"" + dataString[5] + "\">";
+			document.getElementById("cImg").innerHTML = "<img width=\"270\" height=\"330\" src=\"" + dataString[5] + "\">";
 			}
 		);		 
 	}
@@ -134,6 +135,7 @@
 		var result = location.search.substr(1).split("=");
 		
 		document.getElementById("IDholder").value = result[1];
+		document.getElementById("IDholder2").value = result[1];
 		//alert(result[1]);
 	}
 	
@@ -286,12 +288,16 @@
                         	</div>
                         	<br>
                         	<div id="formHolder">
-                        		<form id="imgUp" method="POST">
-                        			<p>Portrait</p>
-                        			<p id="cImg"></p>
-                        			<p>Upload New Portrait:</p>
-                        			<input type="file" id="file" name="myfile" placeholder="Select image" onchange="readURL(this);"/>
-                        			<input id="upImage" type="submit" value="UPLOAD"/>
+                        		<form id="imgUp" method="post" action="uploadImage.php" enctype="multipart/form-data">
+                        			<div class="portraitHolder">
+                        				<p>Current Portrait</p>
+                        				<p id="cImg"></p>
+                        			</div>
+	                        		<p>Upload New Portrait:</p>
+	                        		<input type="file" id="file" name="myfile" placeholder="Select image" onchange="readURL(this);"/>
+	                        		<div id="myImg"></div>
+	                        		<input type="text" id="IDholder2" name="id" value="" hidden/>
+	                        		<input id="upImage" type="submit" value="UPLOAD"/><div id="fbUIMG" class="feedback"></div>
                         		</form>
                         	</div>
                         </div>                   

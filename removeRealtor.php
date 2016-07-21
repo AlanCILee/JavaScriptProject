@@ -18,6 +18,21 @@
 		$rID = intval($_POST["id"]);
 	}
 	
+	
+	//delete the image
+	$sqlImg = "SELECT imgsource FROM AGENT WHERE agent_ID={$rID}";
+	$result = mysqli_query($conn, $sqlImg);
+
+    if (mysqli_num_rows($result) > 0) 
+    {
+        while($row = mysqli_fetch_assoc($result)) 
+        {
+	        //put function call here?
+	        $imgPath = $row["imgsource"];
+		}      
+    }
+	unlink($imgPath);
+	
 	$sql = "DELETE FROM AGENT WHERE agent_ID={$rID}";
 	//$result = mysqli_query($conn, $sql);
 	
