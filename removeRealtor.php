@@ -29,9 +29,15 @@
         {
 	        //put function call here?
 	        $imgPath = $row["imgsource"];
-		}      
+	      	
+		} 
+	     
     }
-	unlink($imgPath);
+	
+	if ($imgPath != NULL)
+	{
+		unlink($imgPath);
+	}
 	
 	$sql = "DELETE FROM AGENT WHERE agent_ID={$rID}";
 	//$result = mysqli_query($conn, $sql);
