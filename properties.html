@@ -215,6 +215,10 @@
 					
 				case '5':
 					type = "Apartment";				
+					break;	
+					
+				default:
+					type = "%";
 					break;														
 			}
 
@@ -223,7 +227,7 @@
 			var priceLow = $("#skip-value-lower2").text();	
 			var priceHigh = $("#skip-value-upper2").text();				
 			
-			where = "WHERE (city LIKE '%"+ city + "%') && (category LIKE '%" + type + "%') && (sqFt BETWEEN "
+			where = "WHERE (city LIKE '%"+ city + "%') && (category LIKE '" + type + "') && (sqFt BETWEEN "
 			             + SpaceLow + " AND " + SpaceHigh + ") && (price BETWEEN " + priceLow + " AND " + priceHigh + ")";	
 
         	pageBlock = 0;		 

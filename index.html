@@ -62,7 +62,7 @@
 		    type:"POST",
 		    dataType:"json",
 		    success:function(msg){			         	
-				generateAgents(msg, 7, "#agent");
+				generateAgents(msg, msg['elementCount'], "#agent");
 		    } 	    
 		});
 			 	
