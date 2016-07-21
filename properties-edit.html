@@ -9,7 +9,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     
-   
+      <link rel="stylesheet" href="sales/css/normalize.css">    
+    <link rel="stylesheet" href="sales/css/style.css">
     <!-- Font awesome -->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -57,7 +58,7 @@
 
  //============================     hide NEW POST submit button     =====================================
 
-	document.getElementById("newPost").style.visibility='hidden'; //hide new post button
+    document.getElementById("newPost").style.visibility='hidden'; //hide new post button
 
     var options = { 
     beforeSend: function() 
@@ -329,15 +330,15 @@
 
 
         <li>
-         <input class="btn btn-submit"  type="submit" name="update" id="update"  value="Update" >       
-    <input class="btn btn-submit" id="vali" onclick="validateNewPost()" value="Validate New Post">
+         <button class="button btn-search"  type="submit" name="update" id="update">Update</button>       
+    <input class="button btn-search" id="vali" onclick="validateNewPost()" value="Validate New Post">
    
    
-	  <button class="btn btn-submit" type="submit" id="newPost" name="newPost" onClick ="clearBtn()">New Post</button>
+	  <button class="button btn-search" type="submit" id="newPost" name="newPost"  onClick ="clearBtn()">New Post</button>
 
 
          <button class="button btn-search" id="clear" onclick="clearAll()">Clear All</button>         
-          <a href="#" class="btn btn-small js-modal-close">Close</a> 
+ 
         </li>
         
       </ul>

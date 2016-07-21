@@ -16,7 +16,7 @@
 
 	      if(empty($errors)==true){
 	         move_uploaded_file($_FILES["myfile"]["tmp_name"],
-	                                "www/JavaScriptProject/sales/" . $_FILES["myfile"]["name"]);
+	                                "../php/" . $_FILES["myfile"]["name"]);
 	                                
 
 	     echo "<script>document.getElementById('img').innerHTML = 'Upload successful!'</script>";
