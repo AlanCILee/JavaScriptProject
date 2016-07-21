@@ -30,6 +30,11 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	
+<script src="http://malsup.github.com/jquery.form.js"></script> <!--form plugin-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.css" rel="stylesheet" type="text/css">	
+<script type="text/javascript" src="sales/js/property.js" ></script>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -49,6 +54,48 @@
 			$(this).appendTo("footer");
 		});
 		$.getScript("js/navigation.js");		
+
+ //============================     hide NEW POST submit button     =====================================
+
+	document.getElementById("newPost").style.visibility='hidden'; //hide new post button
+
+    var options = { 
+    beforeSend: function() 
+    {
+        $("#progress").show();
+        //clear everything
+        $("#bar").width('0%');
+        $("#message").html("");
+        $("#percent").html("0%");
+    },
+    uploadProgress: function(event, position, total, percentComplete) 
+    {
+        $("#bar").width(percentComplete+'%');
+        $("#percent").html(percentComplete+'%');
+ 
+    },
+    success: function() 
+    {
+        $("#bar").width('100%');
+        $("#percent").html('100%');
+ 
+    },
+    complete: function(response) 
+    {
+        $("#message").html("<font color='green'>"+response.responseText+"</font>");
+    },
+
+    error: function()
+    {
+        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+ 
+    }
+ 
+}; 
+ 
+     $("#myForm").ajaxForm(options);
+
+
 	});
 
 
@@ -145,40 +192,160 @@
   </section>
   <!-- End menu section -->
 
-  <!-- Start Proerty header  -->
+  <!-- Start Property header  -->
 
   <section id="aa-property-header">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>Properties Details</h2>
+            <h2>Property Updates</h2>
             <ol class="breadcrumb">
-            <li><a href="#">HOME</a></li>            
-            <li class="active">APPARTMENT TITLE</li>
+            <li class="active">UPDATE</li>
+            <li class="active">DELETE</li>
+            <li class="active">NEW POSTING</li>
           </ol>
           </div>
         </div>
       </div>
     </div>
   </section> 
-  <!-- End Proerty header  -->
+  <!-- End Property header  -->
 
   <!-- Start Properties  -->
   <section id="aa-properties">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="aa-properties-content">            
             <!-- Start properties content body -->
-            <div class="aa-properties-details">
-             <div class="aa-properties-details-img">
-               <img src="img/slider/1.jpg" alt="img">
-               <img src="img/slider/2.jpg" alt="img">
-               <img src="img/slider/3.jpg" alt="img">
-             </div>
+                   <form id="myForm" action="updateAndNewPos.php" method="post" enctype="multipart/form-data">
+      <ul>
+
+        <li>
+          <p class="search">
+           <label>Address for Search/New Post  <span class="req">*</span></label>
+             <input name="address" id="address" type="text" placeholder="201-3399 Example Street" />
+             &nbsp;<!--<input class="button btn-search"  onclick="srch()" value="Search">-->
+             <button class="button btn-search"  onclick="srch()" type="button">Search</button>
+          </p>
+          
+          
+          <p class="del">
+            <label>ID to Delete Post</label>
+            <input name="delete" id="de"  type="number" placeholder="2" />      
+             &nbsp;<!--<input class="button btn-search"  onclick="del()" value="Delete">-->
+             <button class="button btn-search"  onclick="del()" type="button">Delete</button>
+          </p>
+        </li>           
+
+        <br><br>
+       
+        <table id="result">
+            <thead>
+                <th>ID</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postal</th>
+                <th>Rooms</th>
+                <th>Baths</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Square Feet</th>
+                <th>Price</th>
+                <th>Image</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+      
+        <br><br>
+   
+         <li>
+          
+          <p class="firstcell">
+            <label>City</label>
+            <input type="text" name="city" id="city" placeholder="Vancouver" />      
+         
+          </p>
+          
+          <p class="secondcell">
+            <label>Postal Code </label>
+            <input name="postal" id="pos" type="text" placeholder="E5X 1A7" />      
+         
+          </p>
+          
+           <p class="thirdcell">
+            <label>Number of Rooms</label>
+            <input name="rooms" id="rm" type="number" placeholder="5"/>      
+          </p>
+
+		<p class="fourthcell">
+           <label>Number of Baths </label>
+            <input name="baths" id="bh" type="number" type="text" placeholder="3"/>            
+          </p>
+          
+        </li>       
+       
+  	  <li>
+          <p class="ct">
+           <label>Property Category</label>
+             <input name="category" id="cat" type="text" placeholder="House"/>
+          </p>          
+          
+          <p class="sfcell">
+           <label>Square Feet</label>
+             <input name="squareF" id="sf" type="number" placeholder="8000"/>
+          </p>
+          
+          <p class="pricecell">
+            <label>Price</label>
+            <input name="Price" id="price" type="number" placeholder="400000" />      
+           
+          </p>
+        </li>       
+      
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+          <label>Description of Property<span class="req">*</span></label>
+          <textarea name="description" id="descp" form="myForm" cols="46" rows="3" name="comment" placeholder="Enter description.." ></textarea>
+        </li>
+        
+        
+        <li>
+          <p>
+            <label>Image</label>
+           <div><input type="file" id="file" name="myfile" placeholder="Select image" onchange="readURL(this);"  /></div>
+          </p>
+        </li>   
+        
+<div id="progress">
+        <div id="bar"></div>
+        <div id="percent">0%</div >
+</div>
+<div id="img"></div>        
+
+
+        <li>
+         <input class="btn btn-submit"  type="submit" name="update" id="update"  value="Update" >       
+    <input class="btn btn-submit" id="vali" onclick="validateNewPost()" value="Validate New Post">
+   
+   
+	  <button class="btn btn-submit" type="submit" id="newPost" name="newPost" onClick ="clearBtn()">New Post</button>
+
+
+         <button class="button btn-search" id="clear" onclick="clearAll()">Clear All</button>         
+          <a href="#" class="btn btn-small js-modal-close">Close</a> 
+        </li>
+        
+      </ul>
+   
+    </form>  
+    <span id="message"></span><br>
              <div class="aa-properties-info">
-               <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, alias!</h2>
+          <!--     <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, alias!</h2>
                <span class="aa-price">$65000</span>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptatibus veniam non voluptate, ipsa eius magni aliquid ratione sit, odio reprehenderit in quis repudiandae dolor.</p>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequatur, veritatis, ducimus in aliquam magnam voluptatibus ullam libero fugiat temporibus at, aliquid explicabo placeat eligendi, assumenda magni saepe eius consequuntur.</p>
@@ -196,7 +363,7 @@
                  <li>Children Play Ground</li>
                  <li>Comunity Center</li>
                  <li>Security System</li>
-               </ul>
+               </ul>-->
                <h4>Property Video</h4>
                <iframe width="100%" height="480" src="https://www.youtube.com/embed/CegXQps0In4" frameborder="0" allowfullscreen></iframe>
                <h4>Property Map</h4>
@@ -285,10 +452,10 @@
           </div>
         </div>
         <!-- Start properties sidebar -->
-        <div class="col-md-4">
-          <aside class="aa-properties-sidebar">
+        <!--<div class="col-md-4">-->
+         <!-- <aside class="aa-properties-sidebar">-->
             <!-- Start Single properties sidebar -->
-            <div class="aa-properties-single-sidebar">
+   <!--         <div class="aa-properties-single-sidebar">
               <h3>Properties Search</h3>
               <form action="">
                 <div class="aa-single-advance-search">
@@ -343,9 +510,9 @@
                   <input type="submit" value="Search" class="aa-search-btn">
                 </div>
               </form>
-            </div> 
+            </div> -->
             <!-- Start Single properties sidebar -->
-            <div class="aa-properties-single-sidebar">
+      <!--      <div class="aa-properties-single-sidebar">
               <h3>Populer Properties</h3>
               <div class="media">
                 <div class="media-left">
@@ -388,7 +555,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
   <!-- / Properties  -->
 
   <!-- Footer -->
