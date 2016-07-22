@@ -14,7 +14,7 @@ function addRealtorElement()
 	
 	var row = "<tr class=\"realtorRow\" >";
 	
-	row += "<td class=\"portraitBox\"><image width=\"270\" height=\"330\" class=\"portrait\" src=\"" + arguments[5] + "\"></td>";  //portrait
+	row += "<td class=\"portraitBox\"><div class=\"hidden-xs\"><image width=\"270\" height=\"330\" class=\"portrait\" src=\"" + arguments[5] + "\"></div></td>";  //portrait
 	
 	row += "<td class=\"realtorInfo\">";
 	row += "<h3 class=\"realtorName\">" + arguments[0] + "</h3>"; //NAME
