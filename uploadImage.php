@@ -55,12 +55,13 @@
 	{
 		$returnMsg = "Image Uploaded!";
 	}
+    mysqli_close($conn);
     
     echo 	"<script>
     			alert(\"".$returnMsg."\");
     			window.history.go(-2);
     		</script>";
     
-    mysqli_close($conn);
+   
     
 ?>
