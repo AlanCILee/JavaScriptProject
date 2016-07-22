@@ -28,7 +28,7 @@
         	alert("Please input Address");
         	return false;
     	}else{
-    	$.post("SearchAndDelete.php",
+    	$.post("sales/php/SearchAndDelete.php",
         	{
             	address: $("#address").val()
             }
@@ -49,7 +49,7 @@
         	return false;
     	}
 	else{
-    	$.post("SearchAndDelete.php",
+    	$.post("sales/php/SearchAndDelete.php",
         	{
             	del: $("#de").val(),
             	address2: addressVal
@@ -59,6 +59,13 @@
       }     
     }
 
+/*function update(){
+	window.history.go(-1);
+	$(document).ready(function(){
+		srch();
+		});
+}
+*/
 
 // ===========================     VALIDATION FOR NEW POST     ===================================
     var addressVal;
@@ -129,7 +136,6 @@
 	function clearBtn(){
 	
 	document.getElementById("newPost").style.visibility = "hidden";
-	srch();
 	}
 
              
@@ -143,6 +149,8 @@
  //       alert("It works.");
         clearAll();
 		 }  
+
+		 
 // =====================     CLEAR ALL excluding address label button activate      ==============================================
 
 	function clearAll() {

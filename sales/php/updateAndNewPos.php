@@ -16,7 +16,7 @@
 
 	      if(empty($errors)==true){
 	         move_uploaded_file($_FILES["myfile"]["tmp_name"],
-	                                "../php/" . $_FILES["myfile"]["name"]);
+	                                "sales/" . $_FILES["myfile"]["name"]);
 	                                
 
 	     echo "<script>document.getElementById('img').innerHTML = 'Upload successful!'</script>";
@@ -27,7 +27,7 @@
 	         print_r($errors);
 	      }
 	   }
-      
+ 
 // ==============================     create sql connection     ================================
 
     // Create connection
@@ -60,12 +60,16 @@
 
         $statement->bind_param("sssiissiis", $address, $city, $postal, $room, $bath, $category, $descp, $sqft, $price, $img);
         $statement->execute();
-	   //  echo "<script>document.getElementById('img').innerHTML = 'Upload successful!'</script>";        
+        
+        $conn->close();
        }
 
 //=================     Display new results after INSERT     ======================= 
  
-        echo '<script>srch();</script>';  
+  		echo "<script>
+			alert('New post uploaded successfully');
+			window.history.go(-1);
+		</script>";		     
   } 
 
 //==================     UPDATE action     =============================
@@ -126,20 +130,27 @@ if(isset($_POST['update']))
 
     
 		if (mysqli_query($conn, $sql)) {
-	    echo "Record updated successfully";
+	     echo "<script>document.getElementById('img').innerHTML = 'Update successful!'</script>";	
 	} 
 	else {
 	    echo "Error updating record: " . mysqli_error($conn);
 	}
 //================     Displays new results     =====================
-        echo '<script>srch();</script>';
 
-  }	
 		     $conn->close();
+
+  		echo "<script>
+			alert('Update successful');
+			window.history.go(-1);
+		</script>";		     
+  }	
+		     
+		
     // ===================     transfer display() results back to HTML  =======================
    	 function display($tag , $value) {
         echo $tag . $value ;
     }		     
-		     
+
+
 
  ?>

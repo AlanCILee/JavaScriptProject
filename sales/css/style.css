@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 html, body {
 
-  background-color: #e6e6e6;
+  background-color: #ffffff;
   font-size: 100%;
   font-family: 'Lato', sans-serif;
   font-weight: 400;
@@ -22,7 +22,7 @@ html {
 body {
 /*    display: table-cell;*/
     vertical-align: middle;
-}*/
+}
 
 div, textarea, input {
   -moz-box-sizing: border-box;
@@ -313,6 +313,9 @@ input[id="vali"]{
 #update{
 	height: 3em;
 }
+#clearForm{
+	height: 3em;
+}
 
 @media only screen and (max-width: 480px) {
   .pull-right {
@@ -387,7 +390,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
 tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
 
-
+div.dataTables_wrapper {
+       /* width: 800px;*/
+       overflow-x: auto;
+        /*margin: 0 auto;*/
+    }
 
 
 /*========= SuperSimple.html ==================*/
@@ -449,7 +456,7 @@ h2 {
   font-size: 0.8em;
 }
 */
-.modal-box {
+/*.modal-box {
   display: none;
   position: absolute;
   z-index: 1000;
@@ -460,15 +467,15 @@ h2 {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-clip: padding-box;
-}
+}*/
 /*@media (min-width: 500px) {
 
 .modal-box { width: 35%; } /*width of modal box*/
-}
+/*}*/
 /*#popup1{
 	width: 35%;
 }*/
-.modal-box header,
+/*.modal-box header,
 .modal-box .modal-header {
   padding: 1.25em 1.5em;
   border-bottom: 1px solid #ddd;
@@ -480,7 +487,7 @@ h2 {
 .modal-box .modal-header h4 { margin: 0; }
 
 .modal-box .modal-body { padding: 0 0; } /*gap between form and modelbox footer*/
-
+/*
 .modal-box footer,
 .modal-box .modal-footer {
   padding: 1em;
@@ -517,4 +524,4 @@ a.close:hover {
   -moz-transition: color 1s ease;
   transition: color 1s ease;
 }
-*/
+*

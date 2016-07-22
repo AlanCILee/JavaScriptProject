@@ -67,7 +67,9 @@
 		        die("Connection failed: " . mysqli_connect_error());
 			}  
 			
-			$conn->query("Delete From formTest where propertyID = $delete");   
+			$conn->query("Delete From formTest where propertyID = $delete");
+			
+
 		    
 
 // =======================    re-display records after DELETE    =====================
@@ -101,6 +103,7 @@
 			        echo "<strong>0 results</strong>";
 		        }
 		    echo '<script> clearAll();</script>';
+     		echo "<script>alert('ID deleted successfully');</script>";  
 		    } 
 
  
