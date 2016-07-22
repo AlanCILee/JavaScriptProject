@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Editing Team Page</title>
+    <title>Cool Real Estate | Realtors | Edit</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -243,7 +243,11 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-property-header-inner">
-            <h2>UPDATE REALTOR INFO</h2>
+            <h2>Realtors</h2>
+            <ol class="breadcrumb">
+            	<li class="active">Our Team</li>            
+            	<li class="active">Edit</li>
+          	</ol>
           </div>
         </div>
       </div>
@@ -266,7 +270,7 @@
                         	<! -- HERE -- >
                         	<div id="display">
                         		<p>CURRENTLY EDITING REALTOR ID: <input type="text" id="IDholder" value="" size="3" readonly="true"><button onclick="removethedude()">DELETE</button></p><div id="fbDel" class="feedback"></div>
-	                        	<table>
+	                        	<table class="displayTable">
 	                        		<tr class="uRow">
 	                        			<td class="leftLbl"><p>Name:</p></td>
 	                        			<td><input type="text" id="uName" value="" size="30"></td>
@@ -285,7 +289,7 @@
 	                       			</tr>
 	                       			<tr class="uRow">
 	                       				<td class="leftLbl"><p>About:</p></td>
-	                       				<td><textarea id="uBio" value="" rows="8" cols="100"></textarea></td>
+	                       				<td><textarea class="Bio" id="uBio" value="" rows="8" cols="100"></textarea></td>
 	                       			</tr>
 	                       		</table>
 	                       		<br><button id="btnUpdate" onclick="dothething()">UPDATE INFORMATION</button><div id="fbUpdate" class="feedback"></div>
