@@ -50,23 +50,31 @@
 	
 	function addthedude() 
 	{
-       
-    	// syntax: $.post(URL,data,callback);
-    	$.post("addNewRealtor.php",
-    		{
-    			name: $("#nName").val(),
-    			loc: $("#nLoc").val(),
-    			phone: $("#nPhone").val(),
-    			mail: $("#nMail").val(),
-    			bio: $("#nBio").val(),
-   			}
-    		, function recieve(msg) 
-    			{ 
-    				document.getElementById("fbAdd").innerHTML = msg;
-    			}
-    	);
-    	
-    	clearFields();      
+       	var yes = validate();
+       	
+       	if (yes)
+       	{
+	    	// syntax: $.post(URL,data,callback);
+	    	$.post("addNewRealtor.php",
+	    		{
+	    			name: $("#nName").val(),
+	    			loc: $("#nLoc").val(),
+	    			phone: $("#nPhone").val(),
+	    			mail: $("#nMail").val(),
+	    			bio: $("#nBio").val(),
+	   			}
+	    		, function recieve(msg) 
+	    			{ 
+	    				document.getElementById("fbAdd").innerHTML = msg;
+	    			}
+	    	);
+	    	
+	    	clearFields();	
+	    }
+	    else
+	    {
+	    	document.getElementById("fbAdd").innerHTML = "Please re-check required fields.";
+	    }  
     }
     
     function clearFields()
@@ -77,6 +85,35 @@
     	document.getElementById("nMail").value = "";  
     	document.getElementById("nBio").value = "";
     }
+    
+    function validate()
+    {
+    	var boolValid = true;
+    	
+    	if (document.getElementById("nName").value == "")
+    	{
+    		boolValid = false;
+    	}
+    	
+    	if (document.getElementById("nLoc").value == "")
+    	{
+    		boolValid = false;
+    	}
+    	
+    	if (document.getElementById("nPhone").value == "")
+    	{
+    		boolValid = false;
+    	}
+    	
+    	if (document.getElementById("nMail").value == "")
+    	{
+    		boolValid = false;
+    	}
+    	
+    	return boolValid;
+
+    }
+    
 	
 	</script>	
 
@@ -200,21 +237,22 @@
                         <div class="aa-blog-single-content">
                         	<! -- HERE -- >
                         	<div id="display">
+                        		<p id="required">Red labels indicate marks a requred field</p>
 	                        	<table>
 	                        		<tr class="uRow">
-	                        			<td class="leftLbl"><p>Name:</p></td>
+	                        			<td class="leftLbl"><p class="reqField">Name:</p></td>
 	                        			<td><input type="text" id="nName" value="" size="30"></td>
 	                        		</tr>
 	                        		<tr class="uRow">
-	                        			<td class="leftLbl"><p>Location:</p></td>
+	                        			<td class="leftLbl"><p class="reqField">Location:</p></td>
 	                        			<td><input type="text" id="nLoc" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
-	                       				<td class="leftLbl"><p>Phone:</p></td>
+	                       				<td class="leftLbl"><p class="reqField">Phone:</p></td>
 	                       				<td><input type="text" id="nPhone" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
-	                       				<td class="leftLbl"><p>Email:</p></td>
+	                       				<td class="leftLbl"><p class="reqField">Email:</p></td>
 	                       				<td><input type="text" id="nMail" value="" size="30"></td>
 	                       			</tr>
 	                       			<tr class="uRow">
@@ -223,7 +261,7 @@
 	                       			</tr>
 	                       		</table>
 	                       		<br><button onclick="addthedude()">ADD REALTOR</button><div id="fbAdd" class="feedback"></div>
-	                       		<p>Reminder that the uploading a realtor's portrait is done on the said realtor's edit page.</p>
+	                       		<p id="reminder">Reminder that the uploading a realtor's portrait is done on the said realtor's edit page.</p>
                         	</div>
                         	<br>
                         </div>                   

@@ -56,10 +56,10 @@
 		$returnMsg = "Image Uploaded!";
 	}
     
-//    echo 	"<script>
-//    			window.history.go(-1);
-//    			document.getElementById(\"fbUIMG\").innerHTML = \"".$returnMsg."\";
-//    		</script>";
+    echo 	"<script>
+    			alert(\"".$returnMsg."\");
+    			window.history.go(-2);
+    		</script>";
     
     mysqli_close($conn);
     

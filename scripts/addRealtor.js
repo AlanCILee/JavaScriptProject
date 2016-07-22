@@ -8,6 +8,8 @@ function addRealtorElement()
 	
 	//alert(arguments[0]);
 	var test = document.getElementById("logoutBtn");
+	var test2 = document.getElementById("loginText").textContent;
+	//alert(test2);
 	
 	var row = "<tr class=\"realtorRow\" >";
 	
@@ -20,7 +22,7 @@ function addRealtorElement()
 	row += "<p class=\"realtorEmail\">" + arguments[3] + "</p>"; //EMAIL
 	row += "<p class=\"realtorBio\">" + arguments[4] + "</p>"; //BIO
 	
-	if (test != null)
+	if (test2 == "hr@gmail.com [LOGOUT]")
 	{
 		row += "<form action=\"realtors-edit.html\" method=\"GET\"><input id=\"rID\" name=\"realtorID\" type=\"hidden\" value=\"" + arguments[6] + "\"><input type=\"submit\" value=\"EDIT\" class=\"editbtn\"></form>";
 		document.getElementById("addNew").innerHTML = "<form action=\"realtors-add.html\" ><input type=\"submit\" value=\"Add New Realtor\"></form>";

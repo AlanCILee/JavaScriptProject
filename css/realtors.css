@@ -64,7 +64,7 @@ p.realtorBio
 {
 	vertical-align: top;
 	font-weight: bold;
-	padding-right: 5px;
+	padding-right: 10px;
 }
 
 #file
@@ -103,4 +103,20 @@ p.realtorBio
 	text-align: center;
 	padding: 2px;
 	width: 300px;
+}
+
+.reqField
+{
+	color: red;
+}
+
+#required
+{
+	font-size: 10px;
+	color: red;
+}
+
+#reminder
+{
+	margin-top: 5px;
 }
