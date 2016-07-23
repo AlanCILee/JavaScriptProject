@@ -7,17 +7,6 @@
     $dbname = "s2016a_user18";
  
 
-//============================  SEARCH button clicked     ==============================
-/*if(isset($_POST["address"])){
- 	$address = $_POST["address"];
-    }*/
-  //  $tempAdd = $_POST["ad"];
-// ===================================     DELETE button clicked     ==========================    
-/*if(isset($_POST["del"])){
-    $delete = $_POST["del"];
-    $address2 = $_POST["address2"];
-	}*/
-
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     // Check connection
@@ -52,9 +41,9 @@
 		    }
 			else {
 			        echo "<strong>0 results</strong>";
+     				  echo "<script>alert('Address is not in the database');</script>";  			        
 			    }
 		 }
-	   /* mysqli_close($conn);*/		
 // ===================================     DELETE button clicked     ==========================    
 		
 		elseif(isset($_POST["del"]))
@@ -69,8 +58,6 @@
 			
 			$conn->query("Delete From formTest where propertyID = $delete");
 			
-
-		    
 
 // =======================    re-display records after DELETE    =====================
 		        

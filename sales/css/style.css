@@ -7,21 +7,9 @@ html, body {
   font-weight: 400;
      margin: auto;
 }
-/*  max-width: 510px;
-  min-width: 324px;*/
 
-/* 
-}
-html, body {
-    height: 100%;
-}
-
-html {
-   /* display: table;*/
- 
 
 body {
-/*    display: table-cell;*/
     vertical-align: middle;
 }
 
@@ -31,79 +19,21 @@ div, textarea, input {
   box-sizing: border-box;
 }
 
-/*.container {*/ /*for entire postings.html*/
- /* width: 500px;*/ /*the width of displaying the form*/
- /* margin: 200px auto 0px;*/ /*325px is the gap between the height of the Modal*/
- /* background-color: #fff;
-  border: 1px solid #cfcfcf;
-  border-bottom: 3px solid #ccc;
-}*/
+
 .updates{ /*for entire updates.html */
-/*  
-  max-width: 510px;
-  min-width: 324px;
-  */
+
   width: 100%;
   margin: 200px auto 0px; /*20px is the gap between the height of the Modal*/
   background-color: #fff;
   border: 1px solid #cfcfcf;
   border-bottom: 3px solid #ccc;
 }
-/*
-.row {
-  width: 100%;
-  margin: 0 0 1em 0;
-  padding: 0 2.5em;
-}
-.row.header {
-  padding: 1.5em 2.5em;
-  border-bottom: 1px solid #ccc;
-  background: url(http://niiiick.com/files/blur-city-1.jpg) left -80px;
-  color: #fff;
-}
-.row.body {
-  padding: .5em 2.5em 1em;
-}*/
+
 
 .pull-right {
   float: right;
 }
-/*
-.search{
-  position: relative;
-  left: 15%;	
-}
-.del {
-  position: relative;
-  left: 30%;
-}
-.firstcell {
-  position: relative;
-  left: 0;
-}
-.secondcell {
-  position: relative;
-  left: 10%;
-}
-.thirdcell {
-  position: relative;
-  left: 20%;
-}
-.fourthcell {
-  position: relative;
-  left: 30%;
-}
-.ct{
-  position: relative;
-  left: 0;	}
-.sfcell{
-  position: relative;
-  left: 10%;	
-}
-.pricecell{
-  position: relative;
-  left: 20%;
-}*/
+
 
 h1 {
   font-family: 'Lato', sans-serif;
@@ -162,7 +92,7 @@ h3 {
   border-bottom-color: #8c8c8c;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
- /* width: 30%;    If button SEARCH and DELETE width is out..       */
+  width: 100%;    /*If button SEARCH and DELETE width is out..  */
   margin-top: 3px;     
 }
 .button:hover {
@@ -176,15 +106,8 @@ h3 {
   background-color: #5f7db6;
 }
 
-#clearForm, #newPost, #vali, #update {
-  width: 100%;	
-}
-/*  width: 100%;*/    /*If button SEARCH and DELETE width is out..  */
-
-
 form {
   max-width: 100%;
-/*  display: inline-block;*/
 }
 form ul {
   margin: 0;
@@ -246,12 +169,7 @@ form textarea {
   width: 100%;
   color: #555;
 }
-/*#pid {
-  border: 1px solid #ccc;
-  padding: 7px 10px;
-  width: 20%;
-  color: #555;
-}*/
+
 #file {
   border: 1px solid #ccc;
   padding: 7px 11px;
@@ -308,22 +226,37 @@ input[id="vali"]{
 	top:6px; 
 	left:48%; 
 }
+#search{
+	height: 3em;
+	width: 120px;
+}
+#delete{
+	height: 3em;
+	width: 120px;
+}
 #clear{
 	height: 3em;
+	width: 150px;
+/*	width: 5em;*/
 }
 #vali{
-	height: 3em;
-	/*width: 12.25em;*/
-	width: 195px;
+	height: 4em;
+	width: 18em;
+	/*width: 200px;*/
 }
 #newPost{
-	height: 3em;
+	height: 4em;
+	/*width: 150px;*/
+	width: 12em;
 }
 #update{
-	height: 3em;
+	height: 4em;
+/*	width: 180px;*/
+	width: 12em;
 }
 #clearForm{
-	height: 3em;
+	height: 4em;
+	width: 12em;	
 }
 
 @media only screen and (max-width: 480px) {
@@ -338,7 +271,6 @@ input[id="vali"]{
   label {
     width: 100%;
     display: inline-block;
-    /*float: left;*/
     clear: both;
   }
 
@@ -363,9 +295,10 @@ input[id="vali"]{
   }
 }
 /*===============    updates.htmll table display    ========================*/
-/*to fix the width of the table http://www.w3schools.com/tags/att_td_width.asp*/
 
-table { 
+
+table.result { 
+text-align: center;
 display: inline-table;
 color: #333;
 font-family: Helvetica, Arial, sans-serif;
@@ -373,22 +306,25 @@ width: 100%;
 margin-left:0 1%; 
 border-collapse: 
 collapse; border-spacing: 0; 
+
 }
 
 td, th { 
 border: 1px solid #ddd;
-height: 30px; 
 transition: all 0.3s;  /* Simple transition for hover effect */
-text-align: left;
 }
 
 th {
+
 background: #DFDFDF;  /* Darken header a bit */
 font-weight: bold;
+height: 40px;
 }
 
 td {
 background: #FAFAFA;
+text-align: center;
+height: 30px; 
 }
 
 /* Cells in even rows (2,4,6...) are one color */ 
@@ -399,138 +335,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
 tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
 
-div.dataTables_wrapper {
-       /* width: 800px;*/
-       overflow-x: auto;
-        /*margin: 0 auto;*/
-    }
-
-
-/*========= SuperSimple.html ==================*/
-
-/*html {
-  font-family: "roboto", helvetica;
-  position: relative;
-  height: 100%;
-  font-size: 100%;
-  line-height: 1.5;
-  color: #444;
-}*/
 
 h2 {
   margin: 1.75em 0 0;
   font-size: 5vw;
-}
-
-/*h3 { font-size: 1.3em; }
-*/
-/*.v-center {
-  height: 100vh;
-  width: 100%;
-  display: table;
-  position: relative;
-  text-align: center;
-}
-
-.v-center > div {
-  display: table-cell;
-  vertical-align: middle;
-  position: relative;
-  top: -10%;
-}*/
-/*
-.btn {
-  font-size: 3vmin;
-  padding: 0.75em 1.5em;
-  background-color: #fff;
-  border: 1px solid #bbb;
-  color: #333;
-  text-decoration: none;
-  display: inline;
-  border-radius: 4px;
-  -webkit-transition: background-color 1s ease;
-  -moz-transition: background-color 1s ease;
-  transition: background-color 1s ease;
-}
-
-.btn:hover {
-  background-color: #ddd;
-  -webkit-transition: background-color 1s ease;
-  -moz-transition: background-color 1s ease;
-  transition: background-color 1s ease;
-}
-
-.btn-small {
-  padding: .75em 1em;
-  font-size: 0.8em;
-}
-*/
-/*.modal-box {
-  display: none;
-  position: absolute;
-  z-index: 1000;
-  width: 98%;
-  background: white;
-  border-bottom: 1px solid #aaa;
-  border-radius: 4px;
-  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-clip: padding-box;
-}*/
-/*@media (min-width: 500px) {
-
-.modal-box { width: 35%; } /*width of modal box*/
-/*}*/
-/*#popup1{
-	width: 35%;
-}*/
-/*.modal-box header,
-.modal-box .modal-header {
-  padding: 1.25em 1.5em;
-  border-bottom: 1px solid #ddd;
-}
-
-.modal-box header h3,
-.modal-box header h4,
-.modal-box .modal-header h3,
-.modal-box .modal-header h4 { margin: 0; }
-
-.modal-box .modal-body { padding: 0 0; } /*gap between form and modelbox footer*/
-/*
-.modal-box footer,
-.modal-box .modal-footer {
-  padding: 1em;
-  border-top: 1px solid #ddd;
-  background: rgba(0, 0, 0, 0.02);
-  text-align: right;
-}
-
-.modal-overlay {
-  opacity: 0;
-  filter: alpha(opacity=0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 900;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3) !important;
-}
-
-a.close {
-  line-height: 1;
-  font-size: 1.5em;
-  position: absolute;
-  top: 5%;
-  right: 2%;
-  text-decoration: none;
-  color: #bbb;
-}
-
-a.close:hover {
-  color: #222;
-  -webkit-transition: color 1s ease;
-  -moz-transition: color 1s ease;
-  transition: color 1s ease;
-}
-*

@@ -74,29 +74,29 @@
 
 //==================     UPDATE action     =============================
   
-if(isset($_POST['update'])) 
+ elseif(isset($_POST['update']) && !empty($_POST['address'])) 
   {  
 
 	$fieldsForUpdate = [];
 
     if(!empty($_POST["address"])) {
-    	$address = $_POST["address"];
-    	$fieldsForUpdate[] = "address = '$address'";
+    		$address = $_POST["address"];
+    		$fieldsForUpdate[] = "address = '$address'";
 	}
 	
 	if(!empty($_POST["city"])) {
-    	$city = $_POST["city"];
-    	$fieldsForUpdate[] = "city = '$city'";
+    		$city = $_POST["city"];
+    		$fieldsForUpdate[] = "city = '$city'";
 	}
 
 	if(!empty($_POST["postal"])) {
-    	$postal = $_POST["postal"];
-    	$fieldsForUpdate[] = "postalCode = '$postal'";
+    		$postal = $_POST["postal"];
+    		$fieldsForUpdate[] = "postalCode = '$postal'";
 	}
 
 	if(!empty($_POST["rooms"])){
-    	$room = $_POST["rooms"];
-    	$fieldsForUpdate[] = "roomCnt = $room";
+    		$room = $_POST["rooms"];
+    		$fieldsForUpdate[] = "roomCnt = $room";
 	}
 	
 	if(!empty($_POST["baths"])){
@@ -106,19 +106,19 @@ if(isset($_POST['update']))
 	
 	if(!empty($_POST["category"])){
   		$category = $_POST["category"];
-     	$fieldsForUpdate[] = "category = '$category'";
+     		$fieldsForUpdate[] = "category = '$category'";
 	}
 	if(!empty($_POST["description"])){
-    	$descp = $_POST["description"];
-     	$fieldsForUpdate[] = "description = '$descp'";
+    		$descp = $_POST["description"];
+     		$fieldsForUpdate[] = "description = '$descp'";
 	}
 	if(!empty($_POST["squareF"])){
-	    $sqft = $_POST["squareF"];
-     	$fieldsForUpdate[] = "sqFt = $sqft";
+	      $sqft = $_POST["squareF"];
+     		$fieldsForUpdate[] = "sqFt = $sqft";
 	}
 	if(!empty($_POST["Price"])){
-	    $price = $_POST["Price"];
-     	$fieldsForUpdate[] = "price = $price";
+	      $price = $_POST["Price"];
+     		$fieldsForUpdate[] = "price = $price";
 	}
 	if(!empty($_FILES['myfile']['name'])){
 	    $fieldsForUpdate[] = "imgPath = '$img'";
@@ -130,20 +130,31 @@ if(isset($_POST['update']))
 
     
 		if (mysqli_query($conn, $sql)) {
-	     echo "<script>document.getElementById('img').innerHTML = 'Update successful!'</script>";	
+	    // echo "<script>document.getElementById('img').innerHTML = 'Update successful!'</script>";	
+	
 	} 
 	else {
-	    echo "Error updating record: " . mysqli_error($conn);
-	}
-//================     Displays new results     =====================
+		echo "<script>
+  			alert('Please enter an address for update');
+  			window.history.go(-1);
+  			</script>";
 
-		     $conn->close();
+/*	    echo "Error updating record: " . mysqli_error($conn);*/
+	}
+
+		$conn->close();
+//=================     Display new results after INSERT     ======================= 
 
   		echo "<script>
-			alert('Update successful');
-			window.history.go(-1);
-		</script>";		     
+  			alert('Updating.....');
+  			window.history.go(-1);
+			</script>";		     
   }	
+   	
+  	else{
+		echo "<script>
+  			window.history.go(-1);
+  			</script>";  	}
 		     
 		
     // ===================     transfer display() results back to HTML  =======================

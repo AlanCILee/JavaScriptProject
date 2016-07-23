@@ -1,4 +1,61 @@
 
+	$(document).ready(function(){
+		$("#aa-menu-area").load("index.html #topNavigation");
+		$("#aa-header").load("index.html #headerContainer");
+		$("#aa-footer").load("index.html #footerContents");		
+		var $div = $('<div>');
+		$div.load('index.html #myModal', function(){
+			$(this).appendTo("footer");
+		});
+		$.getScript("js/navigation.js");
+				
+
+ //============================     hide NEW POST submit button     =====================================
+	clearAll();
+   if(document.getElementById("address").value){
+   	srch();
+   }
+   
+    document.getElementById("newPost").style.visibility='hidden'; //hide new post button
+	 
+    var options = { 
+    beforeSend: function() 
+    {
+        $("#progress").show();
+        $("#bar").width('0%');
+        $("#message").html("");
+        $("#percent").html("0%");
+    },
+    uploadProgress: function(event, position, total, percentComplete) 
+    {
+        $("#bar").width(percentComplete+'%');
+        $("#percent").html(percentComplete+'%');
+ 
+    },
+    success: function() 
+    {
+        $("#bar").width('100%');
+        $("#percent").html('100%');
+ 
+    },
+    complete: function(response) 
+    {
+        $("#message").html("<font color='green'>"+response.responseText+"</font>");
+    },
+
+    error: function()
+    {
+        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
+ 
+    }
+ 
+}; 
+ 
+     $("#myForm").ajaxForm(options);
+
+
+	});
+
 //=========================     allow the user to view image before upload     ========================
 
 	function readURL(input) {
@@ -70,6 +127,7 @@
 // ===========================     VALIDATION FOR NEW POST     ===================================
     var addressVal;
 	function validateNewPost() {
+		
 		addressVal = $("#address").val();
 	
 	var isValid =true;
@@ -132,21 +190,17 @@
     }	
 //==============================     CLEAR VALUES on NEW POST clicked     ===========================
 
-
 	function clearBtn(){
 	
 	document.getElementById("newPost").style.visibility = "hidden";
 	}
 
-             
-	
-          
+
 //=================     Display results and CLEAR ALL     ==================================================== 
             
     function display(dataFromtheServer) {
     	$("#result tbody > tr").remove();
-        $("#result tbody").empty().append(dataFromtheServer); //.empty - empty the previous daa before appending new results
- //       alert("It works.");
+        $("#result tbody").empty().append(dataFromtheServer);
         clearAll();
 		 }  
 
@@ -165,6 +219,6 @@
 	document.getElementById('sf').value ='';
 	document.getElementById('price').value ='';
 	document.getElementById('file').value = '';
-
+	document.getElementById('img').innerHTML = '';
 	}
 	

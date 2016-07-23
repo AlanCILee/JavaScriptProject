@@ -47,62 +47,6 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 
 	<script>
-	$(document).ready(function(){
-		$("#aa-menu-area").load("index.html #topNavigation");
-		$("#aa-header").load("index.html #headerContainer");
-		$("#aa-footer").load("index.html #footerContents");		
-		var $div = $('<div>');
-		$div.load('index.html #myModal', function(){
-			$(this).appendTo("footer");
-		});
-		$.getScript("js/navigation.js");
-				
-
- //============================     hide NEW POST submit button     =====================================
-
-   if(document.getElementById("address").value){
-   	srch();
-   }
-   
-    document.getElementById("newPost").style.visibility='hidden'; //hide new post button
-	 
-    var options = { 
-    beforeSend: function() 
-    {
-        $("#progress").show();
-        $("#bar").width('0%');
-        $("#message").html("");
-        $("#percent").html("0%");
-    },
-    uploadProgress: function(event, position, total, percentComplete) 
-    {
-        $("#bar").width(percentComplete+'%');
-        $("#percent").html(percentComplete+'%');
- 
-    },
-    success: function() 
-    {
-        $("#bar").width('100%');
-        $("#percent").html('100%');
- 
-    },
-    complete: function(response) 
-    {
-        $("#message").html("<font color='green'>"+response.responseText+"</font>");
-    },
-
-    error: function()
-    {
-        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
- 
-    }
- 
-}; 
- 
-     $("#myForm").ajaxForm(options);
-
-
-	});
 
 
 	</script>	
@@ -177,20 +121,20 @@
       <div class="row">
 
         <li >
-         <div class="col-md-6 col-xs-12">
+         <span class="col-md-6 col-xs-12">
           <p class="search">
            <label>Address for Search/New Post  <span class="req">*</span></label>
              <input name="address" id="address" type="text" placeholder="201-3399 Example Street" />
              &nbsp;<!--<input class="button btn-search"  onclick="srch()" value="Search">-->
-             <button class="button btn-search"  onclick="srch()" type="button">Search</button>
+             <button class="button btn-search" id="search"  onclick="srch()" type="button">Search</button>
           </p>
-          </div>
+          </span>
           <div class="col-md-6 col-xs-12">
           <p class="del">
             <label>ID to Delete Post</label>
             <input name="delete" id="de"  type="number" placeholder="2" />      
              &nbsp;<!--<input class="button btn-search"  onclick="del()" value="Delete">-->
-             <button class="button btn-search"  onclick="del()" type="button">Delete</button>
+             <button class="button btn-search" id="delete"  onclick="del()" type="button">Delete</button>
           </p>
           </div>
         </li>           
@@ -200,7 +144,7 @@
        
 <!--       <div class="dataTables_wrapper">-->
        <div class="table-responsive">
-        <table id="result">
+        <table class="result" id="result">
             <thead>
                 <th>ID</th>
                 <th>Address</th>
@@ -296,16 +240,16 @@
 
    		<div class="row">
         <li>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-2 col-sm-6 col-xs-12">
          <button class="button btn-search"  type="submit" name="update"  id="update">Update</button>    
          </div>
          <div class="col-md-3 col-sm-6 col-xs-12">   
-    	 <input class="button btn-search" id="vali" onclick="validateNewPost()" value="Validate New Post">
+    	 <button class="button btn-search" id="vali" type="button" onclick="validateNewPost()">Validate New Post</button>
 	   </div>
-	   <div class="col-md-3 col-sm-6 col-xs-12">
+	   <div class="col-md-2 col-sm-6 col-xs-12">
 	  	<button class="button btn-search" type="submit" id="newPost" name="newPost"  onClick ="clearBtn()">New Post</button>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
+		<div class="col-md-1 col-sm-6 col-xs-12">
          <button class="button btn-search" id="clearForm"  onClick="clearAll()" type="button">Clear All</button>         
 		 </div>
         </li>
