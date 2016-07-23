@@ -41,7 +41,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "UPDATE NEWS SET imgsource='".$img."' WHERE agent_ID={$id}";
+    $sql = "UPDATE NEWSTEST SET imgsource='".$img."' WHERE agent_ID={$id}";
 
     //Do thr query
 	if (mysqli_query($conn, $sql))
