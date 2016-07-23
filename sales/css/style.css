@@ -163,7 +163,6 @@ h3 {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
  /* width: 30%;    If button SEARCH and DELETE width is out..       */
-  width: 100%;    /*If button SEARCH and DELETE width is out..  */
   margin-top: 3px;     
 }
 .button:hover {
@@ -176,6 +175,12 @@ h3 {
 .button.btn-search:hover {
   background-color: #5f7db6;
 }
+
+#clearForm, #newPost, #vali, #update {
+  width: 100%;	
+}
+/*  width: 100%;*/    /*If button SEARCH and DELETE width is out..  */
+
 
 form {
   max-width: 100%;
