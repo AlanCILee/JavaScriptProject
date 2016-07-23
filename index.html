@@ -83,6 +83,7 @@
 				$(startID+i+" .date").html(pInfo[i]['Date']);
 				$(startID+i+" .image").attr("src",pInfo[i]['Image']);
 				$(startID+i+" .description").html(pInfo[i]['Description'].substring(0,80));
+				$(startID+i+" .author").html("By "+pInfo[i]['Author']);
 				$(startID+i+" .title").html(pInfo[i]['Title']);	
 			}			
 		}				 	
