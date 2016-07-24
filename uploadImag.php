@@ -3,36 +3,42 @@
 	$username = "s2016a_user14";
     $password = "s2016a_user14";
     $dbname = "s2016a_user14";
-    $errors = array();
 
-
+	$returnMsg = "Upload Failed!";
 	if(isset($_FILES['myfile']))
 	{
-
+		$errors = array();
         $file_name = $_FILES['myfile']['name'];
         $file_size = $_FILES['myfile']['size'];
         $file_tmp = $_FILES['myfile']['tmp_name'];
         $file_type = $_FILES['myfile']['type'];
 
 
-        //
+      /*   if($file_size > 2097152){
+            $errors[]='File size must not exceed 2 MB';
+         }*/
+        // if $errors is EMPTY - upload the img file
         if(empty($errors) == true)
         {
         	move_uploaded_file($_FILES["myfile"]["tmp_name"], "img/news/" . $_FILES["myfile"]["name"]);
+
+            // echo "Uploaded File :".$_FILES["myfile"]["name"] . "<br>";
+
+        	//echo "<script>document.getElementById('img').innerHTML = 'Upload successful!'</script>";
 
             $img = "img/news/" . $_FILES['myfile']['name']; //store image path for sql upload
 
         }
         else
         {
-
+        	print_r($errors);
         }
 	}
 
-	//get id
+	//need the ID
 	if (isset($_POST["id"]))
     {
-		$id = intval($_POST["id"]);
+		$rID = intval($_POST["id"]);
 	}
 
 	// Create connection
@@ -42,19 +48,20 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "UPDATE NEWS SET Image='".$img."' WHERE newsID={$id}";
+    $sql = "UPDATE NEWSTEST SET Image='".$img."' WHERE newsID={$rID}";
+	//$result = mysqli_query($conn, $sql);
 
-    //Do thr query
 	if (mysqli_query($conn, $sql))
 	{
-
+		$returnMsg = "Image Uploaded!";
 	}
-    echo "<script>
-    alert('Upload Worked');
-    window.history.go(-1);
-    </script>";
-
-
     mysqli_close($conn);
+
+    echo 	"<script>
+    			alert(\"".$returnMsg."\");
+    			window.history.go(-2);
+    		</script>";
+
+
 
 ?>

@@ -6,7 +6,7 @@
 
       <!--Eventaully add a SessionChecked to see if logged in-->
       <!--Session-->
-      
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
@@ -45,36 +45,36 @@
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$.getScript("js/navigation.js");
 		//^^pre loaded stuff
-		
-		//Do the code. 
+
+		//Do the code.
 		$.ajax({
 		    url:"getDBInfo.php",
-		    data : 
+		    data :
 		    {//change query when used
-    			query : "SELECT title, description * From NEWS ", 
+    			query : "SELECT title, description * From NEWS ",
   			},
 		    type:"POST",
 		    dataType:"json",
 		    success:function()
-		    {//you can change this functions name			         	
+		    {//you can change this functions name
 				generateSales(0, "#sales");
-		    } 	    
+		    }
 		});
-	
+
 		//uh change function name when I use it and the attributes
 		function generateSales(propertyCnt, startID)
 		{
 			for (var i=0;i<propertyCnt;i++)
 			{//it loops so it can add to multi boxs
 			//the # are his <p> tag ids
-			
+
 			//either a it works b im sadden
 				$(startID+i+"#title").html(pInfo[i]['title']);
 				$(startID+i+"#description").html(pInfo[i]['description']);
-		
-			}			
-		}	
-		
+
+			}
+		}
+
 				/* test example
 		function generateSales(pInfo, propertyCnt, startID){
 			for (var i=0;i<propertyCnt;i++)
@@ -86,13 +86,13 @@
 				$(startID+i+" #sqFt").html(pInfo[i]['sqFt']+"SQ FT");
 				$(startID+i+" #imgPath").attr("src",pInfo[i]['imgPath']);
 				$(startID+i+" #description").html(pInfo[i]['description']+"SQ FT");
-				$(startID+i+" #title").html(pInfo[i]['address']+", "+pInfo[i]['city']);			
-			}			
-		}	
+				$(startID+i+" #title").html(pInfo[i]['address']+", "+pInfo[i]['city']);
+			}
+		}
 		*/
 	});
-	
-	
+
+
 
 
 	</script>

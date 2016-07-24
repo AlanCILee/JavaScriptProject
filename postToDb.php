@@ -16,7 +16,7 @@
     $result = $conn->query($sql) or die("Query: ($sql) [problem]");
 
    	$conn->close();   */
-   	
+
    	$test = "is it working";
 
     $servername = "ec2-52-201-212-193.compute-1.amazonaws.com";
@@ -43,13 +43,13 @@
 
 
 
-    $query = "UPDATE NEWSTEST SET title='".$title."', author:='".$author."', date='".$date."', description='".$description."' WHERE newsID={$id}";
-     
+    $query = "UPDATE NEWS SET title='".$title."', author:='".$author."', date='".$date."', description='".$description."' WHERE newsID={$id}";
+
     if (mysqli_query($conn, $query))
 	{
 		$test = "working";
 	}
-	
+
 	echo $test;
 
 
