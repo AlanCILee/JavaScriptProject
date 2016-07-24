@@ -18,41 +18,6 @@
    
     document.getElementById("newPost").style.visibility='hidden'; //hide new post button
 	 
-    var options = { 
-    beforeSend: function() 
-    {
-        $("#progress").show();
-        $("#bar").width('0%');
-        $("#message").html("");
-        $("#percent").html("0%");
-    },
-    uploadProgress: function(event, position, total, percentComplete) 
-    {
-        $("#bar").width(percentComplete+'%');
-        $("#percent").html(percentComplete+'%');
- 
-    },
-    success: function() 
-    {
-        $("#bar").width('100%');
-        $("#percent").html('100%');
- 
-    },
-    complete: function(response) 
-    {
-        $("#message").html("<font color='green'>"+response.responseText+"</font>");
-    },
-
-    error: function()
-    {
-        $("#message").html("<font color='red'> ERROR: unable to upload files</font>");
- 
-    }
- 
-}; 
- 
-     $("#myForm").ajaxForm(options);
-
 
 	});
 
@@ -72,8 +37,6 @@
             }
         }
         
-
-
 
 // =========================== SEARCH address and displays results  ========================
     var addressVal;
@@ -116,13 +79,6 @@
       }     
     }
 
-/*function update(){
-	window.history.go(-1);
-	$(document).ready(function(){
-		srch();
-		});
-}
-*/
 
 // ===========================     VALIDATION FOR NEW POST     ===================================
     var addressVal;
@@ -182,7 +138,7 @@
         	alert("Please select an Image");
         	isValid =  false;
     	}
-    	if(isValid)
+    		if(isValid)
     	{
 		alert("All inputs verified, please click on NEW POST to proceed");
 		document.getElementById("newPost").style.visibility = "visible";
