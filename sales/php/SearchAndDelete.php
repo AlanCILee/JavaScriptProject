@@ -2,9 +2,9 @@
 /*http://ec2-52-201-212-193.compute-1.amazonaws.com/phpmyadmin/*/
 
     $servername = "ec2-52-201-212-193.compute-1.amazonaws.com";
-    $username = "s2016a_user18";
-    $password = "s2016a_user18";
-    $dbname = "s2016a_user18";
+    $username = "s2016a_user14";
+    $password = "s2016a_user14";
+    $dbname = "s2016a_user14";
  
 
     // Create connection
@@ -21,7 +21,7 @@
 		 	
 		 $address = $_POST["address"];
 		 
-		 $sql = "Select propertyID, address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath From formTest ";
+		 $sql = "Select propertyID, address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath From Sales ";
 		 $sql .= " where address ='" . $address . "' order by propertyID asc ";
 
 		 $result = mysqli_query($conn, $sql) or die("Query: ($sql) [problem]");
@@ -56,12 +56,12 @@
 		        die("Connection failed: " . mysqli_connect_error());
 			}  
 			
-			$conn->query("Delete From formTest where propertyID = $delete");
+			$conn->query("Delete From Sales where propertyID = $delete");
 			
 
 // =======================    re-display records after DELETE    =====================
 		        
-		 $sql = "Select propertyID, address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath From formTest ";
+		 $sql = "Select propertyID, address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath From Sales ";
 		 $sql .= " where address ='" . $address2 . "' order by propertyID asc ";
 // and EMPLOYEE NUMBER
 

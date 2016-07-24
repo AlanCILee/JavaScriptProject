@@ -298,7 +298,6 @@ input[id="vali"]{
 
 
 table.result { 
-text-align: center;
 display: inline-table;
 color: #333;
 font-family: Helvetica, Arial, sans-serif;
@@ -323,7 +322,7 @@ height: 40px;
 
 td {
 background: #FAFAFA;
-text-align: center;
+text-align: left;
 height: 30px; 
 }
 
