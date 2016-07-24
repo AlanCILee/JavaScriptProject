@@ -1,9 +1,9 @@
 <?php
 /*http://ec2-52-201-212-193.compute-1.amazonaws.com/phpmyadmin/*/
     $servername = "ec2-52-201-212-193.compute-1.amazonaws.com";
-    $username = "s2016a_user18";
-    $password = "s2016a_user18";
-    $dbname = "s2016a_user18";
+    $username = "s2016a_user14";
+    $password = "s2016a_user14";
+    $dbname = "s2016a_user14";
   
  // ==================       img input        =======================     
 	if(isset($_FILES['myfile'])){
@@ -51,7 +51,7 @@
     $sqft = $_POST["squareF"];
     $price = $_POST["Price"];
 
-    $sql = "INSERT INTO formTest (address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath) " ;
+    $sql = "INSERT INTO Sales (address, city, postalCode, roomCnt, bathCnt, category, description, sqFt,price, imgPath) " ;
     $sql .="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) " ;
     
     
@@ -126,7 +126,7 @@
 
 		$commaSeparatedFieldsForUpdate = implode(",", $fieldsForUpdate);
 
-		$sql = "UPDATE formTest set " . $commaSeparatedFieldsForUpdate . " WHERE address='$address' ";
+		$sql = "UPDATE Sales set " . $commaSeparatedFieldsForUpdate . " WHERE address='$address' ";
 
     
 		if (mysqli_query($conn, $sql)) {
