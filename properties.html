@@ -60,13 +60,16 @@
 		var sortOption = 1; //1: Latest, 2:Price High, 3:Price Low
 		var where ="";
 		
+		$("#prevClick").addClass("disabled");
+		$("#nextClick").addClass("disabled");
+		
 		loadProperties();
 			
 		$("#sortOption").change(function(){
 			sortOption = $("#sortOption").val();
         	
         	pageBlock = 0;		 
-			activePage = 1;		
+			activePage = 1;				
 			loadProperties();
     	});
 			
@@ -79,8 +82,6 @@
 			}else if (sortOption == 3){
 				queryStr = "SELECT * From Sales "+where+" order by price asc limit "+startProperty+" ,31";
 			}
-			
-			where ="";
 			
 			$.ajax({
 			    url:"getDBInfo.php",
@@ -96,11 +97,21 @@
          			
          			if(elementCount != 0){
          				generateSales(msg);
-						pageControl();				
+						pageControl();	
+						
+						if(elementCount > 30)
+							$("#nextClick").removeClass("disabled");
+						else	
+							$("#nextClick").addClass("disabled");						
+						if(pageBlock > 0)
+							$("#prevClick").removeClass("disabled");
+						else
+							$("#prevClick").addClass("disabled");										
          			}else{
          				alert ("Sorry, There is no property");
-         			}
-
+         				$("#nextClick").addClass("disabled");
+         				$("#prevClick").addClass("disabled");	
+         			}  			
 				}		     	    
 			});
 
@@ -108,7 +119,7 @@
 		
 		function generateSales(msg){
 			var startElement = (activePage-1) * 6;
-			
+							
 			$("#propertyList").html("");
 			
 			for (var i=startElement; i<(startElement+6) && i<elementCount ;i++){
@@ -157,7 +168,7 @@
 				pageBlock--;	
 				activePage = 5;
 				loadProperties();	
-			}	
+			}				
 		});	
 		
 		$("#nextClick").click(function(){
@@ -165,7 +176,7 @@
 				pageBlock++;	
 				activePage = 1;	
 				loadProperties();			
-			}
+			}			
 		});
 		
 		$("#p1").click(function(){
@@ -248,6 +259,7 @@
 	cursor: pointer;
 	cursor: hand;
 }
+
 	
 </style>
   </head>
@@ -502,7 +514,7 @@
               <nav>
                 <ul class="pagination">
                   <li id="prevClick">
-                    <a aria-label="Previous">
+                    <a aria-label="Previous" id="prevB">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>

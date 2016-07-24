@@ -1486,6 +1486,19 @@ img {
 #aa-properties .aa-properties-content .aa-properties-content-bottom .pagination .active a {
   color: #fff;
 }
+
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > span,
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > span:hover,
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > span:focus,
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > a,
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > a:hover,
+#aa-properties .aa-properties-content .aa-properties-content-bottom .pagination > .disabled > a:focus {
+  color: #fff;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+
 #aa-properties .aa-properties-sidebar {
   background-color: #f8f8f8;
   display: inline;
@@ -3457,3 +3470,5 @@ img {
   }
   
 }
+
+

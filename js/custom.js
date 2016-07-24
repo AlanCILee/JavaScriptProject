@@ -203,7 +203,7 @@ jQuery(function($){
             },
             snap: true,
             connect: true,
-            start: [1000, 1800]
+            start: [0, 3000]
         });
         // for value print
         var skipValues = [
@@ -234,7 +234,7 @@ jQuery(function($){
             },
             snap: true,
             connect: true,
-            start: [300000, 1000000]
+            start: [0, 5000000]
         });
         // for value print
         var skipValues2 = [
