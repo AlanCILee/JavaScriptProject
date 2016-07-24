@@ -206,7 +206,7 @@
 		$("#searchBtn").click(function(){
 			var city = $("#searchCity").val();
 			var type ="";
-
+	
 			switch($("#searchType").val()){
 				case '1':
 					type = "House";				
@@ -240,7 +240,7 @@
 			
 			where = "WHERE (city LIKE '%"+ city + "%') && (category LIKE '" + type + "') && (sqFt BETWEEN "
 			             + SpaceLow + " AND " + SpaceHigh + ") && (price BETWEEN " + priceLow + " AND " + priceHigh + ")";	
-
+			             
         	pageBlock = 0;		 
 			activePage = 1;	
 			loadProperties();             		
@@ -539,7 +539,7 @@
             <!-- Start Single properties sidebar -->
             <div class="aa-properties-single-sidebar">
               <h3>Properties Search</h3>
-              <form>
+              <!--<form>-->
                 <div class="aa-single-advance-search">
                   <input id="searchCity" type="text" placeholder="Type Your City">
                 </div>
@@ -590,11 +590,11 @@
                   </div>      
                 </div>
                 <div class="aa-single-advance-search">
-              <!--  <input id="searchBtn" type="submit" value="Search" class="aa-search-btn">-->
+                <!--<input id="searchBtn" value="Search" class="aa-search-btn">-->
                 <!--<input type="submit" id="searchBtn" value="Search" class="aa-search-btn">-->
                 <button id="searchBtn" class="aa-search-btn">Search</button>
                 </div>
-              </form>
+              <!--</form>-->
             </div> 
             <!-- Start Single properties sidebar -->
 <!--            <div class="aa-properties-single-sidebar">
