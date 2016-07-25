@@ -55,21 +55,7 @@
 			$.getScript("js/navigation.js");
 		});
 
-			function editData()
-			{
-				var title = document.getElementById("title").value;
-				var author = document.getElementById("author").value;
-				var date = document.getElementById("date").value;
-				var desc = document.getElementById("description").value;
-				var image = document.getElementById("image").value;
-				var id = document.getElementById("id").value;
 
-				//test worked
-				//document.getElementById("test").innerHTML = title;
-
-				//alert("Working before")
-
-			}
 
 			function updateNews()
 			{
@@ -387,6 +373,7 @@
 
 				<!--	As long as your within the domain of this form its submit sends all data-->
 				<div id="formHolder">
+					<!--onsubmit runs my getID which then puts data into hidden input field-->
 						<form id="imgUp" method="post" onsubmit="javascript:getID()" action="newsuploadimg.php" enctype="multipart/form-data" >
 							<p>Upload New Picture:</p>
 							<!--NOTE: We are sending these to php -->
