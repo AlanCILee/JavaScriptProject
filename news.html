@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,8 +38,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script>
+  var numbArticle;
   //All code in ready function
-
   $(document).ready(function(){
 		$("#aa-menu-area").load("index.html #topNavigation");
 		$("#aa-header").load("index.html #headerContainer");
@@ -51,6 +52,26 @@
     //^^pre loaded stuff
   //  alert("Before calling DB");
     //Do the code.
+
+    $.ajax({
+         url:"newsGetDB.php", //url
+         data :
+         {//change query when used
+           query : "SELECT * From NEWS ",
+           //query : "SELECT * From NEWS",
+         },
+         type:"POST",//GET or POST
+         dataType:"json",//Datatype
+         success:function(msg)//Call Back Function
+         {
+
+          numbArticle = msg;
+
+
+         }
+     });
+
+    //===========================================
    $.ajax({
         url:"getDBInfo.php", //url
         data :
@@ -63,7 +84,8 @@
         success:function(msg)//Call Back Function
         {//you can change this functions name
           //alert("doesitevenwork");
-          news(msg, 3, "#news");
+
+          news(msg, "#news");
         //NOTE:Eventaully get rid of the "2" amd read by array.length
         }
     });
@@ -80,30 +102,76 @@
 				generateAgents(msg, 1, "#agent");
 		    }
 		});*/
-
     //uh change function name when I use it and the attributes
-    function news(callback, numbArticle, startID)
+    function news(callback, startID)
     {
+
+
+
+     //var numbArticle = calledback;
+
+
+    //var numbArticle = JSON.parse(callback);
+    //numbArticle = callback.length;
+  //  doThing();
+
+
+
+    /*  alert("wew");
+      alert(callback);
+      alert(numbArticle);
+      alert(callback[0]['Title']);
+      alert(callback[0]['test']);*/
+
+
+    //  alert(callback['resultNum']);
+
+      $("#test > div").remove();
+
       //alert("callback working? Is it Even being called");
       //REASON since in getDBInfo we saved it all to one array
-      //we now must iterate though all of them
-      for (var i=0;i<numbArticle;i++)//NOTE: change to array length
-      {//it loops so it can add to multi boxs
-      //the # are his <p> tag ids
 
-      //either a it works b im sadden
-        $(startID+i+" .title").html(callback[i]['Title']);//NOTE: adds calledback data from post and since we put it into an array its at "What index + column name" not sure how is getting column name though
-        $(startID+i+" .description").html(callback[i]['Description']);
+        for (var i=0;i<numbArticle;i++)//NOTE: change to array length
+        {//it loops so it can add to multi boxs
 
-        $(startID+i+" .author").html("By "+callback[i]['Author']);
-        $(startID+i+" .aa-date-tag").html(callback[i]['Date']);
-        //Didn't realize I could just add file path manually instead of in picture name..oh well
-        $(startID+i+" .imgPath").attr("src",callback[i]['Image']);
-
-      }
+          //  $("#test > div").remove();
+            $("#test").append("<div id='news"+i+"'><div class='col-md-12'><article class='aa-blog-single'><figure class='aa-blog-img'><a href='#'><img class='imgPath' src='img/item/1.jpg' alt='img' style='width:360px;height:240px;' ></a><span class='aa-date-tag'>15 April, 16</span></figure><div class='aa-blog-single-content'><span><a href='#' class='author'>Author</a></span><h3><a href='#' class='title'>Lorem ipsum dolor sit amet, consectetur.</a></h3><p class='description'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p><div class='aa-blog-single-bottom'><a href='#' class='aa-blog-author'><i class='fa fa-user'></i> Admin</a><a href='#' class='aa-blog-comments'><i class='fa fa-comment-o'></i>6</a></div></div></article></div></div>");
+          //the # are his <p> tag ids
+          //either a it works b im sadden
+            $(startID+i+" .title").html(callback[i]['Title']);//NOTE: adds calledback data from post and since we put it into an array its at "What index + column name" not sure how is getting column name though
+            $(startID+i+" .description").html(callback[i]['Description']);
+            $(startID+i+" .author").html("By "+callback[i]['Author']);
+            $(startID+i+" .aa-date-tag").html(callback[i]['Date']);
+            //Didn't realize I could just add file path manually instead of in picture name..oh well
+            $(startID+i+" .imgPath").attr("src",callback[i]['Image']);
+        }
     }
   });
 //  alert("gets to end of script");
+
+function doThing()
+{
+  var aye;
+  $.ajax({
+       url:"newsGetDB.php", //url
+       data :
+       {//change query when used
+         query : "SELECT * From NEWS ",
+         //query : "SELECT * From NEWS",
+       },
+       type:"POST",//GET or POST
+       dataType:"json",//Datatype
+       success:function(msg)//Call Back Function
+       {//you can change this functions name
+         alert("hi");
+          aye = msg;
+          alert(aye);
+
+
+       }
+   });
+
+}
   </script>
 
 
@@ -230,70 +298,10 @@
             </div>
             <div class="aa-latest-blog-content">
               <div class="row">
-                <div id="news0"><!--NOTE: NEWSPART-->
-                  <!-- start single blog 0-->
-                  <div class="col-md-12">
-                    <article class="aa-blog-single">
-                      <figure class="aa-blog-img">
-                        <a href="#"><img class="imgPath" src="img/item/1.jpg"  alt="img" style="width:360px;height:240px;" ></a>
-                        <span class="aa-date-tag">15 April, 16</span>
-                      </figure>
-                      <div class="aa-blog-single-content">
-                     	  <span><a href="#" class="author">Author</a></span>
-                        <h3><a href="#" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                        <div class="aa-blog-single-bottom">
-  <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                          <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
-                        </div>
-                      </div>
+          <div id="test">
 
-                    </article>
-                  </div>
-                </div><!--NEWPART END-->
+          </div>
 
-
-                  <!--TODO: start single blog 1-->
-
-                <div id="news1"><!--NOTE: NEWSPART-->
-                  <div class="col-md-12">
-                    <article class="aa-blog-single">
-                      <figure class="aa-blog-img">
-                        <a href="#"><img class="imgPath" src="img/item/1.jpg" alt="img" style="width:360px;height:240px;" ></a>
-                        <span class="aa-date-tag">15 April, 16</span>
-                      </figure>
-                      <div class="aa-blog-single-content">
-                      	<span><a href="#" class="author">Author</a></span>
-                        <h3><a href="#" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                        <div class="aa-blog-single-bottom">
-  <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                          <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div><!--NEWS PART END-->
-                  <!-- start single blog 2 -->
-                <div id="news2"><!--NOTE: NEWSPART-->
-                  <div class="col-md-12">
-                    <article class="aa-blog-single">
-                      <figure class="aa-blog-img">
-                        <a href="#" ><img class="imgPath" src="img/item/1.jpg" alt="img"  style="width:360px;height:240px;"></a>
-                        <span class="aa-date-tag">15 April, 16</span>
-                      </figure>
-                      <div class="aa-blog-single-content">
-                     	  <span><a href="#" class="author">Author</a></span>
-                        <h3><a href="#" class="title">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                        <div class="aa-blog-single-bottom">
-  <!--                        <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                          <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>-->
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div><!--NOTE: NEWSPART END-->
               </div>
             </div>
           </div>
@@ -370,3 +378,5 @@
   </body>
 
 </html>
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status Help
