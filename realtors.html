@@ -67,7 +67,10 @@
 			//alert("debug1");
 			$.post("retrieveRealtors.php", function recieve(msg) {
 					var dataArray;
+					alert(msg);
 					dataArray = JSON.parse(msg);
+
+						alert(msg);
 
 					for (var i = 0; i < dataArray.length; i++)
 					{

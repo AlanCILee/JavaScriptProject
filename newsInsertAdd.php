@@ -25,8 +25,8 @@
     $id= intval($_POST["id"]);
 
     //Remeber you have to change these values when you change columns amount
-	$sql = "INSERT INTO NEWS (title, author, date, description) " ;
- 	$sql .="VALUES (?, ?, ?, ?) " ;
+	$sql = "INSERT INTO NEWS (title, author, date, description, newsID) " ;
+ 	$sql .="VALUES (?, ?, ?, ?, ?) " ;
 
     	//$sql .="VALUES (?, ?, ?, ?, ?) " ;
 
@@ -44,7 +44,7 @@
 
          //I really should have auto incremented in DB
          //Apparently you cant use this to add image string?
-         $statement->bind_param("ssss", $title, $author, $date, $desc);
+         $statement->bind_param("ssssi", $title, $author, $date, $desc, $id);
     	//$statement->bind_param("ssssi", $title, $author, $date, $img, $id);
 
     	if ($statement->execute())
